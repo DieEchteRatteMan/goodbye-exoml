@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en" class="dark"> <!-- Default to dark, JS will check localStorage -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exoml Chat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> <!-- Font Awesome CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> <!-- Marked.js for Markdown -->
+    
+<!-- Highlight.js CSS (Atom One Dark theme) -->
+<link rel="stylesheet" id="highlightjs-theme-dark" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+<!-- Highlight.js JS -->
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <style>
+        :root {
+            --bg-primary-light: #ffffff;
+            --bg-secondary-light: #f0f2f5;
+            --bg-tertiary-light: #e4e6eb;
+            --text-primary-light: #050505;
+            --text-secondary-light: #65676b;
+            --border-light: #ced0d4;
+            --accent-light: #1877f2;
+            --header-text-light: #1c1e21; /* For h1, h2 etc. in light mode */
+
+            --bg-primary-dark: #202123;    /* Sidebar */
+            --bg-secondary-dark: #343541;  /* Main chat area */
+            --bg-tertiary-dark: #40414f;   /* Input, Modals */
+            --text-primary-dark: #ECECEC;
+            --text-secondary-dark: #C5C5D2; /* History items, placeholders */
+            --border-dark: #4d4d4f;       /* Borders, new chat button */
+            --accent-dark: #1a73e8;        /* User messages, buttons */
+            --header-text-dark: #f5f5f5; /* For h1, h2 etc. in dark mode */
+        }
+
+        .light {
+            --bg-primary: var(--bg-primary-light);
+            --bg-secondary: var(--bg-secondary-light);
+            --bg-tertiary: var(--bg-tertiary-light);
+            --text-primary: var(--text-primary-light);
+            --text-secondary: var(--text-secondary-light);
+            --header-text: var(--header-text-light);
+            --border-color: var(--border-light);
+            --accent-color: var(--accent-light);
+            --avatar-user-bg: var(--accent-light);
+            --avatar-bot-bg: var(--bg-tertiary-light);
+            --message-user-bg: var(--accent-light);
+            --message-user-text: var(--bg-primary-light);
+            --message-bot-bg: var(--bg-tertiary-light);
+            --message-bot-text: var(--text-primary-light);
+            --button-primary-bg: var(--accent-light);
+            --button-primary-text: var(--bg-primary-light);
+            --input-bg: var(--bg-secondary-light);
+        }
+
+        .dark {
+            --bg-primary: var(--bg-primary-dark);
+            --bg-secondary: var(--bg-secondary-dark);
+            --bg-tertiary: var(--bg-tertiary-dark);
+            --text-primary: var(--text-primary-dark);
+            --text-secondary: var(--text-secondary-dark);
+            --header-text: var(--header-text-dark);
+            --border-color: var(--border-dark);
+            --accent-color: var(--accent-dark);
+            --avatar-user-bg: var(--accent-dark);
+            --avatar-bot-bg: var(--bg-tertiary-dark);
+            --message-user-bg: var(--accent-dark);
+            --message-user-text: var(--text-primary-dark);
+            --message-bot-bg: #444654; /* Specific dark bot message */
+            --message-bot-text: var(--text-primary-dark);
+            --button-primary-bg: var(--accent-dark);
+            --button-primary-text: var(--text-primary-dark);
+            --input-bg: var(--bg-tertiary-dark);
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI Adjusted", "Segoe UI", "Liberation Sans", sans-serif;
+            color: var(--text-primary);
+            background-color: var(--bg-secondary);
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #555; border-radius: 3px; }
+        .dark ::-webkit-scrollbar-thumb { background: #555; }
+        .light ::-webkit-scrollbar-thumb { background: #bbb; }
+        ::-webkit-scrollbar-thumb:hover { background: #777; }
+        .dark ::-webkit-scrollbar-thumb:hover { background: #777; }
+        .light ::-webkit-scrollbar-thumb:hover { background: #999; }
+
+        .sidebar {
+            width: 260px;
+            background-color: var(--bg-primary);
+            display: flex; flex-direction: column;
+            padding: 8px; border-right: 1px solid var(--border-color);
+            transition: background-color 0.3s;
+        }
+        .sidebar-header { padding: 8px; }
+        .sidebar-button {
+            display: flex; align-items: center; justify-content: space-between;
+            width: 100%; padding: 10px 12px; border-radius: 6px;
+            color: var(--text-primary); border: 1px solid var(--border-color);
+            font-size: 0.875rem; cursor: pointer; transition: background-color 0.2s;
+            background-color: transparent; /* Ensure it uses sidebar bg */
+        }
+        .sidebar-button:hover { background-color: var(--bg-tertiary); }
+        .sidebar-button i { margin-left: 8px; } /* Adjusted for Font Awesome */
+        
+        .chat-history { flex-grow: 1; overflow-y: auto; margin-top: 16px; }
+        .chat-history-item {
+            display: flex; align-items: center; padding: 10px 12px; border-radius: 6px;
+            color: var(--text-secondary); font-size: 0.875rem; cursor: pointer;
+            margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .chat-history-item:hover, .chat-history-item.active {
+            background-color: var(--bg-secondary); color: var(--text-primary);
+        }
+        .chat-history-item i { margin-right: 10px; color: var(--text-secondary); } /* Adjusted for Font Awesome */
+        .chat-history-item.active i { color: var(--text-primary); }
+
+        .sidebar-footer { padding: 8px; border-top: 1px solid var(--border-color); }
+        .sidebar-footer-button-group { display: flex; gap: 8px; }
+        .sidebar-footer-button {
+            flex-grow: 1; /* Allow multiple buttons to share space */
+            display: flex; align-items: center; justify-content: center; /* Center icon/text if only one child */
+            padding: 10px; border-radius: 6px;
+            color: var(--text-secondary); font-size: 0.875rem; cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+            border: 1px solid transparent; /* For consistency, can be var(--border-color) */
+        }
+        .sidebar-footer-button:hover { background-color: var(--bg-secondary); color: var(--text-primary); }
+        .sidebar-footer-button i { margin-right: auto; margin-left: auto; font-size: 1.1em; } /* Adjusted for Font Awesome */
+        .sidebar-footer-button span + i { margin-left: 8px; margin-right:0; }
+        .sidebar-footer-button i + span { margin-left: 8px; }
+
+
+        .main-chat-area {
+            flex-grow: 1; display: flex; flex-direction: column;
+            background-color: var(--bg-secondary);
+            position: relative;
+            transition: background-color 0.3s;
+        }
+        #chat-header {
+            padding: 16px 20px; border-bottom: 1px solid var(--border-color);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        #chat-header h1 { font-size: 1rem; color: var(--text-primary); margin: 0; }
+        #current-model-display { font-size: 0.8rem; color: var(--text-secondary); }
+
+        #chat-container {
+            flex-grow: 1; overflow-y: auto; padding: 20px;
+            display: flex; flex-direction: column; gap: 16px;
+        }
+        .message-wrapper { display: flex; max-width: 80%; }
+        .message-wrapper.user { align-self: flex-end; flex-direction: row-reverse; }
+        .message-wrapper.bot { align-self: flex-start; }
+        .avatar {
+            width: 30px; height: 30px; border-radius: 4px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem; color: var(--text-primary);
+            margin-right: 10px;
+        }
+        .message-wrapper.user .avatar { margin-right: 0; margin-left: 10px; background-color: var(--avatar-user-bg); }
+        .message-wrapper.bot .avatar { background-color: var(--avatar-bot-bg); }
+        
+        .message {
+            padding: 12px 16px; border-radius: 8px; line-height: 1.6;
+            font-size: 0.95rem; box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            word-wrap: break-word; max-width: calc(100% - 40px);
+        }
+        .message-wrapper.user .message { background-color: var(--message-user-bg); color: var(--message-user-text); }
+        .message-wrapper.bot .message { background-color: var(--message-bot-bg); color: var(--message-bot-text); }
+        .message-wrapper.error .message { background-color: #5e2a2a; color: #ffcccc; border: 1px solid #8c4242; }
+        .message-wrapper.bot-typing .message { color: var(--text-secondary); font-style: italic; background-color: transparent; box-shadow: none;}
+
+        /* Markdown/KaTeX specific styling */
+        .message pre {
+            /* Basic container styling for code blocks */
+            /* The Highlight.js theme (e.g., atom-one-dark) will style the <code class="hljs ..."> inside */
+            background-color: var(--bg-primary); /* Default background, can be overridden by hljs theme on <code> */
+            padding: 1em;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 0.5em 0;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Ensure that the Highlight.js background on <code> inside <pre> takes precedence if set */
+        .message pre code.hljs {
+            /* hljs themes often set their own background on the <code> tag.
+               If you want the <pre> background to be the *only* background,
+               you might set this to `background-color: transparent !important;`
+               but typically, it's fine to let hljs theme control the inner code background.
+               The padding on `pre` will create a frame effect if `pre` and `code` have different backgrounds.
+            */
+            display: block; /* Ensures <code> takes full width for background if set by hljs */
+            padding: 0; /* Reset padding if any, as <pre> already has it. Some hljs themes might add padding to <code>. */
+        }
+
+        /* For inline code, if any (not handled by highlight.js through marked by default) */
+        .message code:not(pre code) {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            font-size: 0.9em;
+            background-color: rgba(128,128,128,0.1); /* Subtle background for inline code */
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+        }
+
+        .message table { border-collapse: collapse; margin: 1em 0; width: auto; }
+        .message th, .message td { border: 1px solid var(--border-color); padding: 0.5em; text-align: left;}
+        .message th { background-color: var(--bg-tertiary); }
+
+        /* Markdown Headers */
+        .message h1, .message h2, .message h3, .message h4, .message h5, .message h6 {
+            color: var(--header-text);
+            font-weight: 600;
+            margin-top: 1.2em;
+            margin-bottom: 0.6em;
+            line-height: 1.3;
+        }
+        .message h1 { font-size: 1.8em; border-bottom: 1px solid var(--border-color); padding-bottom: 0.3em;}
+        .message h2 { font-size: 1.5em; border-bottom: 1px solid var(--border-color); padding-bottom: 0.3em;}
+        .message h3 { font-size: 1.3em; }
+        .message h4 { font-size: 1.1em; }
+        .message h5 { font-size: 1em; }
+        .message h6 { font-size: 0.9em; color: var(--text-secondary); }
+
+        /* Mermaid diagrams styling */
+        .message .mermaid {
+            margin: 1em 0;
+            padding: 10px;
+            border-radius: 6px;
+            background-color: var(--bg-primary); /* Similar to pre for consistency */
+            border: 1px solid var(--border-color);
+            text-align: center; /* Center the diagram */
+        }
+        .dark .message .mermaid svg { /* Ensure SVG text is visible in dark mode if not handled by mermaid theme */
+            /* fill: var(--text-primary-dark); */ /* May need more specific selectors if mermaid doesn't adapt well */
+        }
+        .light .message .mermaid svg {
+            /* fill: var(--text-primary-light); */
+        }
+
+
+        #input-area-wrapper {
+            padding: 16px 20px 24px; border-top: 1px solid var(--border-color);
+            background-color: var(--bg-secondary); /* Match main chat bg for seamless look */
+        }
+        #input-area {
+            display: flex; align-items: center; max-width: 768px; margin: 0 auto;
+            background-color: var(--input-bg);
+            border-radius: 12px; padding: 4px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        #message-input {
+            flex-grow: 1; border: none; border-radius: 8px; padding: 12px 14px;
+            font-size: 0.95rem; background-color: transparent; color: var(--text-primary);
+            outline: none; resize: none; min-height: 24px; max-height: 200px; line-height: 1.5;
+        }
+        #message-input::placeholder { color: var(--text-secondary); }
+        #send-button {
+            background-color: var(--button-primary-bg); color: var(--button-primary-text);
+            border: none; border-radius: 8px; width: 38px; height: 38px;
+            font-size: 1rem; cursor: pointer; display: flex; justify-content: center; align-items: center;
+            margin-left: 8px; transition: background-color 0.2s;
+        }
+        #send-button:hover { filter: brightness(0.9); }
+        #send-button:disabled { background-color: var(--text-secondary); cursor: not-allowed; }
+        #send-button i { font-size: 1rem; } /* Adjusted for Font Awesome */
+
+        /* Modal Styling */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+            display: none; justify-content: center; align-items: center; z-index: 1000;
+        }
+        .dark .modal-overlay { background-color: rgba(10, 10, 10, 0.7); }
+        .light .modal-overlay { background-color: rgba(50, 50, 50, 0.5); }
+
+        .modal-content {
+            background-color: var(--bg-tertiary);
+            padding: 25px 30px; border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            width: 90%; max-width: 520px; /* Wider for customization */
+            text-align: left; color: var(--text-primary);
+        }
+        .modal-content h2 { margin-top: 0; margin-bottom: 20px; font-size: 1.3em; }
+        .modal-content label {
+            display: block; margin-top: 15px; margin-bottom: 8px;
+            color: var(--text-secondary); font-size: 0.85em;
+        }
+        .modal-content input[type="text"],
+        .modal-content input[type="password"],
+        .modal-content select,
+        .modal-content textarea {
+            width: 100%; padding: 10px 12px; margin-bottom: 10px;
+            border: 1px solid var(--border-color); border-radius: 6px;
+            font-size: 0.9em; background-color: var(--bg-secondary); color: var(--text-primary);
+            box-sizing: border-box;
+        }
+         .modal-content textarea { min-height: 60px; resize: vertical; }
+        .modal-content select {
+            appearance: none;
+            background-image: var(--select-arrow-dark); /* JS will set this */
+            background-repeat: no-repeat; background-position: right .7em top 50%; background-size: .65em auto;
+        }
+        .dark .modal-content select { --select-arrow-dark: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%20fill%3D%22%23ECECEC%22%3E%3Cpath%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'); }
+        .light .modal-content select { --select-arrow-light: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%20fill%3D%22%23333333%22%3E%3Cpath%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'); background-image: var(--select-arrow-light); }
+
+        .modal-buttons { display: flex; justify-content: flex-end; gap: 10px; margin-top: 25px; }
+        .modal-buttons button {
+            padding: 9px 18px; border-radius: 6px; border: none;
+            font-size: 0.9em; cursor: pointer; transition: background-color 0.2s;
+            color: var(--button-primary-text);
+        }
+        .modal-buttons .save-button { background-color: var(--button-primary-bg); }
+        .modal-buttons .save-button:hover { filter: brightness(0.9); }
+        .modal-buttons .cancel-button { background-color: var(--bg-secondary); color: var(--text-primary); border: 1px solid var(--border-color); }
+        .modal-buttons .cancel-button:hover { filter: brightness(0.95); }
+        .light .modal-buttons .cancel-button:hover { filter: brightness(0.9); }
+
+        .modal-content .toggle-switch { display: flex; align-items: center; margin-top: 15px; }
+        .modal-content .toggle-switch label { margin: 0 10px 0 0; color: var(--text-secondary); }
+        .modal-content .toggle-switch input[type="checkbox"] { height: 0; width: 0; visibility: hidden; }
+        .modal-content .toggle-switch .slider { cursor: pointer; width: 40px; height: 20px; background-color: var(--bg-secondary); display: inline-block; border-radius: 20px; position: relative; transition: background-color 0.2s; }
+        .modal-content .toggle-switch .slider::before { content: ""; position: absolute; height: 14px; width: 14px; left: 3px; bottom: 3px; background-color: white; border-radius: 50%; transition: transform 0.2s; }
+        .modal-content .toggle-switch input:checked + .slider { background-color: var(--accent-color); }
+        .modal-content .toggle-switch input:checked + .slider::before { transform: translateX(20px); }
+        
+        .modal-visible { display: flex; }
+
+        /* Loading Screen Styling */
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-secondary); /* Use theme background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000; /* Higher than modals */
+            opacity: 1;
+            transition: opacity 0.5s ease-out;
+        }
+        #loading-overlay.hidden {
+            opacity: 0;
+            pointer-events: none; /* Allow interaction with elements underneath when hidden */
+        }
+        .loader {
+            border: 5px solid var(--bg-tertiary); /* Lighter border for the spinner */
+            border-top: 5px solid var(--accent-color); /* Accent color for the spinning part */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+<!-- Loading Overlay -->
+    <div id="loading-overlay">
+        <div class="loader"></div>
+    </div>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <button id="new-chat-button" class="sidebar-button">
+                <span>New Chat</span>
+                <!-- Lucide icon placeholder, JS will render -->
+            </button>
+        </div>
+        <div id="chat-history-list" class="chat-history"></div>
+        <div class="sidebar-footer">
+            <div class="sidebar-footer-button-group">
+                <button id="theme-toggle-button" class="sidebar-footer-button" title="Toggle Theme"></button>
+                <button id="customize-ai-button" class="sidebar-footer-button" title="Customize AI"></button>
+                <button id="settings-button" class="sidebar-footer-button" title="Settings"></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-chat-area">
+        <div id="chat-header">
+            <h1 id="current-chat-title">Chat</h1>
+            <span id="current-model-display">No model selected</span>
+        </div>
+        <div id="chat-container"></div>
+        <div id="input-area-wrapper">
+            <div id="input-area">
+                <textarea id="message-input" placeholder="Send a message..." rows="1"></textarea>
+                <button id="send-button" title="Send"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>Settings</h2>
+            <label for="exoml-key-input">Exoml API Key:</label>
+            <input type="password" id="exoml-key-input" placeholder="Enter your API key">
+            <label for="model-select">Chat Model:</label>
+            <select id="model-select"><option value="">Loading models...</option></select>
+            <div class="modal-buttons">
+                <button id="cancel-settings-button" class="cancel-button">Cancel</button>
+                <button id="save-settings-button" class="save-button">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Customization Modal -->
+    <div id="ai-customization-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>Customize AI Chat</h2>
+            <p class="text-sm" style="color: var(--text-secondary); margin-bottom: 15px;">Introduce yourself to get better, more personalized responses.</p>
+            
+            <label for="ai-user-name">What should AI call you?</label>
+            <input type="text" id="ai-user-name" placeholder="Your name or nickname">
+            
+            <label for="ai-user-role">What do you do?</label>
+            <input type="text" id="ai-user-role" placeholder="e.g., Software Developer, Student, Artist">
+            
+            <label for="ai-traits">What traits should AI have?</label>
+            <textarea id="ai-traits" placeholder="e.g., Friendly and helpful, Concise and direct, Humorous" rows="2"></textarea>
+            
+            <label for="ai-other-info">Anything else AI should know about you?</label>
+            <textarea id="ai-other-info" placeholder="e.g., Interested in AI, learning Python, loves cats" rows="2"></textarea>
+
+            <div class="toggle-switch">
+                <label for="ai-enable-customization">Enable for new chats</label>
+                <input type="checkbox" id="ai-enable-customization">
+                <label class="slider" for="ai-enable-customization"></label>
+            </div>
+            
+            <div class="modal-buttons">
+                <button id="cancel-ai-customization-button" class="cancel-button">Cancel</button>
+                <button id="save-ai-customization-button" class="save-button">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        // Configure marked.js
+        if (typeof marked !== 'undefined') {
+            const renderer = new marked.Renderer();
+            const originalCodeRenderer = renderer.code; // Save original for fallback
+
+            renderer.code = function(code, language, isEscaped) {
+                if (language === 'mermaid') {
+                    // For Mermaid, we just need to put the raw code into a div with class 'mermaid'.
+                    // Mermaid.js will find these divs and render them.
+                    // We must escape the code to prevent XSS if it's not already escaped.
+                    // However, Mermaid expects the raw diagram syntax.
+                    // marked.js's `escaped` argument tells us if it already did HTML escaping.
+                    // If we re-escape, Mermaid won't understand it.
+                    // Let's assume `code` is the raw Mermaid syntax.
+                    return `<div class="mermaid">${code}</div>`;
+                }
+                // Fallback to default behavior for other languages
+                return originalCodeRenderer.call(this, code, language, isEscaped);
+            };
+
+            marked.setOptions({
+                renderer: renderer,
+                gfm: true,
+                tables: true,
+                breaks: true,
+                pedantic: false,
+                sanitize: false, // Still important to be aware of this for security
+                smartLists: true,
+                smartypants: true,
+                highlight: function(code, lang) {
+                    // Ensure hljs is loaded, otherwise return plain code
+                    if (typeof hljs !== 'undefined' && hljs.getLanguage(lang)) {
+                        try {
+                            return hljs.highlight(code, { language: lang, ignoreIllegals: true }).value;
+                        } catch (e) {
+                            console.error("Highlight.js error:", e, "for lang:", lang);
+                            // Fallback for errors during highlighting specific language
+                            return hljs.highlight(code, { language: 'plaintext', ignoreIllegals: true }).value;
+                        }
+                    } else if (typeof hljs !== 'undefined') {
+                        // Language not supported by hljs, or lang is empty/null
+                        return hljs.highlight(code, { language: 'plaintext', ignoreIllegals: true }).value;
+                    }
+                    // Fallback if hljs is not loaded at all (should not happen with defer but as a safeguard)
+                    // Escape the code to prevent XSS if it's not highlighted.
+                    const escapeHtml = (unsafe) => {
+                        if (typeof unsafe !== 'string') return '';
+                        return unsafe
+                             .replace(/&/g, "&")
+                             .replace(/</g, "<")
+                             .replace(/>/g, ">")
+                             .replace(/"/g, "\"")
+                             .replace(/'/g, "&#039;");
+                    };
+                    return escapeHtml(code);
+                }
+            });
+        } else {
+            console.error("Marked.js not loaded, Markdown rendering will be basic.");
+        }
+
+        // Configure Highlight.js if loaded
+        // This is a good spot as it's after hljs script (defer) might have run and before marked might use it.
+        // However, with defer, script execution order relative to other non-deferred scripts can be tricky.
+        // The check within the highlight callback is more robust.
+        // document.addEventListener('DOMContentLoaded', () => { // Alternative: ensure hljs is fully loaded
+        //    if (typeof hljs !== 'undefined') {
+        //        hljs.configure({ ignoreUnescapedHTML: true });
+        //    }
+        // });
+        // For now, the check inside the highlight function is the primary safeguard.
+        // Adding a direct configure call here is speculative for `defer` behavior
+        if (typeof hljs !== 'undefined') {
+            hljs.configure({ ignoreUnescapedHTML: true }); // Added for safety
+        }
+        
+        // Initialize Mermaid.js
+        if (typeof mermaid !== 'undefined') {
+            mermaid.initialize({
+                startOnLoad: false, // We will call mermaid.run() manually
+                // theme: 'default', // Initial theme, will be updated by applyTheme
+                // sécuritLevel: 'strict' // consider for security
+            });
+        } else {
+            console.error("Mermaid.js not loaded, diagram rendering will not work.");
+        }
+
+
+        // --- Constants for localStorage ---
+        const LS_API_KEY = 'exomlApiKey_v3';
+        const LS_SELECTED_MODEL = 'exomlSelectedModel_v3';
+        const LS_CHAT_HISTORY = 'exomlChatHistory_v3';
+        const LS_CURRENT_CHAT_ID = 'exomlCurrentChatId_v3';
+        const LS_THEME = 'exomlChatTheme_v3';
+        const LS_AI_CUSTOMIZATION = 'exomlAiCustomization_v3';
+
+        // --- DOM Elements ---
+        const newChatButton = document.getElementById('new-chat-button');
+        const chatHistoryList = document.getElementById('chat-history-list');
+        const settingsButton = document.getElementById('settings-button');
+        const themeToggleButton = document.getElementById('theme-toggle-button');
+        const customizeAiButton = document.getElementById('customize-ai-button');
+        
+        const chatHeaderTitle = document.getElementById('current-chat-title');
+        const currentModelDisplay = document.getElementById('current-model-display');
+        const chatContainer = document.getElementById('chat-container');
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+        
+        const settingsModal = document.getElementById('settings-modal');
+        const exomlKeyInput = document.getElementById('exoml-key-input');
+        const modelSelect = document.getElementById('model-select');
+        const saveSettingsButton = document.getElementById('save-settings-button');
+        const cancelSettingsButton = document.getElementById('cancel-settings-button');
+
+        const aiCustomizationModal = document.getElementById('ai-customization-modal');
+        const aiUserNameInput = document.getElementById('ai-user-name');
+        const aiUserRoleInput = document.getElementById('ai-user-role');
+        const aiTraitsInput = document.getElementById('ai-traits');
+        const aiOtherInfoInput = document.getElementById('ai-other-info');
+        const aiEnableCustomizationToggle = document.getElementById('ai-enable-customization');
+        const saveAiCustomizationButton = document.getElementById('save-ai-customization-button');
+        const cancelAiCustomizationButton = document.getElementById('cancel-ai-customization-button');
+
+        const loadingOverlay = document.getElementById('loading-overlay');
+
+        let allChats = {};
+        let currentChatId = null;
+        let isBotTyping = false;
+
+        // --- Utility Functions ---
+        function generateId() { return Date.now().toString(36) + Math.random().toString(36).substr(2); }
+        function escapeHtml(unsafe) {
+            if (typeof unsafe !== 'string') return ''; // Ensure unsafe is a string
+            return unsafe
+                 .replace(/&/g, "&")
+                 .replace(/</g, "<")
+                 .replace(/>/g, ">")
+                 .replace(/"/g, "&amp;quot;")
+                 .replace(/'/g, "&#039;");
+        }
+
+        // --- Theme Management ---
+        function applyTheme(theme) {
+            // const darkHljsTheme = document.getElementById('highlightjs-theme-dark'); // No longer switching hljs themes here
+            // const lightHljsTheme = document.getElementById('highlightjs-theme-light'); // Removed
+
+            if (theme === 'light') {
+                document.documentElement.classList.remove('dark');
+                document.documentElement.classList.add('light');
+                // if (darkHljsTheme) darkHljsTheme.disabled = true; // No longer switching hljs themes here
+                // if (lightHljsTheme) lightHljsTheme.disabled = false; // Removed
+            } else { // 'dark' or default
+                document.documentElement.classList.remove('light');
+                document.documentElement.classList.add('dark');
+                // if (darkHljsTheme) darkHljsTheme.disabled = false; // No longer switching hljs themes here
+                // if (lightHljsTheme) lightHljsTheme.disabled = true; // Removed
+            }
+            localStorage.setItem(LS_THEME, theme);
+            updateThemeIcons(); // Update icons after theme change
+
+            // Update Mermaid theme
+            if (typeof mermaid !== 'undefined') {
+                 mermaid.initialize({
+                    startOnLoad: false,
+                    theme: theme === 'dark' ? 'dark' : 'default', // 'default' for light, 'dark' for dark
+                });
+            }
+
+            // If Highlight.js is loaded, re-highlight visible code blocks if necessary.
+            // Marked.js integration should handle new blocks, but existing ones might need this if theme changes styling significantly.
+            // However, usually Highlight.js themes are self-contained and don't require re-running highlightAll after theme switch.
+            // If issues appear, this is a place to consider:
+            // if (typeof hljs !== 'undefined' && typeof hljs.highlightAll === 'function') {
+            //    document.querySelectorAll('pre code').forEach((block) => {
+            //        hljs.highlightElement(block);
+            //    });
+            // }
+        }
+        function toggleTheme() {
+            const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+            applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        }
+        function loadTheme() {
+            const savedTheme = localStorage.getItem(LS_THEME) || 'dark'; // Default to dark
+            applyTheme(savedTheme);
+            applyTheme(savedTheme);
+        }
+
+        // No longer need renderLucideIcon helper
+
+        function updateThemeIcons(){
+            const currentTheme = localStorage.getItem(LS_THEME) || 'dark';
+            themeToggleButton.innerHTML = `<i class="fas ${currentTheme === 'dark' ? 'fa-sun' : 'fa-moon'}"></i>`;
+        }
+
+        // --- Font Awesome Icon Rendering ---
+        function renderIcons() {
+            newChatButton.innerHTML = `<span>New Chat</span> <i class="fas fa-plus-square"></i>`;
+            sendButton.innerHTML = `<i class="fas fa-arrow-up"></i>`;
+            settingsButton.innerHTML = `<i class="fas fa-cog"></i>`;
+            customizeAiButton.innerHTML = `<i class="fas fa-user-cog"></i>`; // Font Awesome equivalent
+            updateThemeIcons(); // Initial theme icon
+        }
+
+        // --- LocalStorage Interaction ---
+        function saveAllChats() { localStorage.setItem(LS_CHAT_HISTORY, JSON.stringify(allChats)); }
+        function loadAllChats() {
+            const stored = localStorage.getItem(LS_CHAT_HISTORY);
+            allChats = stored ? JSON.parse(stored) : {};
+        }
+        function saveCurrentChatId() { localStorage.setItem(LS_CURRENT_CHAT_ID, currentChatId); }
+        function loadCurrentChatId() { currentChatId = localStorage.getItem(LS_CURRENT_CHAT_ID); }
+
+        function loadAiCustomization() {
+            const stored = localStorage.getItem(LS_AI_CUSTOMIZATION);
+            if (stored) {
+                const settings = JSON.parse(stored);
+                aiUserNameInput.value = settings.userName || '';
+                aiUserRoleInput.value = settings.userRole || '';
+                aiTraitsInput.value = settings.aiTraits || '';
+                aiOtherInfoInput.value = settings.otherInfo || '';
+                aiEnableCustomizationToggle.checked = settings.enabled || false;
+            }
+        }
+        function saveAiCustomization() {
+            const settings = {
+                userName: aiUserNameInput.value.trim(),
+                userRole: aiUserRoleInput.value.trim(),
+                aiTraits: aiTraitsInput.value.trim(),
+                otherInfo: aiOtherInfoInput.value.trim(),
+                enabled: aiEnableCustomizationToggle.checked
+            };
+            localStorage.setItem(LS_AI_CUSTOMIZATION, JSON.stringify(settings));
+            alert('AI Customization settings saved!');
+            closeAiCustomizationModal();
+        }
+
+        // --- UI Rendering (Chat History & Messages) ---
+        function renderChatHistoryList() {
+            chatHistoryList.innerHTML = '';
+            Object.values(allChats).sort((a,b) => (b.lastUpdated || 0) - (a.lastUpdated || 0) ).forEach(chat => {
+                const item = document.createElement('div');
+                item.className = `chat-history-item ${chat.id === currentChatId ? 'active' : ''}`;
+                item.dataset.chatId = chat.id;
+                item.innerHTML = `<i class="fas fa-comment-alt"></i> <span>${escapeHtml(chat.title || 'Untitled Chat')}</span>`;
+                item.addEventListener('click', () => switchChat(chat.id));
+                chatHistoryList.appendChild(item);
+            });
+        }
+
+        function renderCurrentChatMessages() {
+            chatContainer.innerHTML = '';
+            if (currentChatId && allChats[currentChatId]) {
+                const chat = allChats[currentChatId];
+                chatHeaderTitle.textContent = escapeHtml(chat.title || 'Untitled Chat');
+                const modelForDisplay = chat.model || localStorage.getItem(LS_SELECTED_MODEL) || 'Not Set';
+                currentModelDisplay.textContent = `Model: ${escapeHtml(modelForDisplay)}`;
+                chat.messages.forEach(msg => addMessageToDOM(msg.content, msg.role));
+            } else {
+                chatHeaderTitle.textContent = 'Chat';
+                currentModelDisplay.textContent = 'No model selected';
+                addMessageToDOM("Select a chat from the sidebar or start a new one.", "system");
+            }
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+        
+        function addMessageToDOM(text, role, messageId = null, isStreaming = false) {
+            let wrapper;
+            let messageDiv;
+
+            if (isStreaming && messageId) {
+                wrapper = document.getElementById(messageId);
+                if (wrapper) {
+                    messageDiv = wrapper.querySelector('.message');
+                }
+            }
+
+            if (!wrapper || !messageDiv) {
+                const newId = messageId || `msg-${generateId()}`;
+                wrapper = document.createElement('div');
+                wrapper.className = `message-wrapper ${role}`;
+                wrapper.id = newId;
+            
+                const avatar = document.createElement('div');
+                avatar.className = 'avatar';
+                let avatarContent = 'U'; // Default for user
+                if (role === 'bot' || role === 'bot-typing') avatarContent = 'B'; // Bot
+                if (role === 'system' || role === 'error') avatarContent = 'S'; // System/Error
+                avatar.textContent = avatarContent;
+
+                messageDiv = document.createElement('div');
+                messageDiv.className = 'message';
+                
+                wrapper.appendChild(avatar);
+                wrapper.appendChild(messageDiv);
+                chatContainer.appendChild(wrapper);
+            }
+            
+            if (role === 'user') { // User messages are plain text, just escape them
+                messageDiv.textContent = text;
+            } else { // Bot, system, error messages can have Markdown/Math
+                if (isStreaming) {
+                    // Append new text to existing content for streaming
+                    // We store raw markdown and re-render, to handle incomplete markdown structures during streaming
+                    messageDiv.dataset.rawMarkdown = (messageDiv.dataset.rawMarkdown || '') + text;
+                    messageDiv.innerHTML = marked.parse(messageDiv.dataset.rawMarkdown || '');
+                } else {
+                    messageDiv.dataset.rawMarkdown = text;
+                    messageDiv.innerHTML = marked.parse(text);
+                }
+
+                // Render Mermaid diagrams
+                if (typeof mermaid !== 'undefined' && (role === 'bot' || role === 'system' || role ==='error')) {
+                    const mermaidDiagrams = messageDiv.querySelectorAll('div.mermaid');
+                    if (mermaidDiagrams.length > 0) {
+                        // Temporarily give unique IDs for rendering, as mermaid.run can be finicky
+                        mermaidDiagrams.forEach((el, index) => {
+                            const tempId = `mermaid-${messageId || generateId()}-${index}`;
+                            // Mermaid modifies the content IN PLACE. It expects the raw text content.
+                            // Our custom renderer already puts the raw code there.
+                            // We need to ensure mermaid processes these elements.
+                            // el.id = tempId; // Not strictly necessary for run({nodes: ...})
+                        });
+                        
+                        // mermaid.run() is preferred for dynamically added elements.
+                         try {
+                            mermaid.run({
+                                nodes: mermaidDiagrams
+                            });
+                        } catch (e) {
+                            console.error("Mermaid rendering error:", e);
+                            mermaidDiagrams.forEach(el => el.textContent = "Error rendering Mermaid diagram.");
+                        }
+                    }
+                }
+            }
+            
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            return wrapper.id; // Return the ID of the message wrapper
+        }
+
+        // --- Chat Logic ---
+        function createNewChat() {
+            const newId = generateId();
+            const defaultModel = localStorage.getItem(LS_SELECTED_MODEL) || null;
+            const aiCustomization = JSON.parse(localStorage.getItem(LS_AI_CUSTOMIZATION) || '{}');
+            let initialSystemMessage = `Chat started. Model: ${defaultModel || 'Not specified'}.`;
+            if(aiCustomization.enabled && aiCustomization.userName){
+                initialSystemMessage += ` You are chatting with ${aiCustomization.userName}.`;
+            }
+
+            allChats[newId] = { 
+                id: newId, 
+                title: 'New Chat ' + (Object.keys(allChats).length + 1), 
+                messages: [{role: 'system', content: initialSystemMessage}],
+                model: defaultModel,
+                createdAt: Date.now(),
+                lastUpdated: Date.now()
+            };
+            switchChat(newId);
+        }
+
+        function switchChat(chatId) {
+            if (allChats[chatId]) {
+                currentChatId = chatId;
+                saveCurrentChatId();
+                renderChatHistoryList();
+                renderCurrentChatMessages();
+            }
+        }
+        
+        function updateChatTimestamp(chatId) {
+            if (allChats[chatId]) {
+                allChats[chatId].lastUpdated = Date.now();
+                saveAllChats();
+                renderChatHistoryList();
+            }
+        }
+
+        // --- API Interaction & Message Handling ---
+        async function fetchModelsAndPopulateSelector() {
+            modelSelect.innerHTML = '<option value="">Loading models...</option>';
+            try {
+                const response = await fetch('/v1/models');
+                if (!response.ok) throw new Error(`HTTP error ${response.status}`);
+                const modelsData = await response.json();
+                
+                modelSelect.innerHTML = '<option value="">-- Select a Model --</option>';
+                if (modelsData && modelsData.data && modelsData.data.length > 0) {
+                    modelsData.data.forEach(model => {
+                         if (model.endpoint.toLowerCase() == "/v1/chat/completions") {
+                            const option = document.createElement('option');
+                            option.value = model.id;
+                            option.textContent = model.id + (model.owned_by ? ` (${model.owned_by})` : '');
+                            modelSelect.appendChild(option);
+                        }
+                    });
+                } else {
+                    modelSelect.innerHTML = '<option value="">No models found</option>';
+                }
+                const savedModel = localStorage.getItem(LS_SELECTED_MODEL);
+                if (savedModel && modelSelect.querySelector(`option[value="${savedModel}"]`)) {
+                    modelSelect.value = savedModel;
+                }
+            } catch (error) {
+                console.error("Failed to fetch models:", error);
+                modelSelect.innerHTML = '<option value="">Error loading models</option>';
+            }
+        }
+
+        async function handleSendMessage() {
+            const messageText = messageInput.value.trim();
+            if (!messageText || !currentChatId || !allChats[currentChatId] || isBotTyping) return;
+
+            const apiKey = localStorage.getItem(LS_API_KEY);
+            const currentChat = allChats[currentChatId];
+            const selectedModel = currentChat.model || localStorage.getItem(LS_SELECTED_MODEL);
+
+            if (!apiKey) { addMessageToDOM("API Key not set. Configure in Settings.", "error"); return; }
+            if (!selectedModel) { addMessageToDOM("Model not selected. Configure in Settings.", "error"); return; }
+            
+            // Add user message to DOM and storage
+            currentChat.messages.push({ role: 'user', content: messageText });
+            addMessageToDOM(messageText, 'user'); // User messages don't stream or use markdown directly from input
+            updateChatTimestamp(currentChatId);
+
+            messageInput.value = '';
+            messageInput.style.height = 'auto';
+            sendButton.disabled = true;
+            isBotTyping = true; // Still useful to prevent multiple sends
+
+            // Create a placeholder for the bot's streaming message
+            const botMessageId = `bot-msg-${generateId()}`;
+            addMessageToDOM(" ", 'bot', botMessageId, true); // Initial empty message for streaming
+            let botMessageDiv = document.getElementById(botMessageId).querySelector('.message');
+            botMessageDiv.dataset.rawMarkdown = ""; // Initialize raw markdown store
+
+            const CONTEXT_LIMIT = 20;
+            let apiMessages = currentChat.messages
+                .filter(msg => msg.role === 'user' || msg.role === 'assistant' || msg.role === 'system')
+                .slice(-CONTEXT_LIMIT)
+                .map(msg => ({ role: msg.role, content: msg.content }));
+
+            // Prepend AI customization if enabled
+            const aiCustomization = JSON.parse(localStorage.getItem(LS_AI_CUSTOMIZATION) || '{}');
+            if(aiCustomization.enabled) {
+                let persona = "You are a helpful AI assistant.";
+                if(aiCustomization.userName) persona += ` The user's name is ${aiCustomization.userName}.`;
+                if(aiCustomization.userRole) persona += ` They work as a ${aiCustomization.userRole}.`;
+                if(aiCustomization.aiTraits) persona += ` Your traits should be: ${aiCustomization.aiTraits}.`;
+                if(aiCustomization.otherInfo) persona += ` Additional context about the user: ${aiCustomization.otherInfo}.`;
+                
+                // Check if a system message already exists from persona
+                const existingSystemPersonaIndex = apiMessages.findIndex(m => m.role === 'system' && m.content.startsWith("You are a helpful AI assistant."));
+                if (existingSystemPersonaIndex > -1) {
+                    apiMessages[existingSystemPersonaIndex].content = persona; // Update existing
+                } else {
+                    apiMessages.unshift({ role: "system", content: persona }); // Add new
+                }
+            }
+
+
+            let fullBotResponse = "";
+
+            try {
+                const response = await fetch('/v1/chat/completions', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+                    body: JSON.stringify({ model: selectedModel, messages: apiMessages, stream: true }) // Request streaming
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({})); // Try to parse error
+                    const errorDetail = errorData?.error?.message || response.statusText || "Unknown API error";
+                    throw new Error(`API Error (${response.status}): ${errorDetail}`);
+                }
+
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+                let buffer = '';
+                let streamCancelledByDone = false;
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) { // Stream ended from the source without a [DONE] message
+                        break;
+                    }
+                    
+                    buffer += decoder.decode(value, { stream: true });
+                    
+                    let lines = buffer.split('\n');
+                    buffer = lines.pop(); // Keep potential partial line for next chunk
+
+                    for (const line of lines) {
+                        if (line.startsWith('data: ')) {
+                            const jsonData = line.substring(6).trim();
+                            if (jsonData === '[DONE]') {
+                                try { await reader.cancel(); } catch(e) { /* ignore potential cancel error if already closed */ }
+                                streamCancelledByDone = true;
+                                break; // Exit for...of lines loop
+                            }
+                            try {
+                                const parsed = JSON.parse(jsonData);
+                                const deltaContent = parsed.choices?.[0]?.delta?.content;
+                                if (deltaContent) {
+                                    fullBotResponse += deltaContent;
+                                    botMessageDiv.dataset.rawMarkdown += deltaContent;
+                                    botMessageDiv.innerHTML = marked.parse(botMessageDiv.dataset.rawMarkdown);
+                                    // KaTeX rendering removed
+                                    chatContainer.scrollTop = chatContainer.scrollHeight;
+                                }
+                            } catch (e) {
+                                console.warn("Failed to parse stream chunk JSON:", jsonData, e);
+                            }
+                        }
+                    } // End for...of lines loop
+
+                    if (streamCancelledByDone) {
+                        break; // Exit while(true) loop
+                    }
+                } // End while(true) loop
+                
+                // Process any final, non-empty buffer part that might not have ended with \n
+                // This is unlikely if server sends [DONE] correctly followed by stream termination.
+                if (buffer.startsWith('data: ')) {
+                     const jsonData = buffer.substring(6).trim();
+                     if (jsonData && jsonData !== '[DONE]') { // Ensure jsonData is not empty
+                        try {
+                            const parsed = JSON.parse(jsonData);
+                            const deltaContent = parsed.choices?.[0]?.delta?.content;
+                            if (deltaContent) {
+                                fullBotResponse += deltaContent;
+                                botMessageDiv.dataset.rawMarkdown += deltaContent;
+                                botMessageDiv.innerHTML = marked.parse(botMessageDiv.dataset.rawMarkdown);
+                                // KaTeX rendering removed
+                            }
+                        } catch (e) { console.warn("Failed to parse final non-newline buffer JSON:", jsonData, e); }
+                     }
+                }
+
+                if (fullBotResponse) {
+                    currentChat.messages.push({ role: 'assistant', content: fullBotResponse });
+                } else if (!isBotTyping && !streamCancelledByDone && botMessageDiv.dataset.rawMarkdown === "") {
+                     // If stream ended, not typing, nothing received, and wasn't explicitly [DONE]
+                     // then it might be an empty valid response or an issue.
+                     // For now, this case is implicitly handled as "no response".
+                }
+
+            } catch (error) {
+                console.error("Chat API error:", error);
+                if(botMessageDiv){ // Update the placeholder message div with the error
+                    botMessageDiv.innerHTML = marked.parse(`Stream Error: ${error.message}`);
+                    // KaTeX rendering removed
+                } else { // Fallback if botMessageDiv wasn't created or found
+                    addMessageToDOM(`Error: ${error.message}`, 'error');
+                }
+            } finally {
+                isBotTyping = false;
+                sendButton.disabled = false;
+                updateChatTimestamp(currentChatId);
+                saveAllChats(); // Save after stream completion
+                messageInput.focus();
+            }
+        }
+        
+        // --- Modal Logic ---
+        function openSettingsModal() {
+            exomlKeyInput.value = localStorage.getItem(LS_API_KEY) || '';
+            fetchModelsAndPopulateSelector().then(() => {
+                const savedModel = localStorage.getItem(LS_SELECTED_MODEL);
+                 if (savedModel && modelSelect.querySelector(`option[value="${savedModel}"]`)) {
+                    modelSelect.value = savedModel;
+                }
+            });
+            settingsModal.classList.add('modal-visible');
+        }
+        function closeSettingsModal() { settingsModal.classList.remove('modal-visible'); }
+        function saveSettings() {
+            const apiKey = exomlKeyInput.value.trim();
+            const model = modelSelect.value;
+
+            if (apiKey) localStorage.setItem(LS_API_KEY, apiKey); else localStorage.removeItem(LS_API_KEY);
+            if (model) {
+                localStorage.setItem(LS_SELECTED_MODEL, model);
+                if (currentChatId && allChats[currentChatId]) { allChats[currentChatId].model = model; }
+                currentModelDisplay.textContent = `Model: ${escapeHtml(model)}`;
+            } else {
+                localStorage.removeItem(LS_SELECTED_MODEL);
+                currentModelDisplay.textContent = 'No model selected';
+            }
+            saveAllChats();
+            alert('Settings saved!');
+            closeSettingsModal();
+            renderCurrentChatMessages();
+        }
+
+        function openAiCustomizationModal() {
+            loadAiCustomization();
+            aiCustomizationModal.classList.add('modal-visible');
+        }
+        function closeAiCustomizationModal() { aiCustomizationModal.classList.remove('modal-visible'); }
+
+        // --- Event Listeners ---
+        newChatButton.addEventListener('click', createNewChat);
+        themeToggleButton.addEventListener('click', toggleTheme);
+        settingsButton.addEventListener('click', openSettingsModal);
+        customizeAiButton.addEventListener('click', openAiCustomizationModal);
+
+        saveSettingsButton.addEventListener('click', saveSettings);
+        cancelSettingsButton.addEventListener('click', closeSettingsModal);
+        settingsModal.addEventListener('click', (e) => { if (e.target === settingsModal) closeSettingsModal(); });
+
+        saveAiCustomizationButton.addEventListener('click', saveAiCustomization);
+        cancelAiCustomizationButton.addEventListener('click', closeAiCustomizationModal);
+        aiCustomizationModal.addEventListener('click', (e) => { if (e.target === aiCustomizationModal) closeAiCustomizationModal(); });
+        
+        sendButton.addEventListener('click', handleSendMessage);
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSendMessage(); }
+        });
+        messageInput.addEventListener('input', () => {
+            messageInput.style.height = 'auto';
+            messageInput.style.height = (messageInput.scrollHeight) + 'px';
+        });
+
+        function hideLoadingScreen() {
+            if (loadingOverlay) {
+                loadingOverlay.classList.add('hidden');
+                // Optional: Remove the overlay from DOM after transition to prevent any lingering interference
+                // setTimeout(() => {
+                //     if (loadingOverlay.classList.contains('hidden')) { // Double check it's still hidden
+                //         loadingOverlay.remove();
+                //     }
+                // }, 500); // Match CSS transition duration
+            }
+        }
+
+        // --- Initialization ---
+        function initializeChatApp() {
+            loadTheme(); // This will also call mermaid.initialize with the correct theme
+            renderIcons(); // Render all Font Awesome icons
+            
+            // Mermaid initial theme set by loadTheme calling applyTheme.
+
+            loadAllChats();
+            loadCurrentChatId();
+            loadAiCustomization(); // Load AI customization settings
+
+            if (!currentChatId || !allChats[currentChatId]) {
+                const chatIds = Object.keys(allChats);
+                if (chatIds.length > 0) {
+                    const sortedChats = Object.values(allChats).sort((a,b) => (b.lastUpdated || 0) - (a.lastUpdated || 0) );
+                    currentChatId = sortedChats[0].id;
+                } else {
+                    createNewChat(); 
+                }
+            }
+            
+            renderChatHistoryList();
+            renderCurrentChatMessages();
+
+            const globallySelectedModel = localStorage.getItem(LS_SELECTED_MODEL);
+            if (currentChatId && allChats[currentChatId] && allChats[currentChatId].model) {
+                currentModelDisplay.textContent = `Model: ${escapeHtml(allChats[currentChatId].model)}`;
+            } else if (globallySelectedModel) {
+                 currentModelDisplay.textContent = `Model: ${escapeHtml(globallySelectedModel)}`;
+            }
+            hideLoadingScreen(); // Hide loading screen after app is initialized
+        }
+        initializeChatApp();
+    </script>
+</body>
+</html>

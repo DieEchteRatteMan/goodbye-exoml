@@ -1,0 +1,2274 @@
+{
+    "endpoints": {
+        "/v1/chat/completions": {
+            "description": "Handles chat completion requests.",
+            "models": {
+                "gpt-4o-mini": [
+                    {
+                        "provider_name": "Xen",
+                        "base_url": "https://no-api.xenai.tech",
+                        "api_key": "sk-9SdssgdBB_xYQrlriVQvJw",
+                        "priority": 1,
+                        "owner": "openai",
+                        "model": "gpt-4o-mini",
+                        "token_multiplier": 1,
+                        "consecutive_failures": 14
+                    },
+                    {
+                        "provider_name": "MultiChat",
+                        "base_url": "https://ilovetofuckadults.cablyai.com/openai",
+                        "api_key": "Nothing",
+                        "priority": 5,
+                        "owner": "openai",
+                        "model": "gpt-4o-mini",
+                        "token_multiplier": 1,
+                        "consecutive_failures": 14
+                    },
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://chat.typegpt.net/api/openai",
+                        "api_key": "Nothing",
+                        "priority": 99,
+                        "owner": "openai",
+                        "model": "gpt-4o-mini",
+                        "token_multiplier": 1,
+                        "consecutive_failures": 14
+                    },
+                    {
+                        "provider_name": "Liaobots",
+                        "base_url": "https://liaobots.cablyai.com",
+                        "api_key": "Nothing",
+                        "priority": 4,
+                        "owner": "openai",
+                        "model": "gpt-4o-mini",
+                        "token_multiplier": 1,
+                        "consecutive_failures": 14
+                    },
+                    {
+                        "provider_name": "OpenAI",
+                        "base_url": "https://0penai.exomlapi.com",
+                        "api_key": "sk-proj-ltSn8OWfiHGoCENTpG0JT3BlbkFJEM3fFp84faLZBHWAmUMc",
+                        "priority": 0,
+                        "owner": "openai",
+                        "model": "gpt-4o-mini",
+                        "token_multiplier": 1,
+                        "consecutive_failures": 0
+                    }
+                ],
+                "gpt-4o": [
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://api.typegpt.net",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 0,
+                        "owner": "openai",
+                        "model": "gpt-4o-2024-08-06",
+                        "token_multiplier": 1.2,
+                        "consecutive_failures": 4304
+                    },
+                    {
+                        "provider_name": "OpenAI",
+                        "base_url": "https://0penai.exomlapi.com",
+                        "api_key": "sk-proj-ltSn8OWfiHGoCENTpG0JT3BlbkFJEM3fFp84faLZBHWAmUMc",
+                        "priority": 0,
+                        "owner": "openai",
+                        "model": "gpt-4o",
+                        "token_multiplier": 1,
+                        "consecutive_failures": 0
+                    }
+                ],
+                "gpt-5": [
+                    {
+                        "provider_name": "OpenAI",
+                        "base_url": "https://0penai.exomlapi.com",
+                        "api_key": "sk-proj-ltSn8OWfiHGoCENTpG0JT3BlbkFJEM3fFp84faLZBHWAmUMc",
+                        "priority": 0,
+                        "owner": "openai",
+                        "model": "gpt-5",
+                        "token_multiplier": 1,
+                        "consecutive_failures": 0
+                    }
+                ],
+                "gpt-5-mini": [
+                    {
+                        "provider_name": "OpenAI",
+                        "base_url": "https://0penai.exomlapi.com",
+                        "api_key": "sk-proj-ltSn8OWfiHGoCENTpG0JT3BlbkFJEM3fFp84faLZBHWAmUMc",
+                        "priority": 0,
+                        "owner": "openai",
+                        "model": "gpt-5-mini",
+                        "token_multiplier": 1,
+                        "consecutive_failures": 0
+                    }
+                ],
+                "gpt-5-nano": [
+                    {
+                        "provider_name": "OpenAI",
+                        "base_url": "https://0penai.exomlapi.com",
+                        "api_key": "sk-proj-ltSn8OWfiHGoCENTpG0JT3BlbkFJEM3fFp84faLZBHWAmUMc",
+                        "priority": 0,
+                        "owner": "openai",
+                        "model": "gpt-5-nano",
+                        "token_multiplier": 1,
+                        "consecutive_failures": 0
+                    }
+                ],
+                "gpt-5-chat": [
+                    {
+                        "provider_name": "OpenAI",
+                        "base_url": "https://0penai.exomlapi.com",
+                        "api_key": "sk-proj-ltSn8OWfiHGoCENTpG0JT3BlbkFJEM3fFp84faLZBHWAmUMc",
+                        "priority": 0,
+                        "owner": "openai",
+                        "model": "gpt-5-chat-latest",
+                        "token_multiplier": 1,
+                        "consecutive_failures": 0
+                    }
+                ],
+                "exo-instant": [
+                    {
+                        "provider_name": "ExoML",
+                        "base_url": "https://opsec.llmplayground.net",
+                        "api_key": "none",
+                        "priority": 0,
+                        "owner": "exoml",
+                        "model": "exo-instant",
+                        "token_multiplier": 0.01
+                    }
+                ],
+                "gpt-4.1": [
+                    {
+                        "provider_name": "nexeonstopped",
+                        "base_url": "https://newernewapi69.nexeonstoppedai.com",
+                        "api_key": "sk-btEAkUm7lX6wrKSqxkyB9vxqezPQSOGYIYrZzAud3IKmVPq7",
+                        "priority": 3,
+                        "owner": "openai",
+                        "model": "gpt-4.1",
+                        "token_multiplier": 1.5,
+                        "consecutive_failures": 1
+                    },
+                    {
+                        "provider_name": "Xen",
+                        "base_url": "https://no-api.xenai.tech",
+                        "api_key": "sk-9SdssgdBB_xYQrlriVQvJw",
+                        "priority": 1,
+                        "owner": "openai",
+                        "model": "gpt-4.1",
+                        "token_multiplier": 1.5,
+                        "consecutive_failures": 1
+                    },
+                    {
+                        "provider_name": "MultiChat",
+                        "base_url": "https://ilovetofuckadults.cablyai.com/openai",
+                        "api_key": "Nothing",
+                        "priority": 5,
+                        "owner": "openai",
+                        "model": "gpt-4.1",
+                        "token_multiplier": 1.5,
+                        "consecutive_failures": 1
+                    },
+                    {
+                        "provider_name": "Liaobots",
+                        "base_url": "https://liaobots.cablyai.com",
+                        "api_key": "Nothing",
+                        "priority": 12,
+                        "owner": "openai",
+                        "model": "gpt-4.1",
+                        "token_multiplier": 1.5
+                    },
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://api.typegpt.net",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 0,
+                        "owner": "openai",
+                        "model": "gpt-4.1-2025-04-14",
+                        "token_multiplier": 1.5,
+                        "consecutive_failures": 27
+                    },
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://api.typegpt.net",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 9,
+                        "owner": "openai",
+                        "model": "gpt-4.1-mini",
+                        "token_multiplier": 1.5
+                    },
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://api.typegpt.net",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 10,
+                        "owner": "openai",
+                        "model": "gpt-4.1-nano-2025-04-14",
+                        "token_multiplier": 1.5
+                    },
+                    {
+                        "provider_name": "OpenAI",
+                        "base_url": "https://0penai.exomlapi.com",
+                        "api_key": "sk-proj-ltSn8OWfiHGoCENTpG0JT3BlbkFJEM3fFp84faLZBHWAmUMc",
+                        "priority": 0,
+                        "owner": "openai",
+                        "model": "gpt-4.1",
+                        "token_multiplier": 1,
+                        "consecutive_failures": 0
+                    }
+                ],
+                "gpt-3.5-turbo": [
+                    {
+                        "provider_name": "nexeonstopped",
+                        "base_url": "https://newernewapi69.nexeonstoppedai.com",
+                        "api_key": "sk-btEAkUm7lX6wrKSqxkyB9vxqezPQSOGYIYrZzAud3IKmVPq7",
+                        "priority": 3,
+                        "owner": "openai",
+                        "model": "gpt-3.5-turbo",
+                        "token_multiplier": 1.2
+                    },
+                    {
+                        "provider_name": "MultiChat",
+                        "base_url": "https://ilovetofuckadults.cablyai.com/openai",
+                        "api_key": "Nothing",
+                        "priority": 5,
+                        "owner": "openai",
+                        "model": "gpt-3.5-turbo",
+                        "token_multiplier": 1.2
+                    },
+                    {
+                        "provider_name": "OpenAI",
+                        "base_url": "https://0penai.exomlapi.com",
+                        "api_key": "sk-proj-ltSn8OWfiHGoCENTpG0JT3BlbkFJEM3fFp84faLZBHWAmUMc",
+                        "priority": 0,
+                        "owner": "openai",
+                        "model": "gpt-3.5-turbo",
+                        "token_multiplier": 1
+                    }
+                ],
+                "deepseek-chat": [
+                    {
+                        "provider_name": "deepseek-chat",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-346cb16a17564972930cfe2e6e001a1d",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-chat",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 15
+                    },
+                    {
+                        "provider_name": "deepseek-chat",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-556df58603df4d74a7394938a60b6144",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-chat",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 15
+                    },
+                    {
+                        "provider_name": "deepseek-chat",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-f7dc68f63da34196b94d494572f8e7b7",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-chat",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 15
+                    },
+                    {
+                        "provider_name": "deepseek-chat",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-311409e8500040d6b02eb63a4eacbe59",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-chat",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 15
+                    },
+                    {
+                        "provider_name": "deepseek-chat",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-55c6985182af491a90e409df945dbf28",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-chat",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 15
+                    },
+                    {
+                        "provider_name": "deepseek-chat",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-469a374cf67f419fb4e46fd76d593ab6",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-chat",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 15
+                    },
+                    {
+                        "provider_name": "deepseek-chat",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-8293f125e6f64cc0a7e1e06963e7b17d",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-chat",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 15
+                    },
+                    {
+                        "provider_name": "deepseek-chat",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-95e75fb741404ba181b52f1138ac21e7",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-chat",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 15
+                    },
+                    {
+                        "provider_name": "deepseek-chat",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-36eb7758370c464a998726a4dbee9f9e",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-chat",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 15
+                    },
+                    {
+                        "provider_name": "deepseek-chat",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-847fb93103244552b367bba791f282dc",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-chat",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 15
+                    },
+                    {
+                        "provider_name": "MultiChat",
+                        "base_url": "https://ilovetofuckadults.cablyai.com/openai",
+                        "api_key": "Nothing",
+                        "priority": 5,
+                        "owner": "deepseek",
+                        "model": "deepseek-ai/DeepSeek-V3-0324",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 15
+                    },
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://chat.typegpt.net/api/openai",
+                        "api_key": "Nothing",
+                        "priority": 99,
+                        "owner": "deepseek",
+                        "model": "deepseek-v3",
+                        "token_multiplier": 0.4
+                    },
+                    {
+                        "provider_name": "Liaobots",
+                        "base_url": "https://liaobots.cablyai.com",
+                        "api_key": "Nothing",
+                        "priority": 4,
+                        "owner": "deepseek",
+                        "model": "deepseek-v3-0324",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 15
+                    },
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://api.typegpt.net",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 2,
+                        "owner": "deepseek",
+                        "model": "deepseek-ai/DeepSeek-V3",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 15
+                    },
+                    {
+                        "provider_name": "Ollama",
+                        "base_url": "http://65.19.181.58:11434",
+                        "api_key": "Nothing",
+                        "priority": 20,
+                        "owner": "deepseek",
+                        "model": "deepseek-v3:671b",
+                        "token_multiplier": 0.4
+                    }
+                ],
+                "katelya-01": [
+                    {
+                        "provider_name": "Decentralized",
+                        "base_url": "https://fenayai.com",
+                        "api_key": "sk-or-v1-VrBz0UYstAWUL4Ib0uiO3E0wsb3GT7DPjioo2eYqzE857ejXECu5dE9oxFzT53Ds",
+                        "priority": 0,
+                        "owner": "stealth",
+                        "model": "kate",
+                        "token_multiplier": 12,
+                        "alpha": true
+                    }
+                ],
+                "tongyi-qianwen": [
+                    {
+                        "provider_name": "Decentralized",
+                        "base_url": "https://fenayai.com",
+                        "api_key": "sk-or-v1-VrBz0UYstAWUL4Ib0uiO3E0wsb3GT7DPjioo2eYqzE857ejXECu5dE9oxFzT53Ds",
+                        "priority": 0,
+                        "owner": "tongyi",
+                        "model": "syzd",
+                        "token_multiplier": 12,
+                        "alpha": true,
+                        "consecutive_failures": 1
+                    }
+                ],
+                "llama-3.3-nemotron-super-49b": [
+                    {
+                        "provider_name": "fenay",
+                        "base_url": "https://api.fenayai.com",
+                        "api_key": "sk-WUz4fnPSyBDKyMQYjcaOIEwTcayLXk4O",
+                        "priority": 0,
+                        "owner": "nvidia",
+                        "model": "llama-3.3-nemotron-super-49b",
+                        "token_multiplier": 0.1,
+                        "consecutive_failures": 4
+                    }
+                ],
+                "devstral-small-2505": [
+                    {
+                        "provider_name": "fenay",
+                        "base_url": "https://api.fenayai.com",
+                        "api_key": "sk-WUz4fnPSyBDKyMQYjcaOIEwTcayLXk4O",
+                        "priority": 0,
+                        "owner": "mistralai",
+                        "model": "devstral-small-2505",
+                        "token_multiplier": 0.1,
+                        "consecutive_failures": 4
+                    }
+                ],
+                "deepseek-v3-0324-selfhost": [
+                    {
+                        "provider_name": "fenay",
+                        "base_url": "https://api.fenayai.com",
+                        "api_key": "sk-WUz4fnPSyBDKyMQYjcaOIEwTcayLXk4O",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-v3-0324",
+                        "token_multiplier": 0.1,
+                        "consecutive_failures": 4
+                    }
+                ],
+                "kimi-k2-selfhost": [
+                    {
+                        "provider_name": "fenay",
+                        "base_url": "https://api.fenayai.com",
+                        "api_key": "sk-WUz4fnPSyBDKyMQYjcaOIEwTcayLXk4O",
+                        "priority": 1,
+                        "owner": "moonshot",
+                        "model": "kimi-k2",
+                        "token_multiplier": 0.1,
+                        "consecutive_failures": 4
+                    }
+                ],
+                "qwen3-235b-a22b-2507": [
+                    {
+                        "provider_name": "a4f",
+                        "base_url": "https://a4f.llmplayground.net",
+                        "api_key": "56c8eeff9971269d7a7e625ff88e8a83a34a556003a5c87c289ebe9a3d8a3d2c",
+                        "priority": 0,
+                        "owner": "qwen",
+                        "model": "provider-3/qwen-3-235b-a22b",
+                        "token_multiplier": 0.1,
+                        "consecutive_failures": 0
+                    }
+                ],
+                "qwen3-coder": [
+                    {
+                        "provider_name": "Decentralized",
+                        "base_url": "https://fenayai.com",
+                        "api_key": "sk-or-v1-VrBz0UYstAWUL4Ib0uiO3E0wsb3GT7DPjioo2eYqzE857ejXECu5dE9oxFzT53Ds",
+                        "priority": 1,
+                        "owner": "qwen",
+                        "model": "qwen3-coder",
+                        "token_multiplier": 0,
+                        "consecutive_failures": 0
+                    }
+                ],
+                "deepseek-r1t2-chimera": [
+                    {
+                        "provider_name": "openrouter",
+                        "base_url": "https://openrouter.ai/api",
+                        "api_key": "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",
+                        "priority": 0,
+                        "owner": "tngtech",
+                        "model": "tngtech/deepseek-r1t2-chimera:free",
+                        "token_multiplier": 2,
+                        "consecutive_failures": 4
+                    },
+                    {
+                        "provider_name": "openrouter",
+                        "base_url": "https://openrouter.ai/api",
+                        "api_key": "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",
+                        "priority": 0,
+                        "owner": "tngtech",
+                        "model": "tngtech/deepseek-r1t2-chimera:free",
+                        "token_multiplier": 2,
+                        "consecutive_failures": 2
+                    },
+                    {
+                        "provider_name": "openrouter",
+                        "base_url": "https://openrouter.ai/api",
+                        "api_key": "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",
+                        "priority": 0,
+                        "owner": "tngtech",
+                        "model": "tngtech/deepseek-r1t2-chimera:free",
+                        "token_multiplier": 2
+                    }
+                ],
+                "deepseek-r1": [
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-346cb16a17564972930cfe2e6e001a1d",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 1440
+                    },
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-556df58603df4d74a7394938a60b6144",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 1416
+                    },
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-f7dc68f63da34196b94d494572f8e7b7",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 1427
+                    },
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-311409e8500040d6b02eb63a4eacbe59",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 672
+                    },
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-55c6985182af491a90e409df945dbf28",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 1437
+                    },
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-469a374cf67f419fb4e46fd76d593ab6",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 1418
+                    },
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-8293f125e6f64cc0a7e1e06963e7b17d",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 927
+                    },
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-95e75fb741404ba181b52f1138ac21e7",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 1442
+                    },
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-36eb7758370c464a998726a4dbee9f9e",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 1074
+                    },
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-847fb93103244552b367bba791f282dc",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 1266
+                    },
+                    {
+                        "provider_name": "Xen",
+                        "base_url": "https://no-api.xenai.tech",
+                        "api_key": "sk-9SdssgdBB_xYQrlriVQvJw",
+                        "priority": 2,
+                        "owner": "deepseek",
+                        "model": "deepseek-ai/DeepSeek-R1",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 678
+                    },
+                    {
+                        "provider_name": "nexeonstopped",
+                        "base_url": "https://newernewapi69.nexeonstoppedai.com",
+                        "api_key": "sk-btEAkUm7lX6wrKSqxkyB9vxqezPQSOGYIYrZzAud3IKmVPq7",
+                        "priority": 100,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 678
+                    },
+                    {
+                        "provider_name": "MultiChat",
+                        "base_url": "https://ilovetofuckadults.cablyai.com/openai",
+                        "api_key": "Nothing",
+                        "priority": 5,
+                        "owner": "deepseek",
+                        "model": "deepseek-ai/DeepSeek-R1",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 678
+                    },
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://chat.typegpt.net/api/openai",
+                        "api_key": "Nothing",
+                        "priority": 99,
+                        "owner": "deepseek",
+                        "model": "deepseek-r1",
+                        "token_multiplier": 1,
+                        "consecutive_failures": 678
+                    },
+                    {
+                        "provider_name": "Liaobots",
+                        "base_url": "https://liaobots.cablyai.com",
+                        "api_key": "Nothing",
+                        "priority": 4,
+                        "owner": "deepseek",
+                        "model": "deepseek-r1",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 678
+                    },
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://api.typegpt.net",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 2,
+                        "owner": "deepseek",
+                        "model": "deepseek-ai/DeepSeek-R1",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 2034
+                    },
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://api.typegpt.net",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 2,
+                        "owner": "deepseek",
+                        "model": "deepseek-ai/DeepSeek-R1",
+                        "token_multiplier": 0.4
+                    },
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://api.typegpt.net",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 2,
+                        "owner": "deepseek",
+                        "model": "deepseek-ai/DeepSeek-R1",
+                        "token_multiplier": 0.4
+                    }
+                ],
+                "deepseek-r1-0528": [
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-346cb16a17564972930cfe2e6e001a1d",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 374
+                    },
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-556df58603df4d74a7394938a60b6144",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 367
+                    },
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-f7dc68f63da34196b94d494572f8e7b7",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 373
+                    },
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-311409e8500040d6b02eb63a4eacbe59",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 7
+                    },
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-55c6985182af491a90e409df945dbf28",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 368
+                    },
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-469a374cf67f419fb4e46fd76d593ab6",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 376
+                    },
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-8293f125e6f64cc0a7e1e06963e7b17d",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 7
+                    },
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-95e75fb741404ba181b52f1138ac21e7",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 366
+                    },
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-36eb7758370c464a998726a4dbee9f9e",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 82
+                    },
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-847fb93103244552b367bba791f282dc",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 82
+                    },
+                    {
+                        "provider_name": "Xen",
+                        "base_url": "https://no-api.xenai.tech",
+                        "api_key": "sk-9SdssgdBB_xYQrlriVQvJw",
+                        "priority": 2,
+                        "owner": "deepseek",
+                        "model": "deepseek-ai/DeepSeek-R1",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 7
+                    },
+                    {
+                        "provider_name": "nexeonstopped",
+                        "base_url": "https://newernewapi69.nexeonstoppedai.com",
+                        "api_key": "sk-btEAkUm7lX6wrKSqxkyB9vxqezPQSOGYIYrZzAud3IKmVPq7",
+                        "priority": 100,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 7
+                    },
+                    {
+                        "provider_name": "MultiChat",
+                        "base_url": "https://ilovetofuckadults.cablyai.com/openai",
+                        "api_key": "Nothing",
+                        "priority": 5,
+                        "owner": "deepseek",
+                        "model": "deepseek-ai/DeepSeek-R1",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 7
+                    },
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://chat.typegpt.net/api/openai",
+                        "api_key": "Nothing",
+                        "priority": 99,
+                        "owner": "deepseek",
+                        "model": "deepseek-r1",
+                        "token_multiplier": 1,
+                        "consecutive_failures": 7
+                    },
+                    {
+                        "provider_name": "Liaobots",
+                        "base_url": "https://liaobots.cablyai.com",
+                        "api_key": "Nothing",
+                        "priority": 4,
+                        "owner": "deepseek",
+                        "model": "deepseek-r1",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 7
+                    },
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://api.typegpt.net",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 2,
+                        "owner": "deepseek",
+                        "model": "deepseek-ai/DeepSeek-R1",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 21
+                    },
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://api.typegpt.net",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 2,
+                        "owner": "deepseek",
+                        "model": "deepseek-ai/DeepSeek-R1",
+                        "token_multiplier": 0.4
+                    },
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://api.typegpt.net",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 2,
+                        "owner": "deepseek",
+                        "model": "deepseek-ai/DeepSeek-R1",
+                        "token_multiplier": 0.4
+                    }
+                ],
+                "gemini-2.0-flash": [
+                    {
+                        "provider_name": "Google",
+                        "base_url": "https://google.exomlapi.com",
+                        "api_key": "AIzaSyAfR0-3oadeMDvxk0D6M-4VNNZIYr3DZYc",
+                        "priority": 0,
+                        "owner": "google",
+                        "model": "gemini-2.0-flash",
+                        "token_multiplier": 1,
+                        "consecutive_failures": 8
+                    },
+                    {
+                        "provider_name": "Vercel",
+                        "base_url": "https://vercel.exomlapi.com",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 1,
+                        "owner": "google",
+                        "model": "vertex/gemini-2.0-flash-001",
+                        "token_multiplier": 1,
+                        "consecutive_failures": 8
+                    }
+                ],
+                "bard": [
+                    {
+                        "provider_name": "Decentralized",
+                        "base_url": "https://fenayai.com",
+                        "api_key": "sk-or-v1-VrBz0UYstAWUL4Ib0uiO3E0wsb3GT7DPjioo2eYqzE857ejXECu5dE9oxFzT53Ds",
+                        "priority": 0,
+                        "owner": "google",
+                        "model": "bard-full",
+                        "token_multiplier": 1,
+                        "consecutive_failures": 3
+                    }
+                ],
+                "gpt-oss-120b-instant": [
+                    {
+                        "provider_name": "sam33",
+                        "base_url": "https://sam33.exomlapi.com",
+                        "api_key": "None",
+                        "priority": 0,
+                        "owner": "openai",
+                        "model": "gpt-oss-120b-instant",
+                        "token_multiplier": 0.05,
+                        "consecutive_failures": 13
+                    }
+                ],
+                "mistral-medium-latest": [
+                    {
+                        "provider_name": "a4f",
+                        "base_url": "https://a4f.llmplayground.net",
+                        "api_key": "None",
+                        "priority": 0,
+                        "owner": "openai",
+                        "model": "provider-3/mistral-medium-latest",
+                        "token_multiplier": 1
+                    }
+                ],
+                "gemini-2.5-flash": [
+                    {
+                        "provider_name": "Google",
+                        "base_url": "https://google.exomlapi.com",
+                        "api_key": "AIzaSyAfR0-3oadeMDvxk0D6M-4VNNZIYr3DZYc",
+                        "priority": 0,
+                        "owner": "google",
+                        "model": "gemini-2.5-flash",
+                        "token_multiplier": 4,
+                        "consecutive_failures": 2
+                    },
+                    {
+                        "provider_name": "Google",
+                        "base_url": "https://google.exomlapi.com",
+                        "api_key": "AIzaSyAssSLo31OgB63GBW53xmMz6X2Q-h91mVo",
+                        "priority": 1,
+                        "owner": "google",
+                        "model": "gemini-2.5-flash",
+                        "token_multiplier": 4,
+                        "consecutive_failures": 2
+                    },
+                    {
+                        "provider_name": "Google",
+                        "base_url": "https://google.exomlapi.com",
+                        "api_key": "AIzaSyDaYtWfHwI9vq3kTatny217HnbKauAvdxE",
+                        "priority": 2,
+                        "owner": "google",
+                        "model": "gemini-2.5-flash",
+                        "token_multiplier": 4,
+                        "consecutive_failures": 2
+                    },
+                    {
+                        "provider_name": "Google",
+                        "base_url": "https://google.exomlapi.com",
+                        "api_key": "AIzaSyDdvl04zrmSAlGFcueLr630AxyD8IVX7oE",
+                        "priority": 3,
+                        "owner": "google",
+                        "model": "gemini-2.5-flash",
+                        "token_multiplier": 4,
+                        "consecutive_failures": 2
+                    },
+                    {
+                        "provider_name": "Google",
+                        "base_url": "https://google.exomlapi.com",
+                        "api_key": "AIzaSyC5bYglL1ry16_ciYXVVe0KOcKkEDgv9bo",
+                        "priority": 4,
+                        "owner": "google",
+                        "model": "gemini-2.5-flash",
+                        "token_multiplier": 4,
+                        "consecutive_failures": 2
+                    },
+                    {
+                        "provider_name": "Google",
+                        "base_url": "https://google.exomlapi.com",
+                        "api_key": "AIzaSyDsfKhZoBAMdU-mkmhtFp72uDGA2YMS2uA",
+                        "priority": 5,
+                        "owner": "google",
+                        "model": "gemini-2.5-flash",
+                        "token_multiplier": 4,
+                        "consecutive_failures": 2
+                    },
+                    {
+                        "provider_name": "Google",
+                        "base_url": "https://google.exomlapi.com",
+                        "api_key": "AIzaSyC3AZBXBFJ32sfyQ-NqpoiPZLvetq5SNUs",
+                        "priority": 6,
+                        "owner": "google",
+                        "model": "gemini-2.5-flash",
+                        "token_multiplier": 4,
+                        "consecutive_failures": 2
+                    }
+                ],
+                "gemini-2.5-pro": [
+                    {
+                        "provider_name": "Google",
+                        "base_url": "https://google.exomlapi.com",
+                        "api_key": "AIzaSyAssSLo31OgB63GBW53xmMz6X2Q-h91mVo",
+                        "priority": 1,
+                        "owner": "google",
+                        "model": "gemini-2.5-pro",
+                        "token_multiplier": 20,
+                        "consecutive_failures": 3
+                    },
+                    {
+                        "provider_name": "Google",
+                        "base_url": "https://google.exomlapi.com",
+                        "api_key": "AIzaSyDaYtWfHwI9vq3kTatny217HnbKauAvdxE",
+                        "priority": 2,
+                        "owner": "google",
+                        "model": "gemini-2.5-pro",
+                        "token_multiplier": 20,
+                        "consecutive_failures": 4
+                    },
+                    {
+                        "provider_name": "Google",
+                        "base_url": "https://google.exomlapi.com",
+                        "api_key": "AIzaSyDdvl04zrmSAlGFcueLr630AxyD8IVX7oE",
+                        "priority": 3,
+                        "owner": "google",
+                        "model": "gemini-2.5-pro",
+                        "token_multiplier": 20,
+                        "consecutive_failures": 4
+                    },
+                    {
+                        "provider_name": "Google",
+                        "base_url": "https://google.exomlapi.com",
+                        "api_key": "AIzaSyC5bYglL1ry16_ciYXVVe0KOcKkEDgv9bo",
+                        "priority": 4,
+                        "owner": "google",
+                        "model": "gemini-2.5-pro",
+                        "token_multiplier": 20,
+                        "consecutive_failures": 4
+                    },
+                    {
+                        "provider_name": "Google",
+                        "base_url": "https://google.exomlapi.com",
+                        "api_key": "AIzaSyDsfKhZoBAMdU-mkmhtFp72uDGA2YMS2uA",
+                        "priority": 5,
+                        "owner": "google",
+                        "model": "gemini-2.5-pro",
+                        "token_multiplier": 20,
+                        "consecutive_failures": 4
+                    },
+                    {
+                        "provider_name": "Google",
+                        "base_url": "https://google.exomlapi.com",
+                        "api_key": "AIzaSyC3AZBXBFJ32sfyQ-NqpoiPZLvetq5SNUs",
+                        "priority": 6,
+                        "owner": "google",
+                        "model": "gemini-2.5-pro",
+                        "token_multiplier": 20,
+                        "consecutive_failures": 4
+                    }
+                ],
+                "gemini-2.5-pro-exp-03-25": [
+                    {
+                        "provider_name": "Google",
+                        "base_url": "https://google.exomlapi.com",
+                        "api_key": "AIzaSyAssSLo31OgB63GBW53xmMz6X2Q-h91mVo",
+                        "priority": 1,
+                        "owner": "google",
+                        "model": "gemini-2.5-pro-exp-03-25",
+                        "token_multiplier": 20,
+                        "consecutive_failures": 3
+                    },
+                    {
+                        "provider_name": "Google",
+                        "base_url": "https://google.exomlapi.com",
+                        "api_key": "AIzaSyDaYtWfHwI9vq3kTatny217HnbKauAvdxE",
+                        "priority": 2,
+                        "owner": "google",
+                        "model": "gemini-2.5-pro-exp-03-25",
+                        "token_multiplier": 20,
+                        "consecutive_failures": 3
+                    },
+                    {
+                        "provider_name": "Google",
+                        "base_url": "https://google.exomlapi.com",
+                        "api_key": "AIzaSyDdvl04zrmSAlGFcueLr630AxyD8IVX7oE",
+                        "priority": 3,
+                        "owner": "google",
+                        "model": "gemini-2.5-pro-exp-03-25",
+                        "token_multiplier": 20,
+                        "consecutive_failures": 3
+                    },
+                    {
+                        "provider_name": "Google",
+                        "base_url": "https://google.exomlapi.com",
+                        "api_key": "AIzaSyC5bYglL1ry16_ciYXVVe0KOcKkEDgv9bo",
+                        "priority": 4,
+                        "owner": "google",
+                        "model": "gemini-2.5-pro-exp-03-25",
+                        "token_multiplier": 20,
+                        "consecutive_failures": 3
+                    },
+                    {
+                        "provider_name": "Google",
+                        "base_url": "https://google.exomlapi.com",
+                        "api_key": "AIzaSyDsfKhZoBAMdU-mkmhtFp72uDGA2YMS2uA",
+                        "priority": 5,
+                        "owner": "google",
+                        "model": "gemini-2.5-pro-exp-03-25",
+                        "token_multiplier": 20,
+                        "consecutive_failures": 3
+                    },
+                    {
+                        "provider_name": "Google",
+                        "base_url": "https://google.exomlapi.com",
+                        "api_key": "AIzaSyC3AZBXBFJ32sfyQ-NqpoiPZLvetq5SNUs",
+                        "priority": 6,
+                        "owner": "google",
+                        "model": "gemini-2.5-pro-exp-03-25",
+                        "token_multiplier": 20,
+                        "consecutive_failures": 3
+                    }
+                ],
+                "chatgpt-4o-latest": [
+                    {
+                        "provider_name": "OpenAI",
+                        "base_url": "https://0penai.exomlapi.com",
+                        "api_key": "sk-proj-ltSn8OWfiHGoCENTpG0JT3BlbkFJEM3fFp84faLZBHWAmUMc",
+                        "priority": 0,
+                        "owner": "openai",
+                        "model": "chatgpt-4o-latest",
+                        "token_multiplier": 1,
+                        "consecutive_failures": 0
+                    }
+                ],
+                "gpt-search": [
+                    {
+                        "provider_name": "Cably",
+                        "base_url": "https://cablyai.com",
+                        "api_key": "sk-Rwoj-uorQwzwVPeimJIUJPu9QLh_jO94zxUGStNrQFBfeohW",
+                        "priority": 99,
+                        "owner": "openai",
+                        "model": "gpt-4o--search",
+                        "token_multiplier": 1,
+                        "consecutive_failures": 4
+                    },
+                    {
+                        "provider_name": "Xen",
+                        "base_url": "https://no-api.xenai.tech",
+                        "api_key": "sk-9SdssgdBB_xYQrlriVQvJw",
+                        "priority": 1,
+                        "owner": "openai",
+                        "model": "gpt-4o-mini-search-preview",
+                        "token_multiplier": 1.5,
+                        "consecutive_failures": 120
+                    },
+                    {
+                        "provider_name": "Xen",
+                        "base_url": "https://no-api.xenai.tech",
+                        "api_key": "sk-9SdssgdBB_xYQrlriVQvJw",
+                        "priority": 0,
+                        "owner": "openai",
+                        "model": "gpt-4o-search-preview",
+                        "token_multiplier": 1.5
+                    },
+                    {
+                        "provider_name": "OpenAI",
+                        "base_url": "https://0penai.exomlapi.com",
+                        "api_key": "sk-proj-ltSn8OWfiHGoCENTpG0JT3BlbkFJEM3fFp84faLZBHWAmUMc",
+                        "priority": 3,
+                        "owner": "openai",
+                        "model": "gpt-4o-mini-search-preview",
+                        "token_multiplier": 1.5,
+                        "consecutive_failures": 0
+                    }
+                ],
+                "qwq-32b": [
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://api.typegpt.net",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 1,
+                        "owner": "qwen",
+                        "model": "Qwen/QwQ-32B",
+                        "token_multiplier": 0,
+                        "consecutive_failures": 1140
+                    },
+                    {
+                        "provider_name": "a4f",
+                        "base_url": "https://a4f.llmplayground.net",
+                        "api_key": "56c8eeff9971269d7a7e625ff88e8a83a34a556003a5c87c289ebe9a3d8a3d2c",
+                        "priority": 0,
+                        "owner": "qwen",
+                        "model": "provider-2/qwq-32b",
+                        "token_multiplier": 0,
+                        "consecutive_failures": 1140
+                    }
+                ],
+                "kimi-k2": [
+                    {
+                        "provider_name": "Simpleterms",
+                        "base_url": "https://simpleterms.pro",
+                        "api_key": "sk-sm-ym6SOd2UF5prfBiMH3ux9j5EStdvdoVgTNPa6LIBnTO3y6QxztaVP5GRyK3PMSte",
+                        "priority": 1,
+                        "owner": "moonshot",
+                        "model": "moonshotai/Kimi-K2-Instruct",
+                        "token_multiplier": 3,
+                        "consecutive_failures": 28
+                    },
+                    {
+                        "provider_name": "groq",
+                        "base_url": "http://141.11.210.85:3000/api/openai",
+                        "api_key": "none",
+                        "priority": 0,
+                        "owner": "moonshot",
+                        "model": "moonshotai/kimi-k2-instruct",
+                        "token_multiplier": 3,
+                        "consecutive_failures": 0
+                    },
+                    {
+                        "provider_name": "groq",
+                        "base_url": "http://8.211.203.227:3000/api/openai",
+                        "api_key": "none",
+                        "priority": 0,
+                        "owner": "moonshot",
+                        "model": "moonshotai/kimi-k2-instruct",
+                        "token_multiplier": 3,
+                        "consecutive_failures": 28
+                    }
+                ],
+                "compound-beta": [
+                    {
+                        "provider_name": "groq",
+                        "base_url": "http://141.11.210.85:3000/api/openai",
+                        "api_key": "none",
+                        "priority": 0,
+                        "owner": "groq",
+                        "model": "compound-beta",
+                        "token_multiplier": 0.1
+                    },
+                    {
+                        "provider_name": "groq",
+                        "base_url": "http://8.211.203.227:3000/api/openai",
+                        "api_key": "none",
+                        "priority": 0,
+                        "owner": "groq",
+                        "model": "compound-beta",
+                        "token_multiplier": 0.1
+                    }
+                ],
+                "qwen-3-235b": [
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://api.typegpt.net",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 0,
+                        "owner": "qwen",
+                        "model": "Qwen/Qwen3-235B-A22B-fp8-tput",
+                        "token_multiplier": 1.5,
+                        "consecutive_failures": 10
+                    },
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://api.typegpt.net",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 2,
+                        "owner": "qwen",
+                        "model": "Qwen/Qwen3-235B-A22B",
+                        "token_multiplier": 1.5
+                    }
+                ],
+                "r1-1776": [
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://api.typegpt.net",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 0,
+                        "owner": "perplexity",
+                        "model": "perplexity-ai/r1-1776",
+                        "token_multiplier": 1.5,
+                        "consecutive_failures": 3
+                    }
+                ],
+                "mistral-small": [
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://api.typegpt.net",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 0,
+                        "owner": "mistral",
+                        "model": "mistral-small-latest",
+                        "token_multiplier": 0.1,
+                        "consecutive_failures": 7436
+                    },
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://api.typegpt.net",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 1,
+                        "owner": "mistral",
+                        "model": "mistralai/Mistral-Small-24B-Instruct-2501",
+                        "token_multiplier": 0.1
+                    }
+                ],
+                "mistral-large": [
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://api.typegpt.net",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 0,
+                        "owner": "mistral",
+                        "model": "mistral-large-latest",
+                        "token_multiplier": 0.1,
+                        "consecutive_failures": 0
+                    },
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://api.typegpt.net",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 1,
+                        "owner": "mistral",
+                        "model": "mistralai/mistral-large",
+                        "token_multiplier": 0.1
+                    }
+                ],
+                "pixtral-large": [
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://api.typegpt.net",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 0,
+                        "owner": "mistral",
+                        "model": "pixtral-large-latest",
+                        "token_multiplier": 0.1,
+                        "consecutive_failures": 3
+                    }
+                ],
+                "mistral-saba": [
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://api.typegpt.net",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 0,
+                        "owner": "mistral",
+                        "model": "mistral-saba-latest",
+                        "token_multiplier": 0.1,
+                        "consecutive_failures": 3
+                    }
+                ],
+                "codestral": [
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://api.typegpt.net",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 0,
+                        "owner": "mistral",
+                        "model": "codestral-latest",
+                        "token_multiplier": 0.1,
+                        "consecutive_failures": 14
+                    }
+                ],
+                "codestral-mamba": [
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://api.typegpt.net",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 0,
+                        "owner": "mistral",
+                        "model": "codestral-mamba-latest",
+                        "token_multiplier": 0.1,
+                        "consecutive_failures": 3
+                    }
+                ],
+                "llama-4-scout": [
+                    {
+                        "provider_name": "Cerebras",
+                        "base_url": "https://api.cerebras.ai",
+                        "api_key": "csk-ewmxnfepvt9fwywy4c5r2ptphm8xrjpvnft6mf39m2hfn4y2",
+                        "priority": 0,
+                        "owner": "meta",
+                        "model": "llama-4-scout-17b-16e-instruct",
+                        "token_multiplier": 1
+                    },
+                    {
+                        "provider_name": "a4f",
+                        "base_url": "https://a4f.llmplayground.net",
+                        "api_key": "56c8eeff9971269d7a7e625ff88e8a83a34a556003a5c87c289ebe9a3d8a3d2c",
+                        "priority": 1,
+                        "owner": "meta",
+                        "model": "provider-3/llama-4-scout",
+                        "token_multiplier": 1
+                    }
+                ],
+                "llama3.3": [
+                    {
+                        "provider_name": "a4f",
+                        "base_url": "https://a4f.llmplayground.net",
+                        "api_key": "56c8eeff9971269d7a7e625ff88e8a83a34a556003a5c87c289ebe9a3d8a3d2c",
+                        "priority": 1,
+                        "owner": "meta",
+                        "model": "provider-3/llama-3.3-70b",
+                        "token_multiplier": 0.5
+                    }
+                ],
+                "llama-4-maverick": [
+                    {
+                        "provider_name": "a4f",
+                        "base_url": "https://a4f.llmplayground.net",
+                        "api_key": "56c8eeff9971269d7a7e625ff88e8a83a34a556003a5c87c289ebe9a3d8a3d2c",
+                        "priority": 0,
+                        "owner": "meta",
+                        "model": "provider-3/llama-4-maverick",
+                        "token_multiplier": 4
+                    }
+                ],
+                "jupyter-base": [
+                    {
+                        "provider_name": "VoidLabs",
+                        "base_url": "https://voidlabs.fenayai.com",
+                        "api_key": "none",
+                        "priority": 0,
+                        "owner": "stealth",
+                        "model": "jupyter-base",
+                        "token_multiplier": 0.1
+                    }
+                ],
+                "glm-4.5-air": [
+                    {
+                        "provider_name": "airforce",
+                        "base_url": "https://api.airforce",
+                        "api_key": "sk-air-BmMhxzoWJTGpa54lrsPlmlqgItxqFRt0xcI0gAp5g6BvBqT8ekmQwR61CVSRRUC1",
+                        "priority": 0,
+                        "owner": "zai",
+                        "model": "glm-4.5",
+                        "token_multiplier": 0
+                    }
+                ],
+                "glm-4.5": [
+                    {
+                        "provider_name": "glm45",
+                        "base_url": "https://glm45.exomlapi.",
+                        "api_key": "none",
+                        "priority": 0,
+                        "owner": "zai",
+                        "model": "glm-4.5",
+                        "token_multiplier": 2,
+                        "consecutive_failures": 1568
+                    }
+                ],
+                "deepseek-r1-zero": [
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-346cb16a17564972930cfe2e6e001a1d",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 3
+                    },
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-556df58603df4d74a7394938a60b6144",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 3
+                    },
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-f7dc68f63da34196b94d494572f8e7b7",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 3
+                    },
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-311409e8500040d6b02eb63a4eacbe59",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 3
+                    },
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-55c6985182af491a90e409df945dbf28",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 3
+                    },
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-469a374cf67f419fb4e46fd76d593ab6",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 3
+                    },
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-8293f125e6f64cc0a7e1e06963e7b17d",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 3
+                    },
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-95e75fb741404ba181b52f1138ac21e7",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 3
+                    },
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-36eb7758370c464a998726a4dbee9f9e",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 3
+                    },
+                    {
+                        "provider_name": "deepseek-reasoner",
+                        "base_url": "https://api.deepseek.com",
+                        "api_key": "sk-847fb93103244552b367bba791f282dc",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 3
+                    },
+                    {
+                        "provider_name": "Xen",
+                        "base_url": "https://no-api.xenai.tech",
+                        "api_key": "sk-9SdssgdBB_xYQrlriVQvJw",
+                        "priority": 2,
+                        "owner": "deepseek",
+                        "model": "deepseek-ai/DeepSeek-R1",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 3
+                    },
+                    {
+                        "provider_name": "nexeonstopped",
+                        "base_url": "https://newernewapi69.nexeonstoppedai.com",
+                        "api_key": "sk-btEAkUm7lX6wrKSqxkyB9vxqezPQSOGYIYrZzAud3IKmVPq7",
+                        "priority": 100,
+                        "owner": "deepseek",
+                        "model": "deepseek-reasoner",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 3
+                    },
+                    {
+                        "provider_name": "MultiChat",
+                        "base_url": "https://ilovetofuckadults.cablyai.com/openai",
+                        "api_key": "Nothing",
+                        "priority": 5,
+                        "owner": "deepseek",
+                        "model": "deepseek-ai/DeepSeek-R1",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 3
+                    },
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://chat.typegpt.net/api/openai",
+                        "api_key": "Nothing",
+                        "priority": 99,
+                        "owner": "deepseek",
+                        "model": "deepseek-r1",
+                        "token_multiplier": 1,
+                        "consecutive_failures": 3
+                    },
+                    {
+                        "provider_name": "Liaobots",
+                        "base_url": "https://liaobots.cablyai.com",
+                        "api_key": "Nothing",
+                        "priority": 4,
+                        "owner": "deepseek",
+                        "model": "deepseek-r1",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 3
+                    },
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://api.typegpt.net",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-ai/DeepSeek-R1",
+                        "token_multiplier": 0.4,
+                        "consecutive_failures": 6
+                    },
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://api.typegpt.net",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 0,
+                        "owner": "deepseek",
+                        "model": "deepseek-ai/DeepSeek-R1",
+                        "token_multiplier": 0.4
+                    }
+                ],
+                "gpt-oss-120b": [
+                    {
+                        "provider_name": "fireworks",
+                        "base_url": "https://fireworks.exomlapi.com",
+                        "api_key": "b5d1fd8a7288935ae523a1673fe3055b16012c80e59eab58de5803b5258afd80",
+                        "priority": 0,
+                        "owner": "openai",
+                        "model": "openai/gpt-oss-120b",
+                        "token_multiplier": 0.5,
+                        "consecutive_failures": 2
+                    }
+                ],
+                "gpt-oss-20b": [
+                    {
+                        "provider_name": "Together",
+                        "base_url": "https://api.together.xyz",
+                        "api_key": "b5d1fd8a7288935ae523a1673fe3055b16012c80e59eab58de5803b5258afd80",
+                        "priority": 0,
+                        "owner": "openai",
+                        "model": "openai/gpt-oss-20b",
+                        "token_multiplier": 0.5
+                    }
+                ],
+                "llama-3.3-70b-fast": [
+                    {
+                        "provider_name": "TypeGPT",
+                        "base_url": "https://api.typegpt.net",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 1,
+                        "owner": "meta",
+                        "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+                        "token_multiplier": 0,
+                        "consecutive_failures": 4
+                    }
+                ],
+                "grok-3-beta": [
+                    {
+                        "provider_name": "Xrgo",
+                        "base_url": "https://api.xrgo.pro",
+                        "api_key": "sk-ff5da3dbb6c2abd196c1a566fef429a10ff74d92d623fdbb",
+                        "priority": 1,
+                        "owner": "xai",
+                        "model": "grok-3-beta",
+                        "token_multiplier": 1,
+                        "consecutive_failures": 3
+                    }
+                ],
+                "mario": [
+                    {
+                        "provider_name": "Decentralized",
+                        "base_url": "https://fenayai.com",
+                        "api_key": "sk-or-v1-VrBz0UYstAWUL4Ib0uiO3E0wsb3GT7DPjioo2eYqzE857ejXECu5dE9oxFzT53Ds",
+                        "priority": 1,
+                        "owner": "exoml",
+                        "model": "mario",
+                        "token_multiplier": 0.1
+                    }
+                ],
+                "exoml-search": [
+                    {
+                        "provider_name": "Exoml Search",
+                        "base_url": "https://exoml-search-model.exomlapi.com",
+                        "api_key": "none",
+                        "priority": 1,
+                        "owner": "exoml",
+                        "model": "exoml-search",
+                        "token_multiplier": 3,
+                        "consecutive_failures": 3
+                    }
+                ],
+                "o3": [
+                    {
+                        "provider_name": "Openai",
+                        "base_url": "https://0penai.exomlapi.com",
+                        "api_key": "sk-proj-ltSn8OWfiHGoCENTpG0JT3BlbkFJEM3fFp84faLZBHWAmUMc",
+                        "priority": 1,
+                        "owner": "openai",
+                        "model": "o3",
+                        "token_multiplier": 8,
+                        "consecutive_failures": 0
+                    }
+                ],
+                "o4-mini": [
+                    {
+                        "provider_name": "Openai",
+                        "base_url": "https://0penai.exomlapi.com",
+                        "api_key": "sk-proj-ltSn8OWfiHGoCENTpG0JT3BlbkFJEM3fFp84faLZBHWAmUMc",
+                        "priority": 1,
+                        "owner": "openai",
+                        "model": "o4-mini",
+                        "token_multiplier": 1,
+                        "consecutive_failures": 0
+                    }
+                ],
+                "fluffy": [
+                    {
+                        "provider_name": "Exoml",
+                        "base_url": "https://fluffy.exomlapi.com",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 1,
+                        "owner": "exoml",
+                        "model": "fluffy",
+                        "token_multiplier": 15
+                    }
+                ],
+                "afm-4.5b-preview": [
+                    {
+                        "provider_name": "Together",
+                        "base_url": "https://api.together.xyz",
+                        "api_key": "b5d1fd8a7288935ae523a1673fe3055b16012c80e59eab58de5803b5258afd80",
+                        "priority": 0,
+                        "owner": "arcee-ai",
+                        "model": "arcee-ai/AFM-4.5B-Preview",
+                        "token_multiplier": 1,
+                        "consecutive_failures": 3
+                    }
+                ],
+                "chatgpt-5": [
+                    {
+                        "provider_name": "Ollama",
+                        "base_url": "http://65.19.181.58:11434",
+                        "api_key": "Nothing",
+                        "priority": 0,
+                        "owner": "exoml",
+                        "model": "chatgpt-5",
+                        "token_multiplier": 0
+                    }
+                ],
+                "hermes3": [
+                    {
+                        "provider_name": "Ollama",
+                        "base_url": "http://65.19.181.58:11434",
+                        "api_key": "Nothing",
+                        "priority": 0,
+                        "owner": "hermes",
+                        "model": "hermes3:405b",
+                        "token_multiplier": 0,
+                        "consecutive_failures": 3
+                    }
+                ],
+                "emotional": [
+                    {
+                        "provider_name": "Ollama",
+                        "base_url": "http://65.19.181.58:11434",
+                        "api_key": "Nothing",
+                        "priority": 0,
+                        "owner": "exoml",
+                        "model": "emotional",
+                        "token_multiplier": 0
+                    }
+                ],
+                "anubis-70b": [
+                    {
+                        "provider_name": "Ollama",
+                        "base_url": "http://65.19.181.58:11434",
+                        "api_key": "Nothing",
+                        "priority": 0,
+                        "owner": "TheDrummer",
+                        "model": "ScrambieBambie/TheDrummer-Anubis-70B-v1.1-Q4_K_L:70b",
+                        "token_multiplier": 0
+                    }
+                ],
+                "glm-z1-9b-0414": [
+                    {
+                        "provider_name": "siliconflow",
+                        "base_url": "https://api.siliconflow.cn",
+                        "api_key": "sk-mfuiunzeuqsmvrtwccwuflfgbdfthgickutyqwouyukbehii",
+                        "priority": 2,
+                        "owner": "thudm",
+                        "model": "THUDM/GLM-Z1-32B-0414",
+                        "token_multiplier": 3
+                    },
+                    {
+                        "provider_name": "siliconflow",
+                        "base_url": "https://api.siliconflow.cn",
+                        "api_key": "sk-mfuiunzeuqsmvrtwccwuflfgbdfthgickutyqwouyukbehii",
+                        "priority": 1,
+                        "owner": "thudm",
+                        "model": "THUDM/GLM-Z1-Rumination-32B-0414",
+                        "token_multiplier": 3
+                    },
+                    {
+                        "provider_name": "siliconflow",
+                        "base_url": "https://api.siliconflow.cn",
+                        "api_key": "sk-mfuiunzeuqsmvrtwccwuflfgbdfthgickutyqwouyukbehii",
+                        "priority": 0,
+                        "owner": "thudm",
+                        "model": "THUDM/GLM-Z1-9B-0414",
+                        "token_multiplier": 3
+                    }
+                ]
+            }
+        },
+        "/v1/embeddings": {
+            "description": "Handles embedding requests.",
+            "models": {
+                "text-embedding-ada-002": [
+                    {
+                        "provider_name": "nexeonstopped",
+                        "base_url": "https://newernewapi69.nexeonstoppedai.com",
+                        "api_key": "sk-btEAkUm7lX6wrKSqxkyB9vxqezPQSOGYIYrZzAud3IKmVPq7",
+                        "priority": 2,
+                        "owner": "openai",
+                        "model": "text-embedding-ada-002",
+                        "token_multiplier": 0.0005
+                    },
+                    {
+                        "provider_name": "OpenAI",
+                        "base_url": "https://0penai.exomlapi.com",
+                        "api_key": "sk-proj-ltSn8OWfiHGoCENTpG0JT3BlbkFJEM3fFp84faLZBHWAmUMc",
+                        "priority": 0,
+                        "owner": "openai",
+                        "model": "text-embedding-ada-002",
+                        "token_multiplier": 0.0005
+                    }
+                ],
+                "text-embedding-3-large": [
+                    {
+                        "provider_name": "nexeonstopped",
+                        "base_url": "https://newernewapi69.nexeonstoppedai.com",
+                        "api_key": "sk-btEAkUm7lX6wrKSqxkyB9vxqezPQSOGYIYrZzAud3IKmVPq7",
+                        "priority": 2,
+                        "owner": "openai",
+                        "model": "text-embedding-3-large",
+                        "token_multiplier": 0.0005,
+                        "consecutive_failures": 6
+                    },
+                    {
+                        "provider_name": "OpenAI",
+                        "base_url": "https://0penai.exomlapi.com",
+                        "api_key": "sk-proj-ltSn8OWfiHGoCENTpG0JT3BlbkFJEM3fFp84faLZBHWAmUMc",
+                        "priority": 0,
+                        "owner": "openai",
+                        "model": "text-embedding-3-large",
+                        "token_multiplier": 0.0005,
+                        "consecutive_failures": 0
+                    }
+                ],
+                "text-embedding-3-small": [
+                    {
+                        "provider_name": "nexeonstopped",
+                        "base_url": "https://newernewapi69.nexeonstoppedai.com",
+                        "api_key": "sk-btEAkUm7lX6wrKSqxkyB9vxqezPQSOGYIYrZzAud3IKmVPq7",
+                        "priority": 2,
+                        "owner": "openai",
+                        "model": "text-embedding-3-small",
+                        "token_multiplier": 0.0005,
+                        "consecutive_failures": 3
+                    },
+                    {
+                        "provider_name": "OpenAI",
+                        "base_url": "https://0penai.exomlapi.com",
+                        "api_key": "sk-proj-ltSn8OWfiHGoCENTpG0JT3BlbkFJEM3fFp84faLZBHWAmUMc",
+                        "priority": 0,
+                        "owner": "openai",
+                        "model": "text-embedding-3-small",
+                        "token_multiplier": 0.0005,
+                        "consecutive_failures": 0
+                    }
+                ]
+            }
+        },
+        "/v1/images/generations": {
+            "description": "Handles image generation requests",
+            "models": {
+                "flux": [
+                    {
+                        "provider_name": "Together",
+                        "base_url": "https://api.together.ai",
+                        "api_key": "b5d1fd8a7288935ae523a1673fe3055b16012c80e59eab58de5803b5258afd80",
+                        "priority": 0,
+                        "owner": "bfl",
+                        "model": "black-forest-labs/FLUX.1-schnell",
+                        "token_multiplier": 5,
+                        "consecutive_failures": 0
+                    }
+                ],
+                "exo-image": [
+                    {
+                        "provider_name": "GPU",
+                        "base_url": "https://exoimg.exomlapi.com",
+                        "api_key": "sk-exoml4ever",
+                        "priority": 1,
+                        "owner": "exoml",
+                        "model": "Exo",
+                        "token_multiplier": 0
+                    }
+                ],
+                "midjourney": [
+                    {
+                        "provider_name": "midjourney",
+                        "base_url": "https://midjourney.exomlapi.com",
+                        "api_key": "sk-exoml4ever",
+                        "priority": 1,
+                        "owner": "midjourney",
+                        "model": "midjourney-v7",
+                        "token_multiplier": 100000
+                    }
+                ],
+                "runway": [
+                    {
+                        "provider_name": "runway",
+                        "base_url": "https://runway.exomlapi.com",
+                        "api_key": "sk-exoml4ever",
+                        "priority": 1,
+                        "owner": "exoml",
+                        "model": "Exo",
+                        "token_multiplier": 5000000,
+                        "consecutive_failures": 0
+                    }
+                ],
+                "flux.1-schnell": [
+                    {
+                        "provider_name": "Together",
+                        "base_url": "https://api.together.ai",
+                        "api_key": "b5d1fd8a7288935ae523a1673fe3055b16012c80e59eab58de5803b5258afd80",
+                        "priority": 0,
+                        "owner": "bfl",
+                        "model": "black-forest-labs/FLUX.1-schnell",
+                        "token_multiplier": 5000
+                    }
+                ],
+                "flux.1-dev": [
+                    {
+                        "provider_name": "Together",
+                        "base_url": "https://api.together.ai",
+                        "api_key": "b5d1fd8a7288935ae523a1673fe3055b16012c80e59eab58de5803b5258afd80",
+                        "priority": 1,
+                        "owner": "bfl",
+                        "model": "black-forest-labs/FLUX.1-dev",
+                        "token_multiplier": 5000
+                    }
+                ],
+                "flux.1-krea-dev": [
+                    {
+                        "provider_name": "Together",
+                        "base_url": "https://api.together.ai",
+                        "api_key": "b5d1fd8a7288935ae523a1673fe3055b16012c80e59eab58de5803b5258afd80",
+                        "priority": 1,
+                        "owner": "bfl",
+                        "model": "black-forest-labs/FLUX.1-krea-dev",
+                        "token_multiplier": 10000,
+                        "consecutive_failures": 0
+                    }
+                ],
+                "flux.1-kontext-pro": [
+                    {
+                        "provider_name": "Together",
+                        "base_url": "https://api.together.ai",
+                        "api_key": "b5d1fd8a7288935ae523a1673fe3055b16012c80e59eab58de5803b5258afd80",
+                        "priority": 0,
+                        "owner": "bfl",
+                        "model": "black-forest-labs/FLUX.1-kontext-pro",
+                        "token_multiplier": 10000,
+                        "consecutive_failures": 0
+                    },
+                    {
+                        "provider_name": "Type",
+                        "base_url": "https://api.typegpt.net",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 1,
+                        "owner": "bfl",
+                        "model": "black-forest-labs/FLUX.1-kontext-pro",
+                        "token_multiplier": 10000,
+                        "consecutive_failures": 7
+                    }
+                ],
+                "flux.1-kontext-max": [
+                    {
+                        "provider_name": "Together",
+                        "base_url": "https://api.together.ai",
+                        "api_key": "b5d1fd8a7288935ae523a1673fe3055b16012c80e59eab58de5803b5258afd80",
+                        "priority": 0,
+                        "owner": "bfl",
+                        "model": "black-forest-labs/FLUX.1-kontext-max",
+                        "token_multiplier": 10000,
+                        "consecutive_failures": 0
+                    },
+                    {
+                        "provider_name": "Type",
+                        "base_url": "https://api.typegpt.net",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 1,
+                        "owner": "bfl",
+                        "model": "black-forest-labs/FLUX.1-kontext-max",
+                        "token_multiplier": 10000,
+                        "consecutive_failures": 28
+                    }
+                ],
+                "flux.1-kontext-dev": [
+                    {
+                        "provider_name": "Together",
+                        "base_url": "https://api.together.ai",
+                        "api_key": "b5d1fd8a7288935ae523a1673fe3055b16012c80e59eab58de5803b5258afd80",
+                        "priority": 0,
+                        "owner": "bfl",
+                        "model": "black-forest-labs/FLUX.1-kontext-dev",
+                        "token_multiplier": 10000,
+                        "consecutive_failures": 1
+                    },
+                    {
+                        "provider_name": "Type",
+                        "base_url": "https://api.typegpt.net",
+                        "api_key": "sk-Fh3yLsRtvBgL6YWGg0zd6ZnbDHltqdRR36Tuo4DhMcDTUfKi",
+                        "priority": 1,
+                        "owner": "bfl",
+                        "model": "black-forest-labs/FLUX.1-kontext-pro",
+                        "token_multiplier": 10000,
+                        "consecutive_failures": 1
+                    }
+                ],
+                "imagen-3": [
+                    {
+                        "provider_name": "Infip",
+                        "base_url": "https://api.infip.pro",
+                        "api_key": "infip-8f45b110",
+                        "priority": 1,
+                        "owner": "google",
+                        "model": "img3",
+                        "token_multiplier": 5000,
+                        "consecutive_failures": 0
+                    }
+                ],
+                "imagen-3-5": [
+                    {
+                        "provider_name": "Infip",
+                        "base_url": "https://api.infip.pro",
+                        "api_key": "infip-8f45b110",
+                        "priority": 1,
+                        "owner": "google",
+                        "model": "img4",
+                        "token_multiplier": 5000
+                    }
+                ],
+                "uncensored": [
+                    {
+                        "provider_name": "Infip",
+                        "base_url": "https://api.infip.pro",
+                        "api_key": "infip-8f45b110",
+                        "priority": 1,
+                        "owner": "infip",
+                        "model": "uncen",
+                        "token_multiplier": 5000
+                    }
+                ],
+                "dalle": [
+                    {
+                        "provider_name": "ExoML",
+                        "base_url": "https://0penai.exomlapi.com",
+                        "api_key": "sk-proj-ltSn8OWfiHGoCENTpG0JT3BlbkFJEM3fFp84faLZBHWAmUMc",
+                        "priority": 2,
+                        "owner": "openai",
+                        "model": "dall-e-3",
+                        "token_multiplier": 50000,
+                        "consecutive_failures": 0
+                    }
+                ],
+                "ideogram": [
+                    {
+                        "provider_name": "Openai",
+                        "base_url": "https://ideogram.exomlapi.com",
+                        "api_key": "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",
+                        "priority": 2,
+                        "owner": "openai",
+                        "model": "ideogram",
+                        "token_multiplier": 10000
+                    }
+                ]
+            }
+        },
+        "/v1/completions": {
+            "description": "Handles legacy completion requests.",
+            "models": {
+                "davinci": [
+                    {
+                        "provider_name": "nexeonstopped",
+                        "base_url": "https://newernewapi69.nexeonstoppedai.com",
+                        "api_key": "sk-btEAkUm7lX6wrKSqxkyB9vxqezPQSOGYIYrZzAud3IKmVPq7",
+                        "priority": 2,
+                        "owner": "openai",
+                        "model": "davinci-002",
+                        "token_multiplier": 2
+                    },
+                    {
+                        "provider_name": "OpenAI",
+                        "base_url": "https://0penai.exomlapi.com",
+                        "api_key": "sk-proj-ltSn8OWfiHGoCENTpG0JT3BlbkFJEM3fFp84faLZBHWAmUMc",
+                        "priority": 0,
+                        "owner": "openai",
+                        "model": "davinci-002",
+                        "token_multiplier": 2
+                    }
+                ],
+                "gpt-3.5-turbo-instruct": [
+                    {
+                        "provider_name": "nexeonstopped",
+                        "base_url": "https://newernewapi69.nexeonstoppedai.com",
+                        "api_key": "sk-btEAkUm7lX6wrKSqxkyB9vxqezPQSOGYIYrZzAud3IKmVPq7",
+                        "priority": 2,
+                        "owner": "openai",
+                        "model": "gpt-3.5-turbo-instruct",
+                        "token_multiplier": 2
+                    },
+                    {
+                        "provider_name": "OpenAI",
+                        "base_url": "https://0penai.exomlapi.com",
+                        "api_key": "sk-proj-ltSn8OWfiHGoCENTpG0JT3BlbkFJEM3fFp84faLZBHWAmUMc",
+                        "priority": 0,
+                        "owner": "openai",
+                        "model": "gpt-3.5-turbo-instruct",
+                        "token_multiplier": 2
+                    }
+                ]
+            }
+        },
+        "/v1/audio/transcriptions": {
+            "description": "Handles audio transcription requests.",
+            "models": {
+                "gpt-4o-mini-transcribe": [
+                    {
+                        "provider_name": "OpenAI",
+                        "base_url": "https://0penai.exomlapi.com",
+                        "api_key": "sk-proj-ltSn8OWfiHGoCENTpG0JT3BlbkFJEM3fFp84faLZBHWAmUMc",
+                        "priority": 0,
+                        "owner": "openai",
+                        "model": "gpt-4o-mini-transcribe",
+                        "token_multiplier": 2,
+                        "consecutive_failures": 48
+                    }
+                ],
+                "gpt-4o-transcribe": [
+                    {
+                        "provider_name": "OpenAI",
+                        "base_url": "https://0penai.exomlapi.com",
+                        "api_key": "sk-proj-ltSn8OWfiHGoCENTpG0JT3BlbkFJEM3fFp84faLZBHWAmUMc",
+                        "priority": 0,
+                        "owner": "openai",
+                        "model": "gpt-4o-transcribe",
+                        "token_multiplier": 3
+                    }
+                ],
+                "whisper-1": [
+                    {
+                        "provider_name": "OpenAI",
+                        "base_url": "https://0penai.exomlapi.com",
+                        "api_key": "sk-proj-ltSn8OWfiHGoCENTpG0JT3BlbkFJEM3fFp84faLZBHWAmUMc",
+                        "priority": 0,
+                        "owner": "openai",
+                        "model": "whisper-1",
+                        "token_multiplier": 3
+                    }
+                ]
+            }
+        },
+        "/v1/audio/speech": {
+            "description": "Handles text-to-speech requests.",
+            "models": {
+                "tts-1": [
+                    {
+                        "provider_name": "OpenAI",
+                        "base_url": "https://0penai.exomlapi.com",
+                        "api_key": "sk-proj-ltSn8OWfiHGoCENTpG0JT3BlbkFJEM3fFp84faLZBHWAmUMc",
+                        "priority": 0,
+                        "owner": "openai",
+                        "model": "tts-1",
+                        "token_multiplier": 1
+                    }
+                ],
+                "tts-1-hd": [
+                    {
+                        "provider_name": "OpenAI",
+                        "base_url": "https://0penai.exomlapi.com",
+                        "api_key": "sk-proj-ltSn8OWfiHGoCENTpG0JT3BlbkFJEM3fFp84faLZBHWAmUMc",
+                        "priority": 0,
+                        "owner": "openai",
+                        "model": "tts-1-hd",
+                        "token_multiplier": 2
+                    }
+                ],
+                "gpt-4o-mini-tts": [
+                    {
+                        "provider_name": "OpenAI",
+                        "base_url": "https://0penai.exomlapi.com",
+                        "api_key": "sk-proj-ltSn8OWfiHGoCENTpG0JT3BlbkFJEM3fFp84faLZBHWAmUMc",
+                        "priority": 0,
+                        "owner": "openai",
+                        "model": "gpt-4o-mini-tts",
+                        "token_multiplier": 3
+                    }
+                ]
+            }
+        },
+        "/v1/moderations": {
+            "description": "Handles text-to-speech requests.",
+            "models": {
+                "omni-moderation": [
+                    {
+                        "provider_name": "Openai",
+                        "base_url": "https://0penai.exomlapi.com",
+                        "api_key": "sk-proj-ltSn8OWfiHGoCENTpG0JT3BlbkFJEM3fFp84faLZBHWAmUMc",
+                        "priority": 1,
+                        "owner": "openai",
+                        "model": "omni-moderation-latest",
+                        "token_multiplier": 0,
+                        "consecutive_failures": 1
+                    }
+                ]
+            }
+        },
+        "/v1/responses": {
+            "description": "Handles responses requests.",
+            "models": {
+                "codex-mini": [
+                    {
+                        "provider_name": "OpenAI",
+                        "base_url": "https://0penai.exomlapi.com",
+                        "api_key": "sk-proj-ltSn8OWfiHGoCENTpG0JT3BlbkFJEM3fFp84faLZBHWAmUMc",
+                        "priority": 0,
+                        "owner": "openai",
+                        "model": "codex-mini-latest",
+                        "token_multiplier": 1,
+                        "consecutive_failures": 2
+                    }
+                ],
+                "o3-pro": [
+                    {
+                        "provider_name": "OpenAI",
+                        "base_url": "https://0penai.exomlapi.com",
+                        "api_key": "sk-proj-ltSn8OWfiHGoCENTpG0JT3BlbkFJEM3fFp84faLZBHWAmUMc",
+                        "priority": 0,
+                        "owner": "openai",
+                        "model": "o3-pro",
+                        "token_multiplier": 1,
+                        "consecutive_failures": 2
+                    }
+                ]
+            }
+        }
+    }
+}

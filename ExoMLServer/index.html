@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>exomlapi.com | Unlimited AI Tokens</title>
+  <meta property="og:title" content="exomlapi.com | Unlimited AI Tokens" />
+  <meta property="og:description" content="Access up to 1B+ AI tokens daily with lifetime plans. Multiple payment options, no rate limits, OpenAI-compatible." />
+  <meta property="og:image" content="https://exomlapi.com/favicon.png" />
+  <meta property="og:url" content="https://exomlapi.com" />
+  <meta property="og:type" content="website" />
+  <link rel="favicon icon" href="https://exomlapi.com/favicon.png" type="image/png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              300: '#93c5fd',
+              400: '#60a5fa',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            },
+            dark: {
+              50: '#f9fafb',
+              100: '#f3f4f6',
+              200: '#e5e7eb',
+              300: '#d1d5db',
+              400: '#9ca3af',
+              500: '#6b7280',
+              600: '#4b5563',
+              700: '#374151',
+              800: '#1f2937',
+              900: '#111827',
+            },
+            neutral: {
+              50: '#f9fafb',
+              100: '#f3f4f6',
+              200: '#e5e7eb',
+              300: '#d1d5db',
+              400: '#9ca3af',
+              500: '#6b7280',
+              600: '#4b5563',
+              700: '#374151',
+              800: '#1f2937',
+              900: '#111827',
+            }
+          },
+          fontFamily: {
+            'sans': ['Inter', 'system-ui', 'sans-serif'],
+            'mono': ['JetBrains Mono', 'Fira Code', 'monospace'],
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-in-out',
+            'slide-up': 'slideUp 0.6s ease-out',
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(20px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
+    
+    .page-content {
+      display: none;
+    }
+    
+    .page-content.active {
+      display: block;
+    }
+    
+    .glass {
+      backdrop-filter: blur(16px);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .dark .glass {
+      background: rgba(0, 0, 0, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .gradient-text{
+      background: linear-gradient(135deg, #3b82f6, #2563eb, #1d4ed8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .typing-animation::after {
+      content: '|';
+      animation: blink 1s infinite;
+    }
+    
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+  </style>
+</head>
+<body class="bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 transition-colors duration-300 font-sans">
+  
+  <nav class="fixed top-0 w-full z-50 glass shadow-lg backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center space-x-3">
+          <div class="w-8 h-8 rounded-lg flex items-center justify-center">
+            <img src="https://exomlapi.com/favicon.png" alt="exomlapi" class="w-8 h-8 rounded-lg">
+          </div>
+          <span class="font-bold text-xl gradient-text font-sans">exomlapi</span>
+        </div>
+        
+        <div class="hidden md:flex items-center space-x-8">
+          <button onclick="showPage('home')" class="nav-link hover:text-primary-600 transition-colors">Home</button>
+          <button onclick="showPage('features')" class="nav-link hover:text-primary-600 transition-colors">Features</button>
+          <button onclick="showPage('docs')" class="nav-link hover:text-primary-600 transition-colors">Docs</button>
+          <button onclick="showPage('pricing')" class="nav-link hover:text-primary-600 transition-colors">Pricing</button>
+          <a href="https://discord.gg/exoml" class="nav-link hover:text-primary-600 transition-colors">Discord</a>
+          <a href="http://status.exomlapi.com/" target="_blank" class="nav-link hover:text-primary-600 transition-colors">Status</a>
+          <a href="https://exomlapi.com" class="nav-link hover:text-primary-600 transition-colors">Chat</a>
+        </div>
+        
+        <button onclick="toggleTheme()" class="p-2 rounded-lg bg-dark-100 dark:bg-dark-800 hover:bg-dark-200 dark:hover:bg-dark-700 transition-colors">
+          <svg id="theme-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 11 0 00-1.414-1.414l.707-.707a1 1 0 011.414 0zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div id="home" class="page-content active">
+    <section class="pt-24 pb-20 px-4 sm:px-6 lg:px-8 min-h-screen flex items-center bg-gradient-to-br from-primary-50 to-neutral-50 dark:from-neutral-900 dark:to-neutral-800 relative overflow-hidden">
+      <div class="max-w-7xl mx-auto w-full">
+        <div class="text-center animate-fade-in relative z-10">
+          <div class="inline-flex items-center px-4 py-2 bg-gray-100 dark:bg-gray-900 rounded-full text-gray-700 dark:text-gray-400 text-sm font-medium mb-8">
+            <span class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
+            Live API Status: Operational
+          </div>
+          
+          <h1 class="text-5xl md:text-7xl font-bold mb-6 gradient-text animate-slide-up tracking-tight">
+            <span class="text-gray-800 dark:text-gray-300 typing-animation">1B+ Tokens</span>
+            <br />
+            <span class="text-gray-800 dark:text-gray-400">Per Day</span>
+          </h1>
+          
+          <p class="text-xl md:text-2xl text-neutral-600 dark:text-neutral-400 mb-8 max-w-3xl mx-auto animate-fade-in font-light tracking-wide">
+            Build unlimited AI applications with our enterprise-grade API.
+          </p>
+          
+          <div class="flex flex-wrap justify-center gap-4 mb-10">
+            <span class="px-4 py-2 bg-primary-50 dark:bg-neutral-800 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium border border-primary-100 dark:border-neutral-700 shadow-sm">
+              <i class="fas fa-infinity mr-2 text-green-600 dark:text-green-400"></i>No rate limits
+            </span>
+            <span class="px-4 py-2 bg-primary-50 dark:bg-neutral-800 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium border border-primary-100 dark:border-neutral-700 shadow-sm">
+              <i class="fas fa-gem mr-2 text-blue-600 dark:text-blue-400"></i>Lifetime access
+            </span>
+            <span class="px-4 py-2 bg-primary-50 dark:bg-neutral-800 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium border border-primary-100 dark:border-neutral-700 shadow-sm">
+              <i class="fas fa-credit-card mr-2 text-purple-600 dark:text-purple-400"></i>Multiple payment options
+            </span>
+          </div>
+          
+          <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-slide-up max-w-lg mx-auto">
+            <a href="https://discord.gg/exoml" class="px-8 py-4 bg-primary-600 dark:bg-primary-700 text-white rounded-xl font-semibold hover:bg-primary-700 dark:hover:bg-primary-600 transform hover:scale-105 transition-all duration-200 shadow-lg">
+              <i class="fas fa-rocket mr-2"></i>Start Free Trial
+            </a>
+            <button onclick="showPage('pricing')" class="px-8 py-4 border-2 border-primary-600 dark:border-primary-700 text-primary-600 dark:text-primary-400 rounded-xl font-semibold hover:bg-primary-50 dark:hover:bg-dark-800 transition-all duration-200">
+              View Pricing
+            </button>
+          </div>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto animate-fade-in">
+            <div class="text-center p-4 bg-white dark:bg-neutral-800 rounded-xl shadow-md dark:shadow-none dark:border dark:border-neutral-700">
+              <div class="text-3xl font-bold text-green-600 dark:text-gray-300 mb-2" id="total-tokens-display">Loading...</div>
+              <div class="text-gray-600 dark:text-gray-500">Total Tokens Processed</div>
+            </div>
+            <div class="text-center p-4 bg-white dark:bg-neutral-800 rounded-xl shadow-md dark:shadow-none dark:border dark:border-neutral-700">
+              <div class="text-3xl font-bold text-green-600 dark:text-gray-300 mb-2" id="daily-tokens-display">Loading...</div>
+              <div class="text-gray-600 dark:text-gray-500">Daily Tokens (Today)</div>
+            </div>
+            <div class="text-center p-4 bg-white dark:bg-neutral-800 rounded-xl shadow-md dark:shadow-none dark:border dark:border-neutral-700">
+              <div class="text-3xl font-bold text-green-600 dark:text-gray-300 mb-2">99.9%</div>
+              <div class="text-gray-600 dark:text-gray-500">Uptime</div>
+            </div>
+            <div class="text-center p-4 bg-white dark:bg-neutral-800 rounded-xl shadow-md dark:shadow-none dark:border dark:border-neutral-700">
+              <div class="text-3xl font-bold text-green-600 dark:text-gray-300 mb-2">24/7</div>
+              <div class="text-gray-600 dark:text-gray-500">Support</div>
+            </div>
+          </div>
+          
+          <div class="text-center mt-8 text-sm text-gray-500 dark:text-gray-500">
+            <div class="text-sm text-gray-500 dark:text-gray-600">
+              Last updated: <span id="last-updated-display">Loading...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <div id="features" class="page-content">
+    <section class="pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <h1 class="text-4xl md:text-6xl font-bold mb-6 gradient-text tracking-tight">Powerful Features</h1>
+          <p class="text-xl text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">Everything you need to build scalable AI applications</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          <div class="p-6 bg-white dark:bg-neutral-800 rounded-2xl shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 dark:shadow-none dark:border dark:border-neutral-700">
+            <div class="w-16 h-16 bg-gradient-to-br from-primary-400 to-primary-600 rounded-2xl flex items-center justify-center mb-6">
+              <i class="fas fa-rocket text-white text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-4">1B+ Tokens Daily</h3>
+            <p class="text-dark-600 dark:text-dark-400">Run massive AI workloads without any rate limits or restrictions</p>
+          </div>
+          
+          <div class="p-6 bg-white dark:bg-neutral-800 rounded-2xl shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 dark:shadow-none dark:border dark:border-neutral-700">
+            <div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center mb-6">
+              <i class="fas fa-bolt text-white text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-4">Lightning Fast</h3>
+            <p class="text-dark-600 dark:text-dark-400">Low latency responses with global CDN and optimized infrastructure</p>
+          </div>
+          
+          <div class="p-6 bg-white dark:bg-neutral-800 rounded-2xl shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 dark:shadow-none dark:border dark:border-neutral-700">
+            <div class="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-600 rounded-2xl flex items-center justify-center mb-6">
+              <i class="fas fa-gem text-white text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-4">Lifetime Access</h3>
+            <p class="text-dark-600 dark:text-dark-400">Pay once and get permanent access to our API services</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="docs" class="page-content">
+    <section class="pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <h1 class="text-4xl md:text-6xl font-bold mb-6 gradient-text tracking-tight">Documentation</h1>
+          <p class="text-xl text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">Get started in minutes with our OpenAI-compatible API</p>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+          <div>
+            <h2 class="text-2xl font-bold mb-6">API Examples</h2>
+            
+            <div class="flex space-x-2 mb-4 border-b border-gray-200 dark:border-gray-700">
+              <button onclick="showLanguageInline('curl')" class="language-tab-inline px-4 py-2 text-sm font-medium border-b-2 border-primary-500 text-primary-600 dark:text-primary-400 transition-colors" data-lang="curl">cURL</button>
+              <button onclick="showLanguageInline('python')" class="language-tab-inline px-4 py-2 text-sm font-medium border-b-2 border-transparent hover:text-primary-600 dark:hover:text-primary-400 transition-colors" data-lang="python">Python</button>
+              <button onclick="showLanguageInline('nodejs')" class="language-tab-inline px-4 py-2 text-sm font-medium border-b-2 border-transparent hover:text-primary-600 dark:hover:text-primary-400 transition-colors" data-lang="nodejs">Node.js</button>
+            </div>
+            
+            <div class="relative overflow-hidden rounded-2xl shadow-md">
+              <div id="code-examples-inline" class="bg-gray-900 dark:bg-dark-900 rounded-2xl p-6 font-mono text-sm overflow-x-auto">
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex space-x-2">
+                    <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                    <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                  </div>
+                  <button onclick="copyCodeInline()" class="px-3 py-1 text-xs bg-gray-700 dark:bg-gray-800 text-gray-300 rounded hover:bg-gray-600 dark:hover:bg-gray-700 transition-colors flex items-center space-x-1">
+                    <i class="fas fa-copy"></i>
+                    <span>Copy</span>
+                  </button>
+                </div>
+                <pre id="code-content-inline" class="text-green-400 dark:text-green-400"></pre>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <h2 class="text-2xl font-bold mb-6">Supported Endpoints</h2>
+            <div class="space-y-3">
+              <button onclick="showEndpointExampleInline('chat')" class="endpoint-btn w-full p-4 bg-white dark:bg-dark-800 rounded-xl border-2 border-primary-500 dark:border-primary-400 transition-colors text-left group" data-endpoint="chat">
+                <div class="font-mono text-sm text-primary-600 dark:text-primary-400 group-hover:text-primary-700 dark:group-hover:text-primary-300">POST /v1/chat/completions</div>
+                <div class="text-dark-600 dark:text-dark-400 text-sm mt-1">Create chat completions</div>
+              </button>
+              <button onclick="showEndpointExampleInline('completions')" class="endpoint-btn w-full p-4 bg-white dark:bg-dark-800 rounded-xl border border-dark-200 dark:border-dark-700 hover:border-primary-500 dark:hover:border-primary-400 transition-colors text-left group" data-endpoint="completions">
+                <div class="font-mono text-sm text-primary-600 dark:text-primary-400 group-hover:text-primary-700 dark:group-hover:text-primary-300">POST /v1/completions</div>
+                <div class="text-dark-600 dark:text-dark-400 text-sm mt-1">Create text completions</div>
+              </button>
+              <button onclick="showEndpointExampleInline('embeddings')" class="endpoint-btn w-full p-4 bg-white dark:bg-dark-800 rounded-xl border border-dark-200 dark:border-dark-700 hover:border-primary-500 dark:hover:border-primary-400 transition-colors text-left group" data-endpoint="embeddings">
+                <div class="font-mono text-sm text-primary-600 dark:text-primary-400 group-hover:text-primary-700 dark:group-hover:text-primary-300">POST /v1/embeddings</div>
+                <div class="text-dark-600 dark:text-dark-400 text-sm mt-1">Create embeddings</div>
+              </button>
+              <button onclick="showEndpointExampleInline('images')" class="endpoint-btn w-full p-4 bg-white dark:bg-dark-800 rounded-xl border border-dark-200 dark:border-dark-700 hover:border-primary-500 dark:hover:border-primary-400 transition-colors text-left group" data-endpoint="images">
+                <div class="font-mono text-sm text-primary-600 dark:text-primary-400 group-hover:text-primary-700 dark:group-hover:text-primary-300">POST /v1/images/generations</div>
+                <div class="text-dark-600 dark:text-dark-400 text-sm mt-1">Generate images</div>
+              </button>
+              <button onclick="showEndpointExampleInline('speech')" class="endpoint-btn w-full p-4 bg-white dark:bg-dark-800 rounded-xl border border-dark-200 dark:border-dark-700 hover:border-primary-500 dark:hover:border-primary-400 transition-colors text-left group" data-endpoint="speech">
+                <div class="font-mono text-sm text-primary-600 dark:text-primary-400 group-hover:text-primary-700 dark:group-hover:text-primary-300">POST /v1/audio/speech</div>
+                <div class="text-dark-600 dark:text-dark-400 text-sm mt-1">Generate audio from text</div>
+              </button>
+              <button onclick="showEndpointExampleInline('transcriptions')" class="endpoint-btn w-full p-4 bg-white dark:bg-dark-800 rounded-xl border border-dark-200 dark:border-dark-700 hover:border-primary-500 dark:hover:border-primary-400 transition-colors text-left group" data-endpoint="transcriptions">
+                <div class="font-mono text-sm text-primary-600 dark:text-primary-400 group-hover:text-primary-700 dark:group-hover:text-primary-300">POST /v1/audio/transcriptions</div>
+                <div class="text-dark-600 dark:text-dark-400 text-sm mt-1">Transcribe audio into text</div>
+              </button>
+              <button onclick="showEndpointExampleInline('responses')" class="endpoint-btn w-full p-4 bg-white dark:bg-dark-800 rounded-xl border border-dark-200 dark:border-dark-700 hover:border-primary-500 dark:hover:border-primary-400 transition-colors text-left group" data-endpoint="responses">
+                <div class="font-mono text-sm text-primary-600 dark:text-primary-400 group-hover:text-primary-700 dark:group-hover:text-primary-300">POST /v1/responses</div>
+                <div class="text-dark-600 dark:text-dark-400 text-sm mt-1">Get AI-generated responses</div>
+              </button>
+              <button onclick="showEndpointExampleInline('usage')" class="endpoint-btn w-full p-4 bg-white dark:bg-dark-800 rounded-xl border border-dark-200 dark:border-dark-700 hover:border-primary-500 dark:hover:border-primary-400 transition-colors text-left group" data-endpoint="usage">
+                <div class="font-mono text-sm text-primary-600 dark:text-primary-400 group-hover:text-primary-700 dark:group-hover:text-primary-300">GET /v1/usage</div>
+                <div class="text-dark-600 dark:text-dark-400 text-sm mt-1">Get token usage statistics</div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="pricing" class="page-content">
+    <section class="pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <h1 class="text-4xl md:text-6xl font-bold mb-6 gradient-text tracking-tight">Simple Pricing</h1>
+          <p class="text-xl text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">Lifetime access with multiple payment methods</p>
+          <p class="text-dark-500 dark:text-dark-400 mt-2">We accept Crypto (BTC/ETH), PayPal F&F, Ko-Fi, and more</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-4xl mx-auto">
+          <div class="p-6 bg-white dark:bg-neutral-800 rounded-2xl shadow-md border border-neutral-200 dark:border-neutral-700 hover:shadow-lg hover:scale-105 transition-all duration-300 dark:shadow-none">
+            <div class="text-center">
+              <h3 class="text-2xl font-bold mb-4">Standard</h3>
+              <div class="text-4xl font-bold gradient-text mb-2">€100</div>
+              <div class="text-dark-600 dark:text-dark-400 mb-6">One-time payment</div>
+              
+              <ul class="space-y-3 mb-8 text-left">
+                <li class="flex items-center">
+                  <svg class="w-5 h-5 text-primary-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  100M tokens/day
+                </li>
+                <li class="flex items-center">
+                  <svg class="w-5 h-5 text-primary-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  No rate limits
+                </li>
+                <li class="flex items-center">
+                  <svg class="w-5 h-5 text-primary-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  Lifetime access
+                </li>
+                <li class="flex items-center">
+                  <svg class="w-5 h-5 text-primary-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  Multiple payment methods
+                </li>
+              </ul>
+              
+              <a href="https://discord.gg/exoml" class="w-full inline-block px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl font-semibold hover:from-primary-600 hover:to-primary-700 transition-all duration-200 shadow-md hover:shadow-lg">
+                Get Started
+              </a>
+            </div>
+          </div>
+          
+          <div class="p-6 bg-white dark:bg-neutral-800 rounded-2xl shadow-md border-2 border-primary-500 relative hover:shadow-lg hover:scale-105 transition-all duration-300 dark:shadow-none">
+            <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+              <span class="bg-primary-500 text-white px-4 py-1 rounded-full text-sm font-medium">Recommended</span>
+            </div>
+            <div class="text-center">
+              <h3 class="text-2xl font-bold mb-4">Premium</h3>
+              <div class="text-4xl font-bold gradient-text mb-2">€500</div>
+              <div class="text-dark-600 dark:text-dark-400 mb-6">One-time payment</div>
+              
+              <ul class="space-y-3 mb-8 text-left">
+                <li class="flex items-center">
+                  <svg class="w-5 h-5 text-primary-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  1B+ tokens/day
+                </li>
+                <li class="flex items-center">
+                  <svg class="w-5 h-5 text-primary-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  No rate limits
+                </li>
+                <li class="flex items-center">
+                  <svg class="w-5 h-5 text-primary-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  Lifetime access
+                </li>
+                <li class="flex items-center">
+                  <svg class="w-5 h-5 text-primary-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  Multiple payment methods
+                </li>
+              </ul>
+              
+              <a href="https://discord.gg/exoml" class="w-full inline-block px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl font-semibold hover:from-primary-600 hover:to-primary-700 transition-all duration-200 shadow-md hover:shadow-lg">
+                Get Started
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="terms" class="page-content">
+    <section class="pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto text-gray-800 dark:text-gray-300">
+        <h1 class="text-4xl md:text-5xl font-bold mb-8 text-center gradient-text">Terms of Service</h1>
+        <div class="space-y-6 prose dark:prose-invert prose-lg max-w-none">
+            <p class="text-sm text-center text-gray-500">Last updated: Jul 31, 2025</p>
+            <p>Please read these Terms of Service ("Terms", "Terms of Service") carefully before using the exomlapi.com website and API (the "Service") operated by exomlapi.com ("us", "we", or "our").</p>
+            <p>Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users, and others who access or use the Service.</p>
+            
+            <h2 class="text-2xl font-bold mt-8 mb-4">1. Accounts</h2>
+            <p>When you create an account with us, you must provide us with information that is accurate, complete, and current at all times. Failure to do so constitutes a breach of the Terms, which may result in immediate termination of your account on our Service.</p>
+            <p>You are responsible for safeguarding the API key that you use to access the Service and for any activities or actions under your API key. You agree not to disclose your API key to any third party. You must notify us immediately upon becoming aware of any breach of security or unauthorized use of your account.</p>
+            
+            <h2 class="text-2xl font-bold mt-8 mb-4">2. Service Usage</h2>
+            <p>Our Service provides a proxy to various third-party AI models. You agree to use the Service in compliance with all applicable laws and regulations.</p>
+            <ul class="list-disc pl-6 space-y-2">
+                <li>You are responsible for the content you generate using the Service.</li>
+                <li>You may not use the Service for any illegal or unauthorized purpose.</li>
+                <li>You agree not to engage in any activity that disrupts, interferes with, or harms the Service, its servers, or networks. This includes, but is not limited to, spamming, DDoS attacks, or attempting to bypass our security measures.</li>
+                <li>We reserve the right to automatically block IP addresses that exhibit suspicious or malicious behavior to protect the integrity of the Service.</li>
+            </ul>
+            
+            <h2 class="text-2xl font-bold mt-8 mb-4">3. Purchases and Payments</h2>
+            <p>We offer lifetime access plans for a one-time fee. Please see our refund policy below for details on refunds.</p>
+            <p>Token limits for daily plans reset at UTC midnight. "Pay2Go" plans require a positive token balance to use the service, with a free daily allowance as specified on our pricing page.</p>
+            
+            <h2 class="text-2xl font-bold mt-8 mb-4">4. Refunds</h2>
+            <p>Our refund policy is designed to be fair to both customers and our service. The lifetime plan is priced equivalent to two months of service. Refunds are handled as follows:</p>
+            <ul class="list-disc pl-6 space-y-2">
+                <li><b>After 2 months:</b> No refunds will be issued after 2 months from the purchase date.</li>
+                <li><b>Within 2 months:</b> Refunds within the first 2 months are determined by your usage. If you have used more than 10% of the token equivalent of your payment, you are not eligible for a refund. If you have used 10% or less, you may be eligible for a partial or full refund, decided on a case-by-case basis.</li>
+            </ul>
+            <p>This policy is in place to prevent abuse of our services while providing a reasonable window for customers to evaluate the service.</p>
+
+            <h2 class="text-2xl font-bold mt-8 mb-4">5. Termination</h2>
+            <p>We may terminate or suspend your account immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms.</p>
+            <p>Upon termination, your right to use the Service will immediately cease.</p>
+            
+            <h2 class="text-2xl font-bold mt-8 mb-4">6. Disclaimer of Warranties</h2>
+            <p>The Service is provided on an "AS IS" and "AS AVAILABLE" basis. We make no warranties, express or implied, regarding the availability, reliability, or accuracy of the Service or the content generated through it. We are not affiliated with OpenAI, Anthropic, Google, or any other official AI model provider.</p>
+            
+            <h2 class="text-2xl font-bold mt-8 mb-4">7. Limitation of Liability</h2>
+            <p>In no event shall exomlapi.com, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use the Service.</p>
+            
+            <h2 class="text-2xl font-bold mt-8 mb-4">8. Governing Law</h2>
+            <p>These Terms shall be governed and construed in accordance with the laws of our operating jurisdiction, without regard to its conflict of law provisions.</p>
+            
+            <h2 class="text-2xl font-bold mt-8 mb-4">9. Changes</h2>
+            <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. We will provide notice of any changes by posting the new Terms of Service on this page.</p>
+            
+            <h2 class="text-2xl font-bold mt-8 mb-4">10. Contact Us</h2>
+            <p>If you have any questions about these Terms, please contact us on our <a href="https://discord.gg/exoml" class="text-primary-600 hover:underline">Discord server</a>.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="privacy" class="page-content">
+    <section class="pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto text-gray-800 dark:text-gray-300">
+        <h1 class="text-4xl md:text-5xl font-bold mb-8 text-center gradient-text">Privacy Policy</h1>
+        <div class="space-y-6 prose dark:prose-invert prose-lg max-w-none">
+            <p class="text-sm text-center text-gray-500">Last updated: Jul 31, 2025</p>
+            <p>Welcome to exomlapi.com. We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our website and API services.</p>
+            
+            <h2 class="text-2xl font-bold mt-8 mb-4">1. Information We Collect</h2>
+            <p>We may collect information about you in a variety of ways. The information we may collect includes:</p>
+            <ul class="list-disc pl-6 space-y-2">
+              <li><strong>User-Provided Information:</strong> When you purchase a plan, we may collect your username and user ID (e.g., from Discord) to create and manage your account.</li>
+              <li><strong>API Usage Information:</strong> We monitor your usage of our API, including the API key used, the models accessed, the number of tokens processed, and timestamps of requests. This is used to enforce plan limits and for billing.</li>
+              <li><strong>Automatically Collected Information:</strong> To protect our services from abuse and ensure stability, we automatically log information such as your IP address, browser type, and user-agent string when you access our website or API.</li>
+              <li><strong>API Content:</strong> The content you submit via our API (prompts, text, audio, etc.) is proxied to third-party AI providers to fulfill your requests. We do not permanently store this content. It may be held temporarily in memory or logs for processing, debugging, and security monitoring.</li>
+              <li><strong>Local Storage:</strong> Our website uses your browser's local storage to save your theme preference (light/dark mode). We do not use tracking cookies.</li>
+            </ul>
+            
+            <h2 class="text-2xl font-bold mt-8 mb-4">2. How We Use Your Information</h2>
+            <p>We use the information we collect in the following ways:</p>
+            <ul class="list-disc pl-6 space-y-2">
+              <li>To provide, operate, and maintain our services.</li>
+              <li>To process transactions and manage your user account.</li>
+              <li>To monitor and analyze usage to improve our services.</li>
+              <li>To protect our services against fraud, spam, and DDoS attacks. This includes automated IP blocking.</li>
+              <li>To communicate with you for support or service-related announcements, primarily through Discord.</li>
+            </ul>
+            
+            <h2 class="text-2xl font-bold mt-8 mb-4">3. How We Share Your Information</h2>
+            <p>We do not sell your personal information. We may share information under the following circumstances:</p>
+            <ul class="list-disc pl-6 space-y-2">
+              <li><strong>Third-Party AI Providers:</strong> Your API requests, including the content you provide, are sent to the corresponding third-party AI model providers. Their use of your data is subject to their own privacy policies.</li>
+              <li><strong>Service Providers:</strong> We use Cloudflare for network security and DDoS mitigation. Your IP address is processed by Cloudflare as part of this protection. We also use Discord for community and support, and notifications about service status (including security events) may be sent there.</li>
+              <li><strong>Legal Obligations:</strong> We may disclose your information if required to do so by law or in response to valid requests by public authorities.</li>
+            </ul>
+            
+            <h2 class="text-2xl font-bold mt-8 mb-4">4. Data Security</h2>
+            <p>We implement security measures designed to protect your information. Your user account data is stored in a configuration file on our server with restricted access. However, please be aware that no security measures are perfect or impenetrable, and we cannot guarantee complete security.</p>
+            
+            <h2 class="text-2xl font-bold mt-8 mb-4">5. Data Retention</h2>
+            <p>We retain your user account information for as long as your account is active. API usage and security logs are retained for a limited period for analysis and protection of the service, after which they are deleted.</p>
+            
+            <h2 class="text-2xl font-bold mt-8 mb-4">6. Your Rights</h2>
+            <p>You have the right to request access to, correction of, or deletion of your personal data. To make such a request, please contact us through our official Discord server.</p>
+            
+            <h2 class="text-2xl font-bold mt-8 mb-4">7. Changes to This Privacy Policy</h2>
+            <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.</p>
+            
+            <h2 class="text-2xl font-bold mt-8 mb-4">8. Contact Us</h2>
+            <p>If you have any questions about this Privacy Policy, please contact us on our <a href="https://discord.gg/exoml" class="text-primary-600 hover:underline">Discord server</a>.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="bg-white dark:bg-neutral-900 py-12 px-4 sm:px-6 lg:px-8 border-t border-neutral-200 dark:border-neutral-700">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-8">
+        <div class="flex items-center justify-center space-x-3 mb-4">
+          <div class="w-8 h-8 rounded-lg flex items-center justify-center">
+            <img src="https://exomlapi.com/favicon.png" alt="exomlapi" class="w-8 h-8 rounded-lg">
+          </div>
+          <span class="font-mono font-bold text-xl text-gray-800 dark:text-gray-400">exomlapi</span>
+        </div>
+        <p class="text-gray-600 dark:text-gray-500">Unlimited AI tokens for builders who push boundaries</p>
+      </div>
+      
+      <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-4 lg:gap-6 mb-8">
+        <div class="text-center">
+          <button onclick="showPage('home')" class="flex flex-col items-center space-y-2 p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors group w-full">
+            <i class="fas fa-home text-2xl text-gray-600 dark:text-gray-500 group-hover:text-green-600 dark:group-hover:text-green-500 transition-colors"></i>
+            <span class="text-sm text-gray-600 dark:text-gray-500 group-hover:text-gray-800 dark:group-hover:text-gray-300 transition-colors">Home</span>
+          </button>
+        </div>
+        
+        <div class="text-center">
+          <button onclick="showPage('features')" class="flex flex-col items-center space-y-2 p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors group w-full">
+            <i class="fas fa-star text-2xl text-gray-600 dark:text-gray-500 group-hover:text-green-600 dark:group-hover:text-green-500 transition-colors"></i>
+            <span class="text-sm text-gray-600 dark:text-gray-500 group-hover:text-gray-800 dark:group-hover:text-gray-300 transition-colors">Features</span>
+          </button>
+        </div>
+        
+        <div class="text-center">
+          <button onclick="showPage('pricing')" class="flex flex-col items-center space-y-2 p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors group w-full">
+            <i class="fas fa-euro-sign text-2xl text-gray-600 dark:text-gray-500 group-hover:text-green-600 dark:group-hover:text-green-500 transition-colors"></i>
+            <span class="text-sm text-gray-600 dark:text-gray-500 group-hover:text-gray-800 dark:group-hover:text-gray-300 transition-colors">Pricing</span>
+          </button>
+        </div>
+        
+        <div class="text-center">
+          <a href="https://discord.gg/exoml" class="flex flex-col items-center space-y-2 p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors group">
+            <i class="fab fa-discord text-2xl text-gray-600 dark:text-gray-500 group-hover:text-green-600 dark:group-hover:text-green-500 transition-colors"></i>
+            <span class="text-sm text-gray-600 dark:text-gray-500 group-hover:text-gray-800 dark:group-hover:text-gray-300 transition-colors">Discord</span>
+          </a>
+        </div>
+        
+        <div class="text-center">
+          <a href="http://status.exomlapi.com/" target="_blank" class="flex flex-col items-center space-y-2 p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors group">
+            <i class="fas fa-chart-line text-2xl text-gray-600 dark:text-gray-500 group-hover:text-green-600 dark:group-hover:text-green-500 transition-colors"></i>
+            <span class="text-sm text-gray-600 dark:text-gray-500 group-hover:text-gray-800 dark:group-hover:text-gray-300 transition-colors">Status</span>
+          </a>
+        </div>
+        
+        <div class="text-center">
+          <a href="https://exomlapi.com" class="flex flex-col items-center space-y-2 p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors group">
+            <i class="fas fa-comments text-2xl text-gray-600 dark:text-gray-500 group-hover:text-green-600 dark:group-hover:text-green-500 transition-colors"></i>
+            <span class="text-sm text-gray-600 dark:text-gray-500 group-hover:text-gray-800 dark:group-hover:text-gray-300 transition-colors">Chat</span>
+          </a>
+        </div>
+        
+        <div class="text-center">
+          <button onclick="showPage('docs')" class="flex flex-col items-center space-y-2 p-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors group w-full">
+            <i class="fas fa-book text-2xl text-gray-600 dark:text-gray-500 group-hover:text-green-600 dark:group-hover:text-green-500 transition-colors"></i>
+            <span class="text-sm text-gray-600 dark:text-gray-500 group-hover:text-gray-800 dark:group-hover:text-gray-300 transition-colors">Docs</span>
+          </button>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-200 dark:border-gray-800 pt-8 text-center">
+        <p class="text-gray-500 dark:text-gray-500 mb-4">
+          Total Tokens Processed: <span id="footer-tokens-display" class="text-green-600 dark:text-gray-300 font-bold">Loading...</span>
+        </p>
+        <div class="flex justify-center mb-4">
+          <a href="http://status.exomlapi.com/" target="_blank" class="inline-block">
+            <img id="status-badge-light" src="https://status.exomlapi.com/api/badge/2/uptime?color=%2316a34a&labelColor=%23f8fafc&style=for-the-badge" alt="Exomlapi Status" class="h-8 rounded dark:hidden">
+            <img id="status-badge-dark" src="https://status.exomlapi.com/api/badge/2/uptime?color=%2366920b&labelColor=%23000&style=for-the-badge" alt="Exomlapi Status" class="h-8 rounded hidden dark:block">
+          </a>
+        </div>
+        <div class="flex justify-center items-center space-x-4 my-6">
+          <button onclick="showPage('terms')" class="text-sm text-gray-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Terms of Service</button>
+          <span class="text-gray-400 dark:text-gray-600">|</span>
+          <button onclick="showPage('privacy')" class="text-sm text-gray-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">Privacy Policy</button>
+        </div>
+        <p class="text-gray-500 dark:text-gray-500 text-sm">© 2025 EXOMLAPI.COM | NOT AFFILIATED WITH ANY OFFICIAL ENTITIES</p>
+      </div>
+    </div>
+  </footer>
+
+  <div id="floating-banner" class="fixed top-20 left-4 right-4 md:left-8 md:right-8 lg:left-16 lg:right-16 z-40 animate-slide-up">
+    <div class="bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-800 dark:to-blue-800 rounded-xl shadow-2xl border border-white/10">
+      <div class="relative">
+        <button onclick="closeBanner()" class="absolute top-2 right-2 text-white/70 hover:text-white text-xl font-bold w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/20 transition-colors">
+          ×
+        </button>
+        <a href="https://fenayai.com/" target="_blank" class="block group p-4 md:p-6">
+          <div class="text-center text-white">
+            <div class="inline-flex items-center px-3 py-1 bg-white/20 rounded-full text-white text-xs font-medium mb-3">
+              <span class="w-2 h-2 bg-yellow-400 rounded-full mr-2 animate-pulse"></span>
+              NEW LAUNCH
+            </div>
+            <h2 class="text-lg md:text-2xl font-bold mb-2 group-hover:scale-105 transition-transform duration-200">
+              🚀 The Future of Decentralized AI
+            </h2>
+            <p class="text-xs md:text-sm text-white/90 mb-2 max-w-3xl mx-auto">
+              Join the first truly decentralized P2P AI network. Share your compute power, earn rewards, and access powerful AI models from providers around the world.
+            </p>
+            <div class="text-xs md:text-sm font-semibold text-yellow-300 mb-2">
+              Revolutionary Pricing Model: Only pay for output tokens! Input and context tokens are completely FREE
+            </div>
+            <div class="text-xs text-white/80 mb-2">
+              Built by exomlapi.com
+            </div>
+            <div class="inline-flex items-center text-xs md:text-sm text-white/90 group-hover:text-white transition-colors">
+              Learn More <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div id="token-toast" class="fixed bottom-4 right-4 bg-primary-600 text-white px-4 py-2 rounded-lg font-mono text-sm opacity-0 transition-opacity duration-300 z-50 shadow-lg">
+    <span id="toast-content"></span>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const themeIcon = document.getElementById('theme-icon');
+      
+      if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+        themeIcon.innerHTML = '<path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 006.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd" />';
+      } else {
+        html.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+        themeIcon.innerHTML = '<path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />';
+      }
+    }
+
+    function loadTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      const html = document.documentElement;
+      const themeIcon = document.getElementById('theme-icon');
+      
+      if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        html.classList.add('dark');
+        themeIcon.innerHTML = '<path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />';
+      } else {
+        themeIcon.innerHTML = '<path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 006.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd" />';
+      }
+    }
+
+    function showPage(pageId) {
+      document.querySelectorAll('.page-content').forEach(page => {
+        page.classList.remove('active');
+      });
+      
+      document.getElementById(pageId).classList.add('active');
+      
+      if (window.location.protocol !== 'file:') {
+        const newUrl = `/${pageId}`;
+        history.pushState({}, '', newUrl);
+      }
+      
+      window.scrollTo(0, 0);
+    }
+
+    window.addEventListener('popstate', function(event) {
+      const path = window.location.pathname;
+      const pageId = path.substring(1) || 'home';
+      
+      document.querySelectorAll('.page-content').forEach(page => {
+        page.classList.remove('active');
+      });
+      
+      const targetPage = document.getElementById(pageId);
+      if (targetPage) {
+        targetPage.classList.add('active');
+      } else {
+        document.getElementById('home').classList.add('active');
+      }
+    });
+
+    const apiKey = "";
+    const usageEndpoint = "https://api.exomlapi.com/v1/usage";
+    const tokenDisplayElement = document.getElementById('total-tokens-display');
+    const dailyTokensElement = document.getElementById('daily-tokens-display');
+    const lastUpdatedElement = document.getElementById('last-updated-display');
+    const footerTokensElement = document.getElementById('footer-tokens-display');
+    const toastElement = document.getElementById('token-toast');
+    const toastContent = document.getElementById('toast-content');
+    let previousTotalTokens = null;
+    let previousDailyTokens = null;
+    let toastTimeoutId = null;
+    const animatingElements = new Set();
+
+    function getFormatParams(value) {
+      if (value >= 1e12) return { divisor: 1e12, suffix: 'T', precision: 7 };
+      if (value >= 1e9) return { divisor: 1e9, suffix: 'B', precision: 7 };
+      return { divisor: 1, suffix: '', precision: 0 };
+    }
+    
+    function formatNumber(scaled, suffix, precision) {
+      return scaled.toLocaleString('en-US', { minimumFractionDigits: precision, maximumFractionDigits: precision }) + suffix;
+    }
+    
+    function animateCounter(element, startValue, endValue, duration = 1000) {
+      if (animatingElements.has(element)) return;
+      animatingElements.add(element);
+      
+      const { divisor, suffix, precision } = getFormatParams(endValue);
+      const scaledStart = startValue / divisor;
+      const scaledEnd = endValue / divisor;
+      const difference = scaledEnd - scaledStart;
+      
+      const startTime = performance.now();
+      
+      function updateCounter(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+        const currentScaled = scaledStart + (difference * easeOutQuart);
+        
+        element.textContent = formatNumber(currentScaled, suffix, precision);
+        
+        if (progress < 1) {
+          requestAnimationFrame(updateCounter);
+        } else {
+          element.textContent = formatNumber(scaledEnd, suffix, precision);
+          animatingElements.delete(element);
+        }
+      }
+      
+      requestAnimationFrame(updateCounter);
+    }
+
+    async function fetchAndUpdateTotalTokens() {
+      if (!tokenDisplayElement || !footerTokensElement || !dailyTokensElement || !lastUpdatedElement) {
+        console.error("Required display elements not found.");
+        return;
+      }
+      
+      try {const response = await fetch(usageEndpoint, {
+          headers: {
+            'Authorization': `Bearer ${apiKey}`
+          }
+        });
+
+        if (!response.ok) {
+          console.error(`Error fetching usage data: ${response.status} ${response.statusText}`);
+          tokenDisplayElement.textContent = "Error";
+          footerTokensElement.textContent = "Error";
+          return;
+        }
+
+        const data = await response.json();
+
+        if (data && typeof data.total_tokens_processed === 'number' && typeof data.daily_tokens_processed_today_utc === 'number') {
+          const currentTotalTokens = data.total_tokens_processed;
+          const currentDailyTokens = data.daily_tokens_processed_today_utc;
+          const timestamp = data.timestamp_utc;
+          
+          if (timestamp) {
+            const date = new Date(timestamp);
+            const formattedTime = date.toLocaleString('en-US', {
+              timeZone: 'UTC',
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit',
+              timeZoneName: 'short'
+            });
+            lastUpdatedElement.textContent = formattedTime;
+          }
+          
+          if (previousTotalTokens !== null && previousDailyTokens !== null) {
+            const newTotalTokens = currentTotalTokens - previousTotalTokens;
+            const newDailyTokens = currentDailyTokens - previousDailyTokens;
+            
+            if (newTotalTokens > 0) {
+              animateCounter(tokenDisplayElement, previousTotalTokens, currentTotalTokens);
+              animateCounter(footerTokensElement, previousTotalTokens, currentTotalTokens);
+              
+              const { divisor, suffix, precision } = getFormatParams(newTotalTokens);
+              const scaledNew = newTotalTokens / divisor;
+              toastContent.textContent = `+${formatNumber(scaledNew, suffix, precision)} tokens`;
+              toastElement.classList.remove('opacity-0');
+              toastElement.classList.add('opacity-100');
+
+              if (toastTimeoutId) {
+                clearTimeout(toastTimeoutId);
+              }
+
+              toastTimeoutId = setTimeout(() => {
+                toastElement.classList.remove('opacity-100');
+                toastElement.classList.add('opacity-0');
+                toastTimeoutId = null;
+              }, 3000);
+            }
+            
+            if (newDailyTokens > 0) {
+              animateCounter(dailyTokensElement, previousDailyTokens, currentDailyTokens);
+            }
+          } else {
+            animateCounter(tokenDisplayElement, 0, currentTotalTokens, 2000);
+            animateCounter(footerTokensElement, 0, currentTotalTokens, 2000);
+            animateCounter(dailyTokensElement, 0, currentDailyTokens, 2000);
+          }
+          
+          previousTotalTokens = currentTotalTokens;
+          previousDailyTokens = currentDailyTokens;
+
+        } else {
+          console.error("Invalid data format received from usage endpoint:", data);
+          tokenDisplayElement.textContent = "N/A";
+          dailyTokensElement.textContent = "N/A";
+          lastUpdatedElement.textContent = "N/A";
+          footerTokensElement.textContent = "N/A";
+          previousTotalTokens = null;
+          previousDailyTokens = null;
+        }
+      } catch (error) {
+        console.error("Network error fetching usage data:", error);
+        tokenDisplayElement.textContent = "Error";
+        dailyTokensElement.textContent = "Error";
+        lastUpdatedElement.textContent = "Error";
+        footerTokensElement.textContent = "Error";
+        previousTotalTokens = null;
+        previousDailyTokens = null;
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', function() {
+      loadTheme();
+      
+      if (window.location.protocol !== 'file:' && window.location.pathname === '/') {
+        history.replaceState({}, '', '/home');
+      }
+      
+      let pageId = 'home';
+      
+      if (window.location.protocol !== 'file:') {
+        const path = window.location.pathname;
+        pageId = path.substring(1) || 'home';
+      }
+      
+      if (['home', 'features', 'docs', 'pricing', 'terms', 'privacy'].includes(pageId)) {
+        showPage(pageId);
+      } else {
+        showPage('home');
+      }
+    });
+
+    window.addEventListener('load', () => {
+      fetchAndUpdateTotalTokens();
+
+      const statusBadgeLight = document.getElementById('status-badge-light');
+      const statusBadgeDark = document.getElementById('status-badge-dark');
+      const cacheBust = `cache_bust=${new Date().getTime()}`;
+      
+      if (statusBadgeLight) {
+        const currentSrc = statusBadgeLight.getAttribute('src');
+        const separator = currentSrc.includes('?') ? '&' : '?';
+        statusBadgeLight.src = `${currentSrc}${separator}${cacheBust}`;
+      }
+      
+      if (statusBadgeDark) {
+        const currentSrc = statusBadgeDark.getAttribute('src');
+        const separator = currentSrc.includes('?') ? '&' : '?';
+        statusBadgeDark.src = `${currentSrc}${separator}${cacheBust}`;
+      }
+    });
+
+    const tokenUpdateInterval = setInterval(fetchAndUpdateTotalTokens, 500);
+
+    const endpointExamples = {
+      chat: {
+        curl: `curl -X POST "https://api.exomlapi.com/v1/chat/completions" \\
+  -H "Content-Type: application/json" \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -d '{
+    "model": "gpt-3.5-turbo",
+    "messages": [
+      {"role": "user", "content": "Hello, how are you?"}
+    ],
+    "max_tokens": 100
+  }'`,
+        python: `from openai import OpenAI
+
+client = OpenAI(
+    api_key="YOUR_API_KEY",
+    base_url="https://api.exomlapi.com/v1"
+)
+
+response = client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[
+        {"role": "user", "content": "Hello, how are you?"}
+    ],
+    max_tokens=100
+)
+
+print(response.choices[0].message.content)`,
+        nodejs: `const { OpenAI } = require('openai');
+
+const openai = new OpenAI({
+  apiKey: 'YOUR_API_KEY',
+  baseURL: 'https://api.exomlapi.com/v1'
+});
+
+async function main() {
+  const completion = await openai.chat.completions.create({
+    model: 'gpt-3.5-turbo',
+    messages: [
+      { role: 'user', content: 'Hello, how are you?' }
+    ],
+    max_tokens: 100
+  });
+
+  console.log(completion.choices[0].message.content);
+}
+
+main();`
+      },
+      completions: {
+        curl: `curl -X POST "https://api.exomlapi.com/v1/completions" \\
+  -H "Content-Type: application/json" \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -d '{
+    "model": "gpt-3.5-turbo-instruct",
+    "prompt": "Once upon a time",
+    "max_tokens": 100,
+    "temperature": 0.7
+  }'`,
+        python: `from openai import OpenAI
+
+client = OpenAI(
+    api_key="YOUR_API_KEY",
+    base_url="https://api.exomlapi.com/v1"
+)
+
+response = client.completions.create(
+    model="gpt-3.5-turbo-instruct",
+    prompt="Once upon a time",
+    max_tokens=100,
+    temperature=0.7
+)
+
+print(response.choices[0].text)`,
+        nodejs: `const { OpenAI } = require('openai');
+
+const openai = new OpenAI({
+  apiKey: 'YOUR_API_KEY',
+  baseURL: 'https://api.exomlapi.com/v1'
+});
+
+async function main() {
+  const completion = await openai.completions.create({
+    model: 'gpt-3.5-turbo-instruct',
+    prompt: 'Once upon a time',
+    max_tokens: 100,
+    temperature: 0.7
+  });
+
+  console.log(completion.choices[0].text);
+}
+
+main();`
+      },
+      embeddings: {
+        curl: `curl -X POST "https://api.exomlapi.com/v1/embeddings" \\
+  -H "Content-Type: application/json" \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -d '{
+    "model": "text-embedding-ada-002",
+    "input": "The quick brown fox jumps over the lazy dog"
+  }'`,
+        python: `from openai import OpenAI
+
+client = OpenAI(
+    api_key="YOUR_API_KEY",
+    base_url="https://api.exomlapi.com/v1"
+)
+
+response = client.embeddings.create(
+    model="text-embedding-ada-002",
+    input="The quick brown fox jumps over the lazy dog"
+)
+
+print(response.data[0].embedding)`,
+        nodejs: `const { OpenAI } = require('openai');
+
+const openai = new OpenAI({
+  apiKey: 'YOUR_API_KEY',
+  baseURL: 'https://api.exomlapi.com/v1'
+});
+
+async function main() {
+  const embedding = await openai.embeddings.create({
+    model: 'text-embedding-ada-002',
+    input: 'The quick brown fox jumps over the lazy dog'
+  });
+
+  console.log(embedding.data[0].embedding);
+}
+
+main();`
+      },
+      images: {
+        curl: `curl -X POST "https://api.exomlapi.com/v1/images/generations" \\
+  -H "Content-Type: application/json" \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -d '{
+    "prompt": "A beautiful sunset over mountains",
+    "n": 1,
+    "size": "1024x1024"
+  }'`,
+        python: `from openai import OpenAI
+
+client = OpenAI(
+    api_key="YOUR_API_KEY",
+    base_url="https://api.exomlapi.com/v1"
+)
+
+response = client.images.generate(
+    prompt="A beautiful sunset over mountains",
+    n=1,
+    size="1024x1024"
+)
+
+print(response.data[0].url)`,
+        nodejs: `const { OpenAI } = require('openai');
+
+const openai = new OpenAI({
+  apiKey: 'YOUR_API_KEY',
+  baseURL: 'https://api.exomlapi.com/v1'
+});
+
+async function main() {
+  const image = await openai.images.generate({
+    prompt: 'A beautiful sunset over mountains',
+    n: 1,
+    size: '1024x1024'
+  });
+
+  console.log(image.data[0].url);
+}
+
+main();`
+      },
+      speech: {
+        curl: `curl -X POST "https://api.exomlapi.com/v1/audio/speech" \\
+  -H "Content-Type: application/json" \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -d '{
+    "model": "tts-1",
+    "input": "Hello world, this is a test.",
+    "voice": "alloy"
+  }' \\
+  --output speech.mp3`,
+        python: `from openai import OpenAI
+
+client = OpenAI(
+    api_key="YOUR_API_KEY",
+    base_url="https://api.exomlapi.com/v1"
+)
+
+response = client.audio.speech.create(
+    model="tts-1",
+    input="Hello world, this is a test.",
+    voice="alloy"
+)
+
+response.stream_to_file("speech.mp3")`,
+        nodejs: `const { OpenAI } = require('openai');
+const fs = require('fs');
+const path = require('path');
+
+const openai = new OpenAI({
+  apiKey: 'YOUR_API_KEY',
+  baseURL: 'https://api.exomlapi.com/v1'
+});
+
+async function main() {
+  const mp3 = await openai.audio.speech.create({
+    model: "tts-1",
+    input: "Hello world, this is a test.",
+    voice: "alloy",
+  });
+  const buffer = Buffer.from(await mp3.arrayBuffer());
+  await fs.promises.writeFile(path.resolve("./speech.mp3"), buffer);
+  console.log('File speech.mp3 saved.');
+}
+
+main();`
+      },
+      transcriptions: {
+        curl: `curl -X POST "https://api.exomlapi.com/v1/audio/transcriptions" \\
+  -H "Content-Type: multipart/form-data" \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -F file="@/path/to/your/audio.mp3" \\
+  -F model="whisper-1"`,
+        python: `from openai import OpenAI
+
+client = OpenAI(
+    api_key="YOUR_API_KEY",
+    base_url="https://api.exomlapi.com/v1"
+)
+
+audio_file = open("/path/to/your/audio.mp3", "rb")
+transcription = client.audio.transcriptions.create(
+  model="whisper-1",
+  file=audio_file
+)
+
+print(transcription.text)`,
+        nodejs: `const { OpenAI } = require('openai');
+const fs = require('fs');
+
+const openai = new OpenAI({
+  apiKey: 'YOUR_API_KEY',
+  baseURL: 'https://api.exomlapi.com/v1'
+});
+
+async function main() {
+  const transcription = await openai.audio.transcriptions.create({
+    file: fs.createReadStream("/path/to/your/audio.mp3"),
+    model: "whisper-1",
+  });
+
+  console.log(transcription.text);
+}
+
+main();`
+      },
+      responses: {
+        curl: `curl -X POST "https://api.exomlapi.com/v1/responses" \\
+  -H "Content-Type: application/json" \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -d '{
+    "model": "gpt-4.1",
+    "input": "Tell me a three sentence bedtime story about a unicorn."
+  }'`,
+        python: `from openai import OpenAI
+
+client = OpenAI(
+    api_key="YOUR_API_KEY",
+    base_url="https://api.exomlapi.com/v1"
+)
+
+response = client.responses.create(
+  model="gpt-4.1",
+  input="Tell me a three sentence bedtime story about a unicorn."
+)
+
+print(response)`,
+        nodejs: `const { OpenAI } = require('openai');
+
+const openai = new OpenAI({
+  apiKey: 'YOUR_API_KEY',
+  baseURL: 'https://api.exomlapi.com/v1'
+});
+
+async function main() {
+  const response = await openai.responses.create({
+    model: "gpt-4.1",
+    input: "Tell me a three sentence bedtime story about a unicorn."
+  });
+
+  console.log(response);
+}
+
+main();`
+      },
+      usage: {
+        curl: `curl -X GET "https://api.exomlapi.com/v1/usage" \\
+  -H "Authorization: Bearer YOUR_API_KEY"`,
+        python: `import requests
+
+api_key = "YOUR_API_KEY"
+headers = {
+   "Authorization": f"Bearer {api_key}"
+}
+
+response = requests.get("https://api.exomlapi.com/v1/usage", headers=headers)
+
+if response.status_code == 200:
+   print(response.json())
+else:
+   print(f"Error: {response.status_code}", response.text)`,
+        nodejs: `const fetch = require('node-fetch');
+
+const apiKey = 'YOUR_API_KEY';
+const url = 'https://api.exomlapi.com/v1/usage';
+
+async function getUsage() {
+ try {
+   const response = await fetch(url, {
+     headers: {
+       'Authorization': \`Bearer \${apiKey}\`
+     }
+   });
+   const data = await response.json();
+   console.log(data);
+ } catch (error) {
+   console.error('Error fetching usage:', error);
+ }
+}
+
+getUsage();`
+      }
+    };
+
+    let currentEndpointInline = 'chat';
+    let currentLanguageInline = 'curl';
+
+    function showEndpointExampleInline(endpoint) {
+      currentEndpointInline = endpoint;
+      
+      document.querySelectorAll('.endpoint-btn').forEach(btn => {
+        btn.classList.remove('border-primary-500', 'dark:border-primary-400');
+        btn.classList.add('border-dark-200', 'dark:border-dark-700');
+      });
+      
+      const activeEndpointBtn = document.querySelector(`.endpoint-btn[data-endpoint="${endpoint}"]`);
+      if (activeEndpointBtn) {
+        activeEndpointBtn.classList.remove('border-dark-200', 'dark:border-dark-700');
+        activeEndpointBtn.classList.add('border-primary-500', 'dark:border-primary-400');
+      }
+      
+      showLanguageInline(currentLanguageInline);
+    }
+
+    function showLanguageInline(language) {
+      currentLanguageInline = language;
+      
+      document.querySelectorAll('.language-tab-inline').forEach(tab => {
+        tab.classList.remove('border-primary-500', 'text-primary-600', 'dark:text-primary-400');
+        tab.classList.add('border-transparent');
+      });
+      
+      const activeTab = document.querySelector(`.language-tab-inline[data-lang="${language}"]`);
+      if (activeTab) {
+        activeTab.classList.remove('border-transparent');
+        activeTab.classList.add('border-primary-500', 'text-primary-600', 'dark:text-primary-400');
+      }
+      
+      const codeContent = document.getElementById('code-content-inline');
+      if (currentEndpointInline && endpointExamples[currentEndpointInline] && endpointExamples[currentEndpointInline][language]) {
+        codeContent.textContent = endpointExamples[currentEndpointInline][language];
+      }
+    }
+
+    function copyCodeInline() {
+      const codeContent = document.getElementById('code-content-inline');
+      if (codeContent) {
+        navigator.clipboard.writeText(codeContent.textContent).then(() => {
+          const copyBtn = document.querySelector('button[onclick="copyCodeInline()"]');
+          const originalText = copyBtn.innerHTML;
+          copyBtn.innerHTML = '<i class="fas fa-check"></i><span>Copied!</span>';
+          setTimeout(() => {
+            copyBtn.innerHTML = originalText;
+          }, 2000);
+        });
+      }
+    }
+
+    function closeBanner() {
+      const banner = document.getElementById('floating-banner');
+      if (banner) {
+        banner.style.transform = 'translateY(-100%)';
+        banner.style.opacity = '0';
+        setTimeout(() => {
+          banner.style.display = 'none';
+        }, 300);
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', function() {
+      showLanguageInline('curl');
+      showEndpointExampleInline('chat');
+    });
+  </script>
+</body>
+</html>

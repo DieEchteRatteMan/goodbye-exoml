@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 Not Found | exomlapi.com</title>
+  <link rel="favicon icon" href="/favicon.png" type="image/png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=IBM+Plex+Sans:wght@400;500;700&display=swap');
+    
+    body {
+      background-color: #050505;
+      color: #e5e5e5;
+      font-family: 'IBM Plex Sans', sans-serif;
+      overflow-x: hidden;
+    }
+    
+    .matrix-text {
+      background: linear-gradient(90deg, #00ff41, #00f7ff, #00ff41);
+      background-size: 200% auto;
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+      animation: matrix-glow 3s linear infinite;
+    }
+    
+    @keyframes matrix-glow {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+    
+    .hacker-glow {
+      text-shadow: 0 0 5px rgba(32,194,14,0.7);
+    }
+    
+    .terminal-cursor {
+      display: inline-block;
+      width: 10px;
+      height: 20px;
+      background-color: #20c20e;
+      vertical-align: middle;
+      animation: terminal-cursor 1s infinite;
+    }
+    
+    @keyframes terminal-cursor {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+    
+    .scanline {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        rgba(32,194,14,0) 0%,
+        rgba(32,194,14,0.03) 50%,
+        rgba(32,194,14,0) 100%
+      );
+      background-size: 100% 4px;
+      pointer-events: none;
+      z-index: 1000;
+      animation: scanline 8s linear infinite;
+    }
+    
+    @keyframes scanline {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 100%; }
+    }
+    
+    .glitch {
+      position: relative;
+    }
+    
+    .glitch::before, .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #050505;
+    }
+    
+    .glitch::before {
+      left: 2px;
+      text-shadow: -2px 0 #ff00ff;
+      clip: rect(44px, 450px, 56px, 0);
+      animation: glitch-anim 5s infinite linear alternate-reverse;
+    }
+    
+    .glitch::after {
+      left: -2px;
+      text-shadow: -2px 0 #00ffff;
+      clip: rect(44px, 450px, 56px, 0);
+      animation: glitch-anim2 5s infinite linear alternate-reverse;
+    }
+    
+    @keyframes glitch-anim {
+      0% { clip: rect(31px, 9999px, 94px, 0); }
+      10% { clip: rect(112px, 9999px, 76px, 0); }
+      20% { clip: rect(85px, 9999px, 77px, 0); }
+      30% { clip: rect(27px, 9999px, 97px, 0); }
+      40% { clip: rect(64px, 9999px, 98px, 0); }
+      50% { clip: rect(61px, 9999px, 85px, 0); }
+      60% { clip: rect(99px, 9999px, 114px, 0); }
+      70% { clip: rect(34px, 9999px, 115px, 0); }
+      80% { clip: rect(98px, 9999px, 129px, 0); }
+      90% { clip: rect(43px, 9999px, 96px, 0); }
+      100% { clip: rect(82px, 9999px, 64px, 0); }
+    }
+    
+    @keyframes glitch-anim2 {
+      0% { clip: rect(65px, 9999px, 119px, 0); }
+      10% { clip: rect(79px, 9999px, 66px, 0); }
+      20% { clip: rect(101px, 9999px, 114px, 0); }
+      30% { clip: rect(110px, 9999px, 89px, 0); }
+      40% { clip: rect(85px, 9999px, 144px, 0); }
+      50% { clip: rect(111px, 9999px, 74px, 0); }
+      60% { clip: rect(67px, 9999px, 62px, 0); }
+      70% { clip: rect(42px, 9999px, 75px, 0); }
+      80% { clip: rect(104px, 9999px, 20px, 0); }
+      90% { clip: rect(98px, 9999px, 54px, 0); }
+      100% { clip: rect(37px, 9999px, 131px, 0); }
+    }
+    
+    .binary-rain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+      opacity: 0.05;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="binaryRain" class="binary-rain"></canvas>
+  
+  <div class="scanline"></div>
+  
+  <main class="min-h-screen flex flex-col items-center justify-center p-4 text-center">
+    <div class="max-w-2xl mx-auto">
+      <div class="flex items-center justify-center mb-8">
+        <span class="text-9xl font-bold matrix-text">4</span>
+        <span class="text-9xl font-bold text-[#20c20e]">0</span>
+        <span class="text-9xl font-bold matrix-text">4</span>
+      </div>
+      
+      <h1 class="text-3xl md:text-4xl font-bold mb-6 hacker-glow glitch" data-text="PAGE NOT FOUND">
+        <span class="matrix-text">PAGE NOT FOUND</span>
+      </h1>
+      
+      <div class="bg-black bg-opacity-50 border border-[#20c20e] border-opacity-30 rounded-lg p-6 mb-8 backdrop-blur-sm">
+        <p class="text-gray-300 mb-4">The requested URL was not found on this server.</p>
+        <p class="text-gray-400 font-mono">>_ Possible causes:</p>
+        <ul class="text-gray-400 text-left max-w-xs mx-auto mt-2 space-y-1">
+          <li class="flex items-start">
+            <span class="text-[#20c20e] mr-2">$</span>
+            <span>Typo in the URL</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-[#20c20e] mr-2">$</span>
+            <span>Page was moved or deleted</span>
+          </li>
+          <li class="flex items-start">
+            <span class="text-[#20c20e] mr-2">$</span>
+            <span>You're not supposed to be here</span>
+          </li>
+        </ul>
+      </div>
+      
+      <a href="/" class="inline-block bg-[#20c20e] hover:bg-green-600 text-black py-3 px-8 rounded font-mono font-bold tracking-wider transition-all duration-200 transform hover:scale-105 shadow-lg shadow-[#20c20e]/30">
+        RETURN TO SAFETY
+      </a>
+      
+      <div class="mt-12 font-mono text-sm text-gray-500 flex items-center justify-center">
+        <span class="text-[#20c20e] mr-2">root@exomlapi:~$</span>
+        <span class="terminal-cursor"></span>
+        <span class="ml-2" id="terminal-text"></span>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const canvas = document.getElementById('binaryRain');
+    const ctx = canvas.getContext('2d');
+    
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const binary = '01';
+    const columns = Math.floor(canvas.width / 20);
+    const drops = [];
+    
+    for (let i = 0; i < columns; i++) {
+      drops[i] = Math.floor(Math.random() * canvas.height);
+    }
+    
+    function drawBinaryRain() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      ctx.fillStyle = '#20c20e';
+      ctx.font = '16px monospace';
+      
+      for (let i = 0; i < drops.length; i++) {
+        const text = binary.charAt(Math.floor(Math.random() * binary.length));
+        ctx.fillText(text, i * 20, drops[i] * 20);
+        
+        if (drops[i] * 20 > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        
+        drops[i]++;
+      }
+    }
+    
+    setInterval(drawBinaryRain, 33);
+    
+    const errorMessages = [
+      "error: path not found",
+      "check URL and try again",
+      "initiating redirect protocol",
+      "connection terminated",
+      "access denied",
+      "404 - resource unavailable",
+      "trace route failed",
+      "system error"
+    ];
+    
+    let currentMessage = 0;
+    const terminalElement = document.getElementById('terminal-text');
+    
+    function typeWriter(text, i, cb) {
+      if (i < text.length) {
+        terminalElement.textContent += text.charAt(i);
+        i++;
+        setTimeout(() => typeWriter(text, i, cb), Math.random() * 50 + 30);
+      } else if (cb) {
+        setTimeout(cb, 1500);
+      }
+    }
+    
+    function changeTerminalText() {
+      terminalElement.textContent = "";
+      typeWriter(errorMessages[currentMessage], 0, () => {
+        currentMessage = (currentMessage + 1) % errorMessages.length;
+        setTimeout(changeTerminalText, 1000);
+      });
+    }
+    
+    window.addEventListener('load', () => {
+      setTimeout(changeTerminalText, 1000);
+    });
+    
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
