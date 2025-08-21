@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suno V4.5+ - AI Song Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'spotify-black': '#191414',
+                        'spotify-green': '#1DB954',
+                        'spotify-grey': '#282828',
+                        'spotify-light-grey': '#b3b3b3',
+                        'spotify-bg': '#121212',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @font-face {
+            font-family: 'NotoColorEmoji';
+            src: url('/fonts/NotoColorEmoji.ttf') format('truetype');
+            font-display: swap;
+        }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #282828; }
+        ::-webkit-scrollbar-thumb { background: #b3b3b3; }
+        ::-webkit-scrollbar-thumb:hover { background: #1DB954; }
+        body { font-family: 'Montserrat', sans-serif; }
+        .modal-overlay { transition: opacity 0.3s ease-in-out; }
+        .modal-content { transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; }
+        .toast {
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+        
+        #captchaPrompt {
+            font-family: 'NotoColorEmoji', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
+        }
+        
+        #captchaImage {
+            font-family: 'NotoColorEmoji', 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
+        }
+        
+        .captcha-loader {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #1DB954;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .captcha-loading-text {
+            text-align: center;
+            color: #b3b3b3;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .captcha-container {
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-spotify-bg text-white flex flex-col items-center min-h-screen p-4 md:p-8 box-border">
+
+    <div class="w-full bg-blue-600 text-white text-center py-3 px-4 mb-4 rounded-lg shadow-lg">
+        <p class="font-bold text-lg">We need your help to sustain this free Suno service!</p>
+        <p class="text-sm mt-1">Please consider donating to help us keep the servers running.</p>
+        <div class="mt-2 text-sm">
+            <p><strong>Bitcoin:</strong> <code class="bg-gray-700 px-2 py-1 rounded">1AnonSHzxMiGgzhANjfFMmGLsXSRn2XAKE</code></p>
+            <p class="mt-1"><strong>PayPal:</strong> <a href="https://paypal.me/thefiredragon05" target="_blank" rel="noopener noreferrer" class="underline hover:text-green-300">https://paypal.me/thefiredragon05</a></p>
+        </div>
+    </div>
+
+    <div id="toastContainer" class="fixed top-5 right-5 z-[100] space-y-2"></div>
+
+    <div id="welcomeModalOverlay" class="modal-overlay fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden opacity-0" onclick="closeWelcomeModal(event)">
+        <div id="welcomeModalContent" class="modal-content bg-gradient-to-br from-spotify-grey to-gray-800 rounded-lg shadow-xl p-6 md:p-8 w-11/12 max-w-lg text-center transform scale-95 opacity-0" onclick="event.stopPropagation()">
+            <h2 class="text-2xl font-bold mb-4 text-spotify-green">Welcome to Suno V4.5+!</h2>
+            <p class="mb-4 text-lg">This experience is powered by <strong class="text-white">exomlapi</strong>.</p>
+            <p class="mb-6 text-md text-spotify-light-grey">Get hundreds of millions of LLM tokens for <strong class="text-white">FREE</strong>!</p>
+            <a href="https://exomlapi.com" target="_blank" rel="noopener noreferrer" class="inline-block bg-spotify-green text-white font-bold py-2 px-6 rounded-full uppercase tracking-wider hover:bg-green-500 transition duration-200 ease-in-out mb-4">
+                Visit exomlapi.com
+            </a>
+            <button onclick="closeWelcomeModal(event)" class="mt-4 block mx-auto text-sm text-gray-400 hover:text-white underline close-button-class">Continue to App</button>
+        </div>
+    </div>
+
+    <div class="container w-full max-w-4xl bg-spotify-grey p-6 md:p-10 rounded-xl shadow-lg text-left mb-8">
+        <header class="text-center mb-8">
+             <div class="mx-auto mb-3 h-12 w-12 bg-contain bg-no-repeat bg-center" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/2048px-Spotify_logo_without_text.svg.png');"></div>
+            <h1 class="text-3xl md:text-4xl font-bold mb-1">Suno V4.5+</h1>
+            <p class="text-spotify-light-grey text-lg">AI Song Generator</p>
+        </header>
+        <form id="songForm" class="mb-8">
+            <div class="mb-6">
+                <label class="block mb-3 font-bold text-spotify-light-grey text-lg">Generation Mode:</label>
+                <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6 items-start">
+                    <div class="flex items-center">
+                        <input type="radio" id="modeSongIdea" name="generationMode" value="idea" class="form-radio h-5 w-5 text-spotify-green focus:ring-2 focus:ring-offset-2 focus:ring-offset-spotify-grey focus:ring-spotify-green" checked>
+                        <label for="modeSongIdea" class="ml-3 text-md text-white cursor-pointer">General Idea</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="radio" id="modeCustomLyrics" name="generationMode" value="custom" class="form-radio h-5 w-5 text-spotify-green focus:ring-2 focus:ring-offset-2 focus:ring-offset-spotify-grey focus:ring-spotify-green">
+                        <label for="modeCustomLyrics" class="ml-3 text-md text-white cursor-pointer">Custom Lyrics</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="radio" id="modeInstrumental" name="generationMode" value="instrumental" class="form-radio h-5 w-5 text-spotify-green focus:ring-2 focus:ring-offset-2 focus:ring-offset-spotify-grey focus:ring-spotify-green">
+                        <label for="modeInstrumental" class="ml-3 text-md text-white cursor-pointer">Instrumental</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label for="versionSelector" class="block mb-2 font-bold text-spotify-light-grey">Version:</label>
+                <select id="versionSelector" name="version" class="w-full p-3 border border-gray-600 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-spotify-green">
+                    <option value="V3_5">V3_5</option>
+                    <option value="V4">V4</option>
+                    <option value="V4_5">V4_5</option>
+                    <option value="V4_5PLUS" selected>V4_5PLUS</option>
+                </select>
+            </div>
+
+            <div id="mainPromptContainer" class="mb-4">
+                <label for="prompt" id="promptLabel" class="block mb-2 font-bold text-spotify-light-grey">Describe your song idea:</label>
+                <textarea id="prompt" name="prompt" rows="3" required maxlength="400" placeholder="e.g., an upbeat synthwave track about space exploration" class="w-full p-3 border border-gray-600 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-spotify-green resize-y"></textarea>
+                <p id="promptCharCount" class="text-xs text-gray-400 mt-1">0 / 400</p>
+            </div>
+
+            <div id="lyricsAndStyleSection" class="hidden mb-4">
+                <div id="customLyricsContainer" class="mb-4">
+                    <label for="customLyrics" id="customLyricsLabel" class="block mb-2 font-bold text-spotify-light-grey">Enter your lyrics (this will be the main prompt):</label>
+                    <textarea id="customLyrics" name="customLyrics" rows="5" maxlength="3000" placeholder="Verse 1: The sun shines bright..." class="w-full p-3 border border-gray-600 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-spotify-green resize-y"></textarea>
+                    <p id="customLyricsCharCount" class="text-xs text-gray-400 mt-1">0 / 3000</p>
+                </div>
+                <div id="styleContainer">
+                    <label for="style" id="styleLabel" class="block mb-2 font-bold text-spotify-light-grey">Style of Music:</label>
+                    <input type="text" id="style" name="style" maxlength="200" placeholder="e.g., Pop, Epic Orchestral, Lofi Hip Hop" class="w-full p-3 border border-gray-600 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-spotify-green">
+                    <p id="styleCharCount" class="text-xs text-gray-400 mt-1">0 / 200</p>
+                </div>
+            </div>
+            <button type="submit" id="submitButton" class="w-full md:w-auto block md:inline-block mx-auto md:mx-0 bg-spotify-green text-white font-bold py-3 px-8 rounded-full uppercase tracking-wider hover:bg-green-500 transition duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed">
+                Generate Song
+            </button>
+        </form>
+        <div id="loader" class="hidden my-6 border-4 border-gray-600 border-t-spotify-green rounded-full w-12 h-12 animate-spin mx-auto"></div>
+        <div id="statusMessage" class="status-message text-center my-4 text-spotify-light-grey italic"></div>
+    </div>
+
+    <div class="w-full max-w-4xl mb-8">
+        <h2 class="text-2xl font-bold mb-4 border-b border-gray-600 pb-2">Generation History</h2>
+        <div id="historyGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"></div>
+        <button id="clearHistoryButton" class="mt-4 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full text-sm transition duration-200 hidden">Clear History</button>
+    </div>
+
+    <div id="captchaModalOverlay" class="modal-overlay fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden opacity-0">
+        <div id="captchaModalContent" class="modal-content bg-gradient-to-br from-spotify-grey to-gray-800 rounded-lg shadow-xl p-6 md:p-8 w-11/12 max-w-lg text-center transform scale-95 opacity-0" onclick="event.stopPropagation()">
+            <h2 class="text-2xl font-bold mb-4 text-spotify-green">Solve the Captcha</h2>
+            <p class="mb-4 text-lg">Click on the emoji: <span id="captchaPrompt" class="text-2xl font-bold text-white"></span></p>
+            <div id="captchaImageContainer" class="mb-4 captcha-container">
+                <div id="captchaLoader" class="hidden">
+                    <div class="captcha-loader"></div>
+                    <div class="captcha-loading-text">Loading captcha...</div>
+                </div>
+                <img id="captchaImage" src="" alt="Captcha" class="w-full max-w-sm mx-auto rounded-md cursor-pointer hidden">
+            </div>
+            <div id="captchaError" class="text-red-400 text-sm mb-4 hidden"></div>
+            <button onclick="refreshCaptcha()" class="bg-gray-600 text-white font-bold py-2 px-4 rounded-full text-sm hover:bg-gray-500 transition duration-200">
+                Refresh Captcha
+            </button>
+        </div>
+    </div>
+
+    <div id="songModalOverlay" class="modal-overlay fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-40 hidden opacity-0" onclick="closeSongModal(event)">
+        <div id="songModal" class="modal-content bg-spotify-grey rounded-lg shadow-xl p-6 w-11/12 max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95 opacity-0 relative" onclick="event.stopPropagation()">
+             <button onclick="closeSongModal(event)" class="absolute top-3 right-3 text-gray-400 hover:text-white text-2xl font-bold close-button-class z-10">&times;</button>
+            <h3 id="modalTitle" class="text-2xl font-bold mb-4 pt-2">Song Details</h3>
+            <img id="modalImage" src="" alt="Song artwork" class="w-full max-w-sm mx-auto rounded-md mb-4">
+            <div id="modalAudioContainer" class="mb-4"></div>
+             <p class="mb-2"><strong>Tags:</strong> <span id="modalTags"></span></p>
+            <p class="mb-4"><strong>Lyrics (Prompt):</strong></p>
+            <div id="modalLyrics" class="text-spotify-light-grey text-sm whitespace-pre-wrap bg-gray-800 p-3 rounded max-h-40 overflow-y-auto"></div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('songForm'), historyGrid = document.getElementById('historyGrid'),
+              loader = document.getElementById('loader'), statusMessageDiv = document.getElementById('statusMessage'),
+              submitButton = document.getElementById('submitButton'), clearHistoryButton = document.getElementById('clearHistoryButton'),
+              songModalOverlay = document.getElementById('songModalOverlay'), songModal = document.getElementById('songModal'),
+              modalTitle = document.getElementById('modalTitle'), modalImage = document.getElementById('modalImage'),
+              modalAudioContainer = document.getElementById('modalAudioContainer'), modalTags = document.getElementById('modalTags'),
+              modalLyrics = document.getElementById('modalLyrics'), welcomeModalOverlay = document.getElementById('welcomeModalOverlay'),
+              welcomeModalContent = document.getElementById('welcomeModalContent'), toastContainer = document.getElementById('toastContainer'),
+              captchaModalOverlay = document.getElementById('captchaModalOverlay'),
+              captchaModalContent = document.getElementById('captchaModalContent'),
+              captchaImage = document.getElementById('captchaImage'),
+              captchaPrompt = document.getElementById('captchaPrompt'),
+              captchaError = document.getElementById('captchaError'),
+              generationModeRadios = document.querySelectorAll('input[name="generationMode"]'),
+              mainPromptContainer = document.getElementById('mainPromptContainer'),
+              promptTextarea = document.getElementById('prompt'),
+              promptLabel = document.getElementById('promptLabel'),
+              lyricsAndStyleSection = document.getElementById('lyricsAndStyleSection'),
+              customLyricsContainer = document.getElementById('customLyricsContainer'),
+              customLyricsTextarea = document.getElementById('customLyrics'),
+              styleContainer = document.getElementById('styleContainer'),
+              styleInput = document.getElementById('style'),
+              styleLabel = document.getElementById('styleLabel'),
+              versionSelector = document.getElementById('versionSelector'),
+              promptCharCount = document.getElementById('promptCharCount'),
+              customLyricsCharCount = document.getElementById('customLyricsCharCount'),
+              styleCharCount = document.getElementById('styleCharCount');
+
+        let pollingInterval = null, currentGeneratingTaskId = null;
+        let captchaSolved = false, currentCaptchaData = null;
+        const POLLING_INTERVAL_MS = 5000, HISTORY_KEY = 'sunoSongHistory';
+
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast p-4 rounded-md shadow-lg text-white mb-2 opacity-0 transform translate-x-full ${type === 'success' ? 'bg-spotify-green' : 'bg-red-500'}`;
+            toast.textContent = message;
+            toastContainer.appendChild(toast);
+            requestAnimationFrame(() => {
+                toast.classList.remove('opacity-0', 'translate-x-full');
+                toast.classList.add('opacity-100', 'translate-x-0');
+            });
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-x-0');
+                toast.classList.add('opacity-0', 'translate-x-full');
+                setTimeout(() => toast.remove(), 500);
+            }, 4000);
+        }
+
+        function showWelcomeModal() { 
+            welcomeModalOverlay.classList.remove('hidden');
+            requestAnimationFrame(() => {
+                welcomeModalOverlay.classList.remove('opacity-0');
+                welcomeModalContent.classList.remove('scale-95', 'opacity-0');
+            });
+        }
+        function closeWelcomeModal(event) {
+            if (event && event.target !== welcomeModalOverlay && !event.target.classList.contains('close-button-class')) return;
+            welcomeModalOverlay.classList.add('opacity-0');
+            welcomeModalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => { welcomeModalOverlay.classList.add('hidden'); }, 300);
+        }
+
+        async function loadCaptcha() {
+            try {
+                const captchaLoader = document.getElementById('captchaLoader');
+                captchaLoader.classList.remove('hidden');
+                captchaImage.classList.add('hidden');
+                captchaError.classList.add('hidden');
+                
+                const response = await fetch('/captcha');
+                const data = await response.json();
+                currentCaptchaData = data;
+                
+                captchaLoader.classList.add('hidden');
+                captchaImage.src = data.image;
+                captchaImage.classList.remove('hidden');
+                captchaPrompt.textContent = data.prompt;
+                
+                return true;
+            } catch (error) {
+                console.error('Failed to load captcha:', error);
+                
+                const captchaLoader = document.getElementById('captchaLoader');
+                captchaLoader.classList.add('hidden');
+                captchaImage.classList.add('hidden');
+                
+                captchaError.textContent = 'Failed to load captcha. Please try again.';
+                captchaError.classList.remove('hidden');
+                return false;
+            }
+        }
+
+        function showCaptchaModal() {
+            captchaModalOverlay.classList.remove('hidden');
+            requestAnimationFrame(() => {
+                captchaModalOverlay.classList.remove('opacity-0');
+                captchaModalContent.classList.remove('scale-95', 'opacity-0');
+            });
+            loadCaptcha();
+        }
+
+        function closeCaptchaModal() {
+            captchaModalOverlay.classList.add('opacity-0');
+            captchaModalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => { captchaModalOverlay.classList.add('hidden'); }, 300);
+        }
+
+        function refreshCaptcha() {
+            const captchaLoader = document.getElementById('captchaLoader');
+            captchaLoader.classList.remove('hidden');
+            captchaImage.classList.add('hidden');
+            captchaError.classList.add('hidden');
+            
+            loadCaptcha();
+        }
+
+        captchaImage.addEventListener('click', async (event) => {
+            if (!currentCaptchaData) return;
+            
+            const rect = captchaImage.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            
+            const gridX = Math.floor((x / rect.width) * 3);
+            const gridY = Math.floor((y / rect.height) * 3);
+            const emojiIndex = gridY * 3 + gridX;
+            
+            if (emojiIndex >= 0 && emojiIndex < 9) {
+                try {
+                    const response = await fetch('/verify-captcha', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ emoji_index: emojiIndex })
+                    });
+                    
+                    const result = await response.json();
+                    if (result.success) {
+                        captchaSolved = true;
+                        closeCaptchaModal();
+                        showToast('Captcha solved successfully!', 'success');
+                    } else {
+                        captchaError.textContent = result.message || 'Incorrect emoji. Please try again.';
+                        captchaError.classList.remove('hidden');
+                        if (result.message && result.message.includes('20 minutes')) {
+                            setTimeout(() => {
+                                closeCaptchaModal();
+                                showToast(result.message, 'error');
+                            }, 2000);
+                        } else {
+                            refreshCaptcha();
+                        }
+                    }
+                } catch (error) {
+                    console.error('Captcha verification failed:', error);
+                    captchaError.textContent = 'Verification failed. Please try again.';
+                    captchaError.classList.remove('hidden');
+                }
+            }
+        });
+
+        function loadHistory() { return JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]'); }
+        function saveHistory(history) { localStorage.setItem(HISTORY_KEY, JSON.stringify(history)); }
+        function addSongsToHistory(songDataArray) {
+            const history = loadHistory();
+            const timestamp = new Date().toISOString();
+            const newHistoryEntries = songDataArray.map(songData => ({
+                ...songData,
+                id: songData.audio_url || `${timestamp}-${Math.random()}`,
+                generatedAt: timestamp,
+                is_stream: false
+            }));
+            const uniqueNewEntries = newHistoryEntries.filter(newSong =>
+                !history.some(oldSong => oldSong.id === newSong.id || (oldSong.audio_url && oldSong.audio_url === newSong.audio_url))
+            );
+            const updatedHistory = [...uniqueNewEntries, ...history];
+            saveHistory(updatedHistory);
+            displayHistory();
+        }
+        function clearHistory() { if (confirm('Clear all history?')) { localStorage.removeItem(HISTORY_KEY); displayHistory(); }}
+
+        function displayHistory() {
+            const history = loadHistory(); historyGrid.innerHTML = '';
+            if (history.length === 0) {
+                historyGrid.innerHTML = '<p class="col-span-full text-center text-spotify-light-grey">No songs generated yet.</p>';
+                clearHistoryButton.classList.add('hidden');
+            } else {
+                clearHistoryButton.classList.remove('hidden');
+                history.forEach(song => {
+                    const card = document.createElement('div');
+                    card.className = 'bg-spotify-grey p-3 rounded-lg shadow-md cursor-pointer transform transition duration-200 ease-in-out hover:scale-105 hover:bg-gray-700';
+                    card.onclick = () => showSongModal(song);
+                    let placeholder = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiMyODJjM2MiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiNiM2IzYjMiPlNvbmdcTm9cSW1hZ2U8L3RleHQ+PC9zdmc+';
+                    card.innerHTML = `
+                        <img src="${song.image_url || placeholder}" alt="${song.title || 'Artwork'}" class="w-full h-32 object-cover rounded mb-2" loading="lazy" onerror="this.src='${placeholder}'">
+                        <h4 class="text-sm font-semibold truncate mb-1" title="${song.title || 'Untitled'}">${song.title || 'Untitled'}</h4>
+                        <p class="text-xs text-spotify-light-grey truncate" title="${song.tags || ''}">${song.tags || 'No tags'}</p>`;
+                    historyGrid.appendChild(card);
+                });
+            }
+        }
+        function showSongModal(songData) {
+            const isPreviewArray = Array.isArray(songData);
+            const songsToShow = isPreviewArray ? songData : [songData];
+            const firstSong = songsToShow[0];
+
+            modalTitle.textContent = firstSong.title || 'Untitled Song';
+            modalImage.src = firstSong.image_url || '';
+            modalImage.onerror = () => { modalImage.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiMyODJjM2MiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiNiM2IzYjMiPlNvbmdcTm9cSW1hZ2U8L3RleHQ+PC9zdmc+'; };
+            modalTags.textContent = firstSong.tags || 'N/A';
+            modalLyrics.textContent = firstSong.lyrics || 'No lyrics available.';
+            modalAudioContainer.innerHTML = '';
+
+            if (songsToShow.length > 0 && songsToShow.some(s => s.audio_url)) {
+                songsToShow.forEach((song, index) => {
+                    if (song.audio_url) {
+                        const audioWrapper = document.createElement('div');
+                        audioWrapper.className = 'mb-3';
+
+                        if (isPreviewArray) {
+                             const previewLabel = document.createElement('p');
+                             previewLabel.className = 'text-sm font-semibold mb-1';
+                             previewLabel.textContent = `Preview ${index + 1}:`;
+                             audioWrapper.appendChild(previewLabel);
+                        }
+
+                        const audio = document.createElement('audio');
+                        audio.controls = true;
+                        audio.src = song.audio_url;
+                        audio.className = 'w-full';
+                        audioWrapper.appendChild(audio);
+
+                        if (song.is_stream) {
+                            const streamNote = document.createElement('p');
+                            streamNote.className = 'text-xs text-spotify-light-grey italic mt-1';
+                            streamNote.textContent = 'Streaming preview. Final version processing...';
+                            audioWrapper.appendChild(streamNote);
+                        }
+                        modalAudioContainer.appendChild(audioWrapper);
+                    }
+                });
+            } else {
+                modalAudioContainer.innerHTML = '<p class="text-spotify-light-grey italic">No audio available.</p>';
+            }
+
+            songModalOverlay.classList.remove('hidden');
+            requestAnimationFrame(() => {
+                songModalOverlay.classList.remove('opacity-0');
+                songModal.classList.remove('scale-95', 'opacity-0');
+            });
+            songModal.dataset.taskId = firstSong.task_id || currentGeneratingTaskId || '';
+        }
+        function closeSongModal(event) {
+            if (event && event.target !== songModalOverlay && !event.target.classList.contains('close-button-class')) return;
+            songModalOverlay.classList.add('opacity-0'); songModal.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                 songModalOverlay.classList.add('hidden');
+                 const audioPlayers = modalAudioContainer.querySelectorAll('audio');
+                 audioPlayers.forEach(player => { player.pause(); player.currentTime = 0; });
+                 delete songModal.dataset.taskId;
+            }, 300);
+        }
+
+        function stopPolling() {
+             if (pollingInterval) { clearInterval(pollingInterval); pollingInterval = null; }
+             loader.classList.add('hidden');
+             submitButton.disabled = false;
+             currentGeneratingTaskId = null;
+        }
+        async function checkStatus(taskId, token) {
+            const isModalOpenForThisTask = !songModalOverlay.classList.contains('hidden') && songModal.dataset.taskId === taskId;
+            if (!isModalOpenForThisTask) {
+                statusMessageDiv.textContent = 'Checking song status...';
+            }
+
+            try {
+                const response = await fetch('/check-status', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ taskId, token }) });
+                const data = await response.json();
+                if (!response.ok) {
+                    console.error(`Check status failed: ${response.status}`, data);
+                    statusMessageDiv.textContent = `Error checking status: ${data.message || response.statusText}`;
+                    if (taskId === currentGeneratingTaskId) stopPolling();
+                    return;
+                 }
+
+                if (data.status === 'TEXT_SUCCESS' && data.results && data.results.length > 0) {
+                    statusMessageDiv.textContent = 'Song preview ready! Processing final version...';
+                     if (!isModalOpenForThisTask) {
+                         const previews = data.results.map(song => ({ ...song, is_stream: true, task_id: taskId }));
+                         showSongModal(previews);
+                     }
+                }
+                else if (data.status === 'COMPLETED' && data.results && data.results.length > 0) {
+                    statusMessageDiv.textContent = 'Song finished and saved!';
+                    if (taskId === currentGeneratingTaskId) stopPolling();
+                    addSongsToHistory(data.results);
+                    showToast(`${data.results[0].title || 'Song'} and variations finished and saved!`);
+                }
+                else if (data.status === 'PENDING') {
+                     if (!isModalOpenForThisTask) {
+                        statusMessageDiv.textContent = 'Your song is being generated... (Status: PENDING)';
+                     }
+                }
+                else if (data.status === 'error') {
+                    console.error(`Polling error for task ${taskId}: ${data.message}`);
+                    statusMessageDiv.textContent = `Error: ${data.message || 'Unknown generation error.'}`;
+                     if (taskId === currentGeneratingTaskId) stopPolling();
+                }
+                 else {
+                     console.log(`Unknown status for task ${taskId}:`, data);
+                      if (data.status !== 'PENDING' && taskId === currentGeneratingTaskId) {
+                          statusMessageDiv.textContent = `Unexpected status: ${data.status}. Stopping polling.`;
+                          stopPolling();
+                      }
+                 }
+            } catch (error) {
+                 console.error(`Fetch error in checkStatus for task ${taskId}:`, error);
+                 statusMessageDiv.textContent = 'Network error checking status.';
+                  if (taskId === currentGeneratingTaskId) stopPolling();
+            }
+        }
+
+        function updateFormForMode() {
+            const selectedMode = document.querySelector('input[name="generationMode"]:checked').value;
+
+            promptTextarea.required = false;
+            customLyricsTextarea.required = false;
+            styleInput.required = false;
+
+            if (selectedMode === 'custom') {
+                mainPromptContainer.classList.remove('hidden');
+                promptLabel.textContent = 'Title (Optional):';
+                promptTextarea.placeholder = 'e.g., My Awesome Song';
+                promptTextarea.rows = 1;
+
+                lyricsAndStyleSection.classList.remove('hidden');
+                customLyricsContainer.classList.remove('hidden');
+                customLyricsTextarea.required = true;
+                customLyricsTextarea.placeholder = "Verse 1:\nThe sun shines bright...\n\nChorus:\nSinging my song...";
+                
+                styleContainer.classList.remove('hidden');
+                styleLabel.textContent = 'Style of Music (required for custom lyrics):';
+                styleInput.required = true;
+                styleInput.placeholder = "e.g., Pop, Epic Orchestral, Lofi Hip Hop (Required)";
+
+            } else if (selectedMode === 'instrumental') {
+                mainPromptContainer.classList.remove('hidden');
+                promptLabel.textContent = 'Describe your instrumental idea:';
+                promptTextarea.placeholder = 'e.g., a calming lo-fi beat for studying';
+                promptTextarea.rows = 3;
+                promptTextarea.required = true;
+
+                lyricsAndStyleSection.classList.add('hidden');
+                customLyricsContainer.classList.add('hidden');
+                styleContainer.classList.add('hidden');
+                customLyricsTextarea.value = '';
+                styleInput.value = '';
+
+            } else {
+                mainPromptContainer.classList.remove('hidden');
+                promptLabel.textContent = 'Describe your song idea:';
+                promptTextarea.placeholder = 'e.g., an upbeat synthwave track about space exploration';
+                promptTextarea.rows = 3;
+                promptTextarea.required = true;
+
+                lyricsAndStyleSection.classList.add('hidden');
+                customLyricsContainer.classList.add('hidden');
+                styleContainer.classList.add('hidden');
+                customLyricsTextarea.value = '';
+                styleInput.value = '';
+                styleInput.required = false;
+            }
+            function updateCharLimits() {
+                const version = versionSelector.value;
+                const isCustomMode = document.querySelector('input[name="generationMode"]:checked').value === 'custom';
+                if (!isCustomMode) {
+                    promptTextarea.maxLength = 400;
+                } else {
+                    if (version === 'V3_5' || version === 'V4') {
+                        promptTextarea.maxLength = 3000;
+                        customLyricsTextarea.maxLength = 3000;
+                        styleInput.maxLength = 200;
+                    } else if (version === 'V4_5' || version === 'V4_5PLUS') {
+                        promptTextarea.maxLength = 5000;
+                        customLyricsTextarea.maxLength = 5000;
+                        styleInput.maxLength = 1000;
+                    }
+                }
+            }
+
+            function attachCharCount(input, counter) {
+                input.addEventListener('input', () => {
+                    counter.textContent = `${input.value.length} / ${input.maxLength}`;
+                });
+            }
+
+            attachCharCount(promptTextarea, promptCharCount);
+            attachCharCount(customLyricsTextarea, customLyricsCharCount);
+            attachCharCount(styleInput, styleCharCount);
+
+            versionSelector.addEventListener('change', () => {
+                updateCharLimits();
+                promptCharCount.textContent = `${promptTextarea.value.length} / ${promptTextarea.maxLength}`;
+                customLyricsCharCount.textContent = `${customLyricsTextarea.value.length} / ${customLyricsTextarea.maxLength}`;
+                styleCharCount.textContent = `${styleInput.value.length} / ${styleInput.maxLength}`;
+            });
+
+            generationModeRadios.forEach(radio => {
+                radio.addEventListener('change', () => {
+                    updateFormForMode();
+                    updateCharLimits();
+                });
+            });
+
+            updateCharLimits();
+        }
+
+        generationModeRadios.forEach(radio => radio.addEventListener('change', updateFormForMode));
+        updateFormForMode();
+
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            if (!captchaSolved) {
+                showCaptchaModal();
+                return;
+            }
+            
+            stopPolling();
+            statusMessageDiv.textContent = 'Initiating song generation...';
+            loader.classList.remove('hidden');
+            submitButton.disabled = true;
+            currentGeneratingTaskId = null;
+
+            const selectedMode = document.querySelector('input[name="generationMode"]:checked').value;
+            let payload = {};
+
+            if (selectedMode === 'custom') {
+                if (!customLyricsTextarea.value.trim()) {
+                    showToast('Custom lyrics cannot be empty.', 'error');
+                    statusMessageDiv.textContent = 'Custom lyrics are required.';
+                    stopPolling(); loader.classList.add('hidden'); submitButton.disabled = false;
+                    return;
+                }
+                if (!styleInput.value.trim()) {
+                    showToast('Style of music is required for custom lyrics.', 'error');
+                    statusMessageDiv.textContent = 'Style of music is required for custom lyrics.';
+                    stopPolling(); loader.classList.add('hidden'); submitButton.disabled = false;
+                    return;
+                }
+                payload = {
+                    prompt: customLyricsTextarea.value,
+                    title: promptTextarea.value.trim() || '',
+                    style: styleInput.value,
+                    customMode: true,
+                    instrumental: false
+                };
+            } else if (selectedMode === 'instrumental') {
+                 if (!promptTextarea.value.trim()) {
+                    showToast('Instrumental description cannot be empty.', 'error');
+                    statusMessageDiv.textContent = 'Instrumental description is required.';
+                    stopPolling(); loader.classList.add('hidden'); submitButton.disabled = false;
+                    return;
+                }
+                payload = {
+                    prompt: promptTextarea.value,
+                    title: '',
+                    style: '',
+                    customMode: false,
+                    instrumental: true
+                };
+            } else {
+                if (!promptTextarea.value.trim()) {
+                    showToast('Song idea description cannot be empty.', 'error');
+                    statusMessageDiv.textContent = 'Song idea description is required.';
+                    stopPolling(); loader.classList.add('hidden'); submitButton.disabled = false;
+                    return;
+                }
+                payload = {
+                    prompt: promptTextarea.value,
+                    title: '',
+                    style: '',
+                    customMode: false,
+                    instrumental: false
+                };
+            }
+
+            console.log("Payload for /generate:", payload);
+
+            try {
+                const response = await fetch('/generate', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                const data = await response.json();
+                if (!response.ok) {
+                    console.error(`Generate request failed: ${response.status}`, data);
+                    if (response.status === 403 && data.error === 'captcha_required') {
+                        captchaSolved = false;
+                        showCaptchaModal();
+                        stopPolling();
+                        return;
+                    }
+                    let msg = `Start failed: ${data.message || 'Try again.'}`;
+                    if (response.status === 429) {
+                        msg = `Rate limit: You must wait 20 minutes before trying again.`;
+                    }
+                    statusMessageDiv.textContent = msg;
+                    stopPolling();
+                    return;
+                }
+                if (data.status === 'initiated' && data.taskId && data.token) {
+                    statusMessageDiv.textContent = 'Generation request sent! Waiting for progress...';
+                    currentGeneratingTaskId = data.taskId;
+                    pollingInterval = setInterval(() => { checkStatus(data.taskId, data.token); }, POLLING_INTERVAL_MS);
+                    checkStatus(data.taskId, data.token);
+                } else {
+                    console.error('Unexpected /generate response:', data);
+                    statusMessageDiv.textContent = `Server error starting task: ${data.message || 'Unknown error'}`;
+                    stopPolling();
+                }
+            } catch (error) {
+                 console.error('Fetch error during /generate:', error);
+                 statusMessageDiv.textContent = 'Network error sending generation request.';
+                 stopPolling();
+             }
+        });
+        clearHistoryButton.addEventListener('click', clearHistory);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            displayHistory();
+            showWelcomeModal();
+            updateFormForMode();
+        });
+    </script>
+</body>
+</html>
